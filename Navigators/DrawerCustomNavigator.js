@@ -3,14 +3,14 @@ import React, { Component } from "react";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // Screens
-import { HomeScreen } from "../screens/home";
-import { GamesScreen } from "../screens/games";
-import { NewPostScreen } from "../screens/newPost";
-import { ApplicationsScreen } from "../screens/applications";
-import { ProfileScreen } from "../screens/profile";
-import { StoreScreen } from "../screens/store";
-import { ConfigScreen } from "../screens/config";
-import { DrawerContentScreen } from "../screens/DrawerContentScreen";
+import { HomeScreen } from "../components/home/homeView";
+import { GamesScreen } from "../components/games/gamesView";
+import { NewPostScreen } from "../components/newPost/newPostView";
+import { ApplicationsScreen } from "../components/applications/applicationsView";
+import { ProfileScreen } from "../components/profile/profileView";
+import { StoreScreen } from "../components/store/storeView";
+import { ConfigScreen } from "../components/config/configView";
+import { DrawerContentScreen } from "../assets/js/DrawerContentView";
 
 const Drawer = createDrawerNavigator();
 
