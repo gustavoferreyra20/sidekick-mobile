@@ -1,19 +1,23 @@
+import React, {Component} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import {DrawerCustomNavigator} from './Navigators/DrawerCustomNavigator.js';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends Component{
+  render(){
+    return(
+      <NavigationContainer>
+        <DrawerCustomNavigator />
+      </NavigationContainer>
+    );
+  } 
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#535053',
     alignItems: 'center',
     justifyContent: 'center',
   },
