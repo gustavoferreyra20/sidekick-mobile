@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import GameService from './gameService';
+import { SIDEKICK_API } from "@env"
 
 export class GamesScreen extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export class GamesScreen extends Component {
   renderGame = (game, index) => {
     return (
       <View key={index} style={styles.gameContainer}>
-        <Image source={{ uri: `http://[2802:8010:9406:9100:41c6:96b7:8d04:577d]:3000/api/images/${game.img}` }} style={styles.gameImage} />
+        <Image source={{ uri: `${SIDEKICK_API}images/${game.img}` }} style={styles.gameImage} />
         <Text style={styles.gameName}>{game.name}</Text>
       </View>
     );
