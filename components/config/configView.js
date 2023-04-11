@@ -1,29 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Button, View } from 'react-native';
 
 export class ConfigScreen extends Component {
 
-    render(){
-        return(
+    handlerLogout() {
+        this.props.onLogout();
+    }
+
+    render() {
+        return (
             <View style={styles.container}>
-                <Text style={styles.text}>This is the config screen</Text>
-                <StatusBar style="auto" />
+                <Button style={styles.buttonStyle}
+                    onPress={() => this.handlerLogout()}
+                    title="Cerrar Sesión"
+                    color="#0eaa61"
+                />
             </View>
         );
     }
-    
+
 }
 
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#535053',
-      alignItems: 'center',
-      justifyContent: 'center'
+        flex: 1,
+        backgroundColor: '#535053',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    text: {
-        color: '#fff'
-    }
-  });
+});

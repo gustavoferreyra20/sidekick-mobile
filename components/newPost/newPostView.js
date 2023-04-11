@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -8,7 +7,6 @@ export class NewPostScreen extends Component {
         return(
             <View style={styles.container}>
                 <Text style={styles.text}>This is the new post screen</Text>
-                <StatusBar style="auto" />
             </View>
         );
     }

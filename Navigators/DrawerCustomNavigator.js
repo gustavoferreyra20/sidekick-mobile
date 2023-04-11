@@ -21,7 +21,6 @@ export class DrawerCustomNavigator extends Component {
             <Drawer.Navigator
                 useLegacyImplementation={true}
                 initialRouteName="Inicio"
-                headerMode={'none'}
                 drawerContent={props => <DrawerContentScreen {...props} />}
                 screenOptions={{
                     headerStyle: { backgroundColor: '#1ded8c' },
@@ -34,7 +33,8 @@ export class DrawerCustomNavigator extends Component {
                 <Drawer.Screen name="Solicitudes" component={ApplicationsScreen} />
                 <Drawer.Screen name="Perfil" component={ProfileScreen} />
                 <Drawer.Screen name="Tienda" component={StoreScreen} />
-                <Drawer.Screen name="configuracion" component={ConfigScreen} />
+                <Drawer.Screen name="configuracion" children={() => <ConfigScreen onLogout={() => this.props.onLogout()} />} />
+                
             </Drawer.Navigator>
         );
     }
