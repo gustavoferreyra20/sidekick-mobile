@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import GameService from './gameService';
 import { SIDEKICK_API } from "@env"
+import styles from '../../assets/styles';
 
 export class GamesScreen extends Component {
   constructor(props) {
@@ -48,36 +49,3 @@ export class GamesScreen extends Component {
   }
 
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#535053",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "#fff",
-  },
-  gamesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    height: "100%",
-  },
-  gameContainer: {
-    alignItems: "center",
-    margin: 10,
-    width: "45%",
-  },
-  gameImage: {
-    width: "100%",
-    height: undefined,
-    aspectRatio: 1,
-    resizeMode: "contain",
-    maxWidth: "100%",
-  },
-  gameName: {
-    color: "#fff",
-  },
-});

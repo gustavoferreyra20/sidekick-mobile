@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Switch, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, Button, Switch, TouchableOpacity } from 'react-native';
 import RegistrationController from './registrationCtrl';
+import styles from '../../assets/styles';
 
 export class RegistrationScreen extends Component {
 
@@ -84,60 +85,3 @@ export class RegistrationScreen extends Component {
     }
 
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#535053',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    formContainer: {
-        width: '80%',
-    },
-    text: {
-        color: '#fff',
-        fontSize: 16,
-        marginBottom: 8,
-        fontWeight: 'bold',
-    },
-    textInput: {
-        backgroundColor: '#fff',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 16,
-        paddingHorizontal: 10,
-        borderRadius: 5,
-    },
-    buttonContainer: {
-        marginTop: 16,
-    },
-    h1: {
-        marginTop: 24,
-        fontSize: 28,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#fff',
-    },
-    header: {
-        backgroundColor: '#1ded8c',
-        height: 60,
-        paddingTop: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    headerText: {
-        color: 'black',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    switchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    switchText: {
-        color: '#fff',
-        fontSize: 16,
-    },
-});

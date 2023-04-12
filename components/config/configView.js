@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View } from 'react-native';
+import { Button, View } from 'react-native';
+import styles from '../../assets/styles';
 
 export class ConfigScreen extends Component {
 
@@ -20,13 +21,3 @@ export class ConfigScreen extends Component {
     }
 
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#535053',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-});

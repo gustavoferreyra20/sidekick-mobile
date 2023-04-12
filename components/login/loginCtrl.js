@@ -1,7 +1,8 @@
 export default class LoginController {
-  constructor() {
+  constructor(onLogin) {
     this.email = '';
     this.password = '';
+    this.onLogin = onLogin;
   }
 
   handleEmailChange = (text) => {
@@ -15,5 +16,6 @@ export default class LoginController {
   handleLogin = () => {
     console.log(`Email: ${this.email}`);
     console.log(`Password: ${this.password}`);
+    this.onLogin();
   };
 }
