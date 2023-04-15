@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import GameService from './gameService';
+import GamesController from './gamesController';
 import { SIDEKICK_API } from "@env"
 import styles from '../../assets/styles';
 
@@ -11,10 +11,11 @@ export class GamesScreen extends Component {
       games: [],
       loading: true,
     };
+    this.controller = new GamesController();
   }
 
   componentDidMount() {
-    GameService.getAll().then((data) => {
+    this.controller.handleGetGames().then((data) => {
       this.setState({
         games: data,
         loading: false,

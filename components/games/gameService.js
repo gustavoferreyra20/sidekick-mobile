@@ -4,15 +4,17 @@ import { SIDEKICK_API } from "@env"
 class GameService {
 
   static async getAll() {
-    try {
-      const response = await axios.get(`${SIDEKICK_API}games`);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
+    return new Promise((resolve, reject) => {
+      axios.get(`${SIDEKICK_API}games`)
+        .then((res) => {
+          resolve(res.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    })
   }
 
 }
 
-module.exports = GameService;
+export default GameService;
