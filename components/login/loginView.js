@@ -21,7 +21,7 @@ export class LoginScreen extends Component {
                     <Text style={styles.text}>Email</Text>
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={this.controller.handleEmailChange}
+                        onChangeText={text => this.controller.email = text}
                         placeholder="Ingrese su email"
                         required
                     />
@@ -30,7 +30,7 @@ export class LoginScreen extends Component {
                     <TextInput
                         style={styles.textInput}
                         secureTextEntry={true}
-                        onChangeText={this.controller.handlePasswordChange}
+                        onChangeText={text => this.controller.password = text}
                         placeholder="**********"
                         required
                     />

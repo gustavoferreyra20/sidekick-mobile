@@ -8,7 +8,13 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
     },
     formContainer: {
-        width: '80%',
+        paddingVertical: 30,
+        width: '80%'
+    },
+    scrollContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%'
     },
     text: {
         color: '#fff',
@@ -24,12 +30,13 @@ export default styles = StyleSheet.create({
         marginBottom: 16,
         paddingHorizontal: 10,
         borderRadius: 5,
+        minWidth: '100%'
     },
     buttonContainer: {
-        marginTop: 16,
+        marginVertical: 8,
     },
     h1: {
-        marginTop: 24,
+        marginVertical: 12,
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -75,4 +82,7 @@ export default styles = StyleSheet.create({
     gameName: {
         color: "#fff",
     },
+    contactContainer: {
+        marginBottom: 8
+    }
 });
