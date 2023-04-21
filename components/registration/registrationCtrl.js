@@ -1,4 +1,5 @@
 import Contact_infService from '../contact_inf/contact_infService';
+import * as ImagePicker from 'expo-image-picker';
 
 export default class RegistrationController {
     constructor() {
@@ -6,9 +7,10 @@ export default class RegistrationController {
         this.email = '';
         this.description = '';
         this.password = '';
+        this.profilePicture = '';
         this.contact_inf_list = [],
-        this.contactOptions = [],
-        this.toggleValue = false;
+            this.contactOptions = [],
+            this.toggleValue = false;
     }
 
     handleGetOptions = () => {
@@ -36,6 +38,29 @@ export default class RegistrationController {
         });
     }
 
+    pickProfilePicture = async () => {
+        const result = await ImagePicker.launchImageLibraryAsync();
+        if (!result.canceled) {
+            // Aquí puedes guardar la imagen seleccionada en el estado de tu componente
+            this.profilePicture = result.assets[0].uri;
+            console.log(this.profilePicture)
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    takeProfilePicture = async () => {
+        const result = await ImagePicker.launchCameraAsync();
+        if (!result.canceled) {
+            // Aquí puedes guardar la imagen tomada en el estado de tu componente
+            this.profilePicture = result.assets[0].uri;
+            console.log(this.profilePicture)
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     handleRegistration = () => {
         console.log(`name: ${this.name}`);

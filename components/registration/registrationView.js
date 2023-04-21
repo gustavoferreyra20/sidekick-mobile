@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationController from './registrationCtrl';
 import styles from '../../assets/styles';
@@ -10,6 +10,7 @@ export class RegistrationScreen extends Component {
         super(props);
         this.state = {
             loading: true,
+            profilePicture: false
         };
         this.controller = new RegistrationController();
     }
@@ -43,6 +44,13 @@ export class RegistrationScreen extends Component {
         })
     }
 
+    componentDidMount = () => {
+        this.controller.handleGetOptions().then(() => {
+            this.setState({ loading: false });
+            this.forceUpdate()
+        })
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -63,6 +71,45 @@ export class RegistrationScreen extends Component {
                             placeholder="Ingrese su email"
                             required
                         />
+
+                        {this.state.profilePicture && (
+                            <View style={styles.buttonContainer}>
+                                <Button
+                                    title="Eliminar foto"
+                                    onPress={() => {
+                                        this.controller.profilePicture = "";
+                                        this.setState({ profilePicture: false });
+                                    }}
+                                    color="#D4403A"
+                                />
+                            </View>
+                        )
+                        }
+
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Seleccionar foto"
+                                disabled={this.state.profilePicture}
+                                onPress={() => {
+                                    this.controller.pickProfilePicture().then((res) => {
+                                        this.setState({ profilePicture: res });
+                                    })
+                                }}
+                                color="#0eaa61"
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Tomar foto"
+                                disabled={this.state.profilePicture}
+                                onPress={() => {
+                                    this.controller.takeProfilePicture().then((res) => {
+                                        this.setState({ profilePicture: res });
+                                    })
+                                }}
+                                color="#0eaa61"
+                            />
+                        </View>
 
                         <Text style={styles.text}>Contanos un poco sobre vos</Text>
                         <TextInput
