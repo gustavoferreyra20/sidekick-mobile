@@ -10,7 +10,7 @@ import { ApplicationsScreen } from "../components/applications/applicationsView"
 import { ProfileScreen } from "../components/profile/profileView";
 import { StoreScreen } from "../components/store/storeView";
 import { ConfigScreen } from "../components/config/configView";
-import { DrawerContentScreen } from "../assets/js/DrawerContentView";
+import { DrawerContentScreen } from "./DrawerContentView";
 
 const Drawer = createDrawerNavigator();
 

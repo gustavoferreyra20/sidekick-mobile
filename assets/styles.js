@@ -84,5 +84,16 @@ export default styles = StyleSheet.create({
     },
     contactContainer: {
         marginBottom: 8
+    },
+    popupContainer: {
+        backgroundColor: "#000000aa",
+        justifyContent: "center",
+        flex: 1
+    },
+    popupContent: {
+        backgroundColor: "#535051",
+        margin: 50,
+        padding: 15,
+        borderRadius: 10,
     }
 });

@@ -23,7 +23,7 @@ export class DrawerContentScreen extends Component {
                 <DrawerContentScrollView {...this.props}>
                     <View style={styles.topDrawer}>
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/home.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/home.png')} style={styles.icon} />}
                             label="Inicio"
                             onPress={() => {
                                 this.props.navigation.navigate("Inicio");
@@ -39,7 +39,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/plays.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/plays.png')} style={styles.icon} />}
                             label="Juegos"
                             onPress={() => {
                                 this.props.navigation.navigate("Juegos");
@@ -55,7 +55,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/plus.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/plus.png')} style={styles.icon} />}
                             label="Crear anuncio"
                             onPress={() => {
                                 this.props.navigation.navigate("Crear anuncio");
@@ -71,7 +71,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/messages.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/messages.png')} style={styles.icon} />}
                             label="Solicitudes"
                             onPress={() => {
                                 this.props.navigation.navigate("Solicitudes");
@@ -87,7 +87,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/home.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/home.png')} style={styles.icon} />}
                             label="Perfil"
                             onPress={() => {
                                 this.props.navigation.navigate("Perfil");
@@ -103,7 +103,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../img/icons/plays.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/plays.png')} style={styles.icon} />}
                             label="Tienda"
                             onPress={() => {
                                 this.props.navigation.navigate("Tienda");
@@ -122,7 +122,7 @@ export class DrawerContentScreen extends Component {
                 </DrawerContentScrollView>
                 <View style={styles.bottomDrawer}>
                     <DrawerItem
-                        icon={() => <Image source={require('../img/icons/settings.png')} style={styles.icon} />}
+                        icon={() => <Image source={require('../assets/img/icons/settings.png')} style={styles.icon} />}
                         label="Configuracion"
                         onPress={() => this.props.navigation.navigate("configuracion")}
                         labelStyle={{ color: "#fff" }}
