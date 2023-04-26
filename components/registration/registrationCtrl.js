@@ -1,15 +1,18 @@
 import Contact_infService from '../contact_inf/contact_infService';
+import UserService from '../users/userService';
 import * as ImagePicker from 'expo-image-picker';
 
 export default class RegistrationController {
     constructor() {
-        this.name = '';
-        this.email = '';
-        this.description = '';
-        this.password = '';
-        this.profilePicture = '';
-        this.contact_inf_list = [],
-            this.contactOptions = [],
+        this.newUser = {
+            name: '',
+            email: '',
+            description: '',
+            password: '',
+            contact_inf_list: []
+        }
+
+        this.contactOptions = [],
             this.toggleValue = false;
     }
 
@@ -17,7 +20,7 @@ export default class RegistrationController {
         return new Promise((resolve, reject) => {
             Contact_infService.getAll().then((data) => {
                 this.contactOptions = data;
-                this.contact_inf_list = [{ platform: data[0], account: '' }];
+                this.newUser.contact_inf_list = [{ platform: data[0], account: '' }];
                 resolve();
             });
         });
@@ -25,14 +28,14 @@ export default class RegistrationController {
     }
 
     handleRemoveAccount = () => {
-        this.contact_inf_list.pop();
+        this.newUser.contact_inf_list.pop();
         return Promise.resolve();
     }
 
     handleAddAccount = () => {
         return new Promise((resolve, reject) => {
             Contact_infService.getAll().then((data) => {
-                this.contact_inf_list.push({ platform: data[0], account: '' });
+                this.newUser.contact_inf_list.push({ platform: data[0], account: '' });
                 resolve();
             });
         });
@@ -42,8 +45,7 @@ export default class RegistrationController {
         const result = await ImagePicker.launchImageLibraryAsync();
         if (!result.canceled) {
             // Aquí puedes guardar la imagen seleccionada en el estado de tu componente
-            this.profilePicture = result.assets[0].uri;
-            console.log(this.profilePicture)
+            this.newUser.profilePicture = result.assets[0].uri;
             return true;
         } else {
             return false;
@@ -54,8 +56,7 @@ export default class RegistrationController {
         const result = await ImagePicker.launchCameraAsync();
         if (!result.canceled) {
             // Aquí puedes guardar la imagen tomada en el estado de tu componente
-            this.profilePicture = result.assets[0].uri;
-            console.log(this.profilePicture)
+            this.newUser.profilePicture = result.assets[0].uri;
             return true;
         } else {
             return false;
@@ -63,11 +64,35 @@ export default class RegistrationController {
     };
 
     handleRegistration = () => {
-        console.log(`name: ${this.name}`);
-        console.log(`Email: ${this.email}`);
-        console.log(`Description: ${this.description}`);
-        console.log(`Password: ${this.password}`);
-        console.log(`ToggleValue: ${this.toggleValue}`);
-        console.log(`contact_inf: ${JSON.stringify(this.contact_inf_list)}`);
+        let conditions = {
+            email: this.newUser.email
+        }
+
+        UserService.get(conditions)
+            .then((existentUser) => {
+
+                if (!this.toggleValue) {
+                    return console.log("Debe aceptar los terminos");
+                }
+
+                if (!this.newUser.name.length || !this.newUser.email.length || !this.newUser.password.length || !this.newUser.contact_inf_list[0].account.length) {
+                    return console.log('Por favor complete todos los campos requeridos');
+                }
+
+                if (this.newUser.password.length < 8) {
+                    return console.log("Contraseña demasiado corta");
+                }
+
+                if (existentUser.length > 0) {
+                    return console.log("Usuario existente");
+                }
+
+                if (this.newUser.profilePicture != undefined) {
+                    console.log("Guardar foto");
+                }
+
+                console.log(`New user: ${JSON.stringify(this.newUser)}`);
+            });
+
     };
 }

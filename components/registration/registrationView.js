@@ -59,7 +59,7 @@ export class RegistrationScreen extends Component {
                         <Text style={styles.text}>Nombre</Text>
                         <TextInput
                             style={styles.textInput}
-                            onChangeText={text => this.controller.name = text}
+                            onChangeText={text => this.controller.newUser.name = text}
                             placeholder="Ingrese su nombre"
                             required
                         />
@@ -67,7 +67,7 @@ export class RegistrationScreen extends Component {
                         <Text style={styles.text}>Email</Text>
                         <TextInput
                             style={styles.textInput}
-                            onChangeText={text => this.controller.email = text}
+                            onChangeText={text => this.controller.newUser.email = text}
                             placeholder="Ingrese su email"
                             required
                         />
@@ -77,7 +77,7 @@ export class RegistrationScreen extends Component {
                                 <Button
                                     title="Eliminar foto"
                                     onPress={() => {
-                                        this.controller.profilePicture = "";
+                                        this.controller.newUser.profilePicture = "";
                                         this.setState({ profilePicture: false });
                                     }}
                                     color="#D4403A"
@@ -117,18 +117,18 @@ export class RegistrationScreen extends Component {
                             multiline={true}
                             numberOfLines={3}
                             maxLength={280}
-                            onChangeText={text => this.controller.description = text}
+                            onChangeText={text => this.controller.newUser.description = text}
                         />
 
                         <Text style={styles.text}>Contacto</Text>
-                        {this.controller.contact_inf_list.length > 0 && this.controller.contact_inf_list.map((contact_inf, index) => (
+                        {this.controller.newUser.contact_inf_list.length > 0 && this.controller.newUser.contact_inf_list.map((contact_inf, index) => (
                             <View style={styles.contactContainer} key={index}>
                                 <Picker
                                     style={styles.textInput}
                                     selectedValue={contact_inf?.platform}
                                     onValueChange={(value) => {
-                                        const index = this.controller.contact_inf_list.indexOf(contact_inf);
-                                        this.controller.contact_inf_list[index].platform = value;
+                                        const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
+                                        this.controller.newUser.contact_inf_list[index].platform = value;
                                         this.setState({})
                                     }}
                                     prompt="Seleccione una opción"
@@ -140,10 +140,10 @@ export class RegistrationScreen extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Ingrese su cuenta o id"
-                                    value={this.controller.contact_inf?.[index]?.account}
+                                    value={this.controller.newUser.contact_inf?.[index]?.account}
                                     onChangeText={(text) => {
-                                        const index = this.controller.contact_inf_list.indexOf(contact_inf);
-                                        this.controller.contact_inf_list[index].account = text;
+                                        const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
+                                        this.controller.newUser.contact_inf_list[index].account = text;
                                     }}
                                 />
                             </View>
@@ -152,7 +152,7 @@ export class RegistrationScreen extends Component {
                         <View style={styles.buttonContainer}>
                             <Button title="Agregar otra cuenta" onPress={this.btnAddAccount} color="#0eaa61" />
                         </View>
-                        {this.controller.contact_inf_list.length > 1 && (
+                        {this.controller.newUser.contact_inf_list.length > 1 && (
                             <View style={styles.buttonContainer}>
                                 <Button title="Eliminar último" onPress={this.btnRemoveAccount} color="#D4403A" />
                             </View>
@@ -162,7 +162,7 @@ export class RegistrationScreen extends Component {
                         <TextInput
                             style={styles.textInput}
                             secureTextEntry={true}
-                            onChangeText={text => this.controller.password = text}
+                            onChangeText={text => this.controller.newUser.password = text}
                             placeholder="**********"
                             required
                         />
