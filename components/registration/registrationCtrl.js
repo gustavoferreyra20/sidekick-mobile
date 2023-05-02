@@ -1,9 +1,11 @@
+import { Component } from 'react';
 import Contact_infService from '../contact_inf/contact_infService';
 import UserService from '../users/userService';
 import * as ImagePicker from 'expo-image-picker';
 
-export default class RegistrationController {
-    constructor() {
+export default class RegistrationController extends Component {
+    constructor(props) {
+        super(props);
         this.newUser = {
             name: '',
             email: '',
@@ -11,8 +13,10 @@ export default class RegistrationController {
             password: '',
             contact_inf_list: []
         }
-
-        this.contactOptions = [],
+        this.msg = "",
+            this.modalType = "alert",
+            this.modalVisible = false,
+            this.contactOptions = [],
             this.toggleValue = false;
     }
 
@@ -64,35 +68,49 @@ export default class RegistrationController {
     };
 
     handleRegistration = () => {
-        let conditions = {
-            email: this.newUser.email
-        }
+        return new Promise((resolve, reject) => {
+            let conditions = {
+                email: this.newUser.email
+            }
 
-        UserService.get(conditions)
-            .then((existentUser) => {
+            UserService.get(conditions)
+                .then((existentUser) => {
 
-                if (!this.toggleValue) {
-                    return console.log("Debe aceptar los terminos");
-                }
+                    if (!this.toggleValue) {
+                        this.msg = "Debe aceptar los terminos"
+                        this.modalVisible = true
+                        resolve();
+                        return
+                    }
 
-                if (!this.newUser.name.length || !this.newUser.email.length || !this.newUser.password.length || !this.newUser.contact_inf_list[0].account.length) {
-                    return console.log('Por favor complete todos los campos requeridos');
-                }
+                    if (!this.newUser.name.length || !this.newUser.email.length || !this.newUser.password.length || !this.newUser.contact_inf_list[0].account.length) {
+                        this.msg = "Por favor complete todos los campos requeridos"
+                        this.modalVisible = true
+                        resolve();
+                        return
+                    }
 
-                if (this.newUser.password.length < 8) {
-                    return console.log("Contraseña demasiado corta");
-                }
+                    if (this.newUser.password.length < 8) {
+                        this.msg = "Contraseña demasiado corta"
+                        this.modalVisible = true
+                        resolve();
+                        return
+                    }
 
-                if (existentUser.length > 0) {
-                    return console.log("Usuario existente");
-                }
+                    if (existentUser.length > 0) {
+                        this.msg = "Usuario existente"
+                        this.modalVisible = true
+                        resolve();
+                        return
+                    }
 
-                if (this.newUser.profilePicture != undefined) {
-                    console.log("Guardar foto");
-                }
+                    if (this.newUser.profilePicture != undefined) {
+                        console.log("Guardar foto");
+                    }
 
-                console.log(`New user: ${JSON.stringify(this.newUser)}`);
-            });
+                    console.log(`New user: ${JSON.stringify(this.newUser)}`);
+                });
+        });
 
     };
 }

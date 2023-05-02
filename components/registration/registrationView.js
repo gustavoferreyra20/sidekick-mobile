@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationController from './registrationCtrl';
 import styles from '../../assets/styles';
+import MyModal from '../popups/popupService';
 
 export class RegistrationScreen extends Component {
 
@@ -10,9 +11,9 @@ export class RegistrationScreen extends Component {
         super(props);
         this.state = {
             loading: true,
-            profilePicture: false
+            profilePicture: false,
         };
-        this.controller = new RegistrationController();
+        this.controller = new RegistrationController(props);
     }
 
     toggleSwitch = () => {
@@ -47,6 +48,17 @@ export class RegistrationScreen extends Component {
     componentDidMount = () => {
         this.controller.handleGetOptions().then(() => {
             this.setState({ loading: false });
+            this.forceUpdate()
+        })
+    }
+
+    setModalVisible = (visible) => {
+        this.controller.modalVisible = visible;
+        this.forceUpdate();
+    }
+
+    btnRegistration = () => {
+        this.controller.handleRegistration().then(() => {
             this.forceUpdate()
         })
     }
@@ -173,7 +185,7 @@ export class RegistrationScreen extends Component {
                         </TouchableOpacity>
 
                         <View style={styles.buttonContainer}>
-                            <Button title="Registrarse" onPress={this.controller.handleRegistration} color="#0eaa61" />
+                            <Button title="Registrarse" onPress={this.btnRegistration} color="#0eaa61" />
                         </View>
 
                         <Text style={styles.h1}>Ya tienes una cuenta?</Text>
@@ -187,6 +199,12 @@ export class RegistrationScreen extends Component {
                     </View>
                 </ScrollView>
 
+                <MyModal
+                    modalVisible={this.controller.modalVisible}
+                    setModalVisible={this.setModalVisible}
+                    modalType={this.controller.modalType}
+                    msg={this.controller.msg}
+                />
             </View>
         );
     }
