@@ -95,5 +95,15 @@ export default styles = StyleSheet.create({
         margin: 50,
         padding: 15,
         borderRadius: 10,
-    }
+    },
+    labelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      required: {
+        marginLeft: 5,
+        color: 'red',
+        fontWeight: 'bold',
+        flex: 1,
+      }
 });

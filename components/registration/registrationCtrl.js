@@ -15,7 +15,8 @@ export default class RegistrationController extends Component {
         }
         this.msg = "",
             this.modalType = "alert",
-            this.modalVisible = false,
+            this.modalFunction = () => { };
+        this.modalVisible = false,
             this.contactOptions = [],
             this.toggleValue = false;
     }
@@ -105,12 +106,46 @@ export default class RegistrationController extends Component {
                     }
 
                     if (this.newUser.profilePicture != undefined) {
-                        console.log("Guardar foto");
+                        UserService.saveImage(this.newUser.profilePicture).then((res) => {
+                            this.newUser.img = `profiles/${res.filename}`;
+                        }).then(() => {
+                            this.saveUser( this.newUser).then(() => {
+                                this.msg = "Usuario registrado con exito"
+                                this.modalVisible = true
+                                this.function = () => {
+                                    this.props.navigation.navigate('Iniciar sesión');
+                                };
+                                resolve();
+                                return
+                            });
+                        })
+                    } else {
+                        this.saveUser(this.newUser).then(() => {
+                            this.msg = "Usuario registrado con exito"
+                            this.modalVisible = true
+                            this.function = () => {
+                                this.props.navigation.navigate('Iniciar sesión');
+                            };
+                            resolve();
+                            return
+                        });
                     }
 
-                    console.log(`New user: ${JSON.stringify(this.newUser)}`);
                 });
         });
 
     };
+
+    saveUser = async (user) => {
+        return new Promise((resolve, reject) => {
+            UserService.save(user)
+                .then(function (id_createdUser) {
+                    UserService.addContact_inf_list({ id_user: id_createdUser, contact_inf_list: user.contact_inf_list });
+                    resolve();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    }
 }

@@ -53,6 +53,10 @@ export class RegistrationScreen extends Component {
     }
 
     setModalVisible = (visible) => {
+        if (typeof this.controller.function === "function") {
+            this.controller.function();
+        }
+
         this.controller.modalVisible = visible;
         this.forceUpdate();
     }
@@ -68,7 +72,11 @@ export class RegistrationScreen extends Component {
             <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer} >
                     <View style={styles.formContainer}>
-                        <Text style={styles.text}>Nombre</Text>
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.text}>Name</Text>
+                            <Text style={styles.required}>*</Text>
+                        </View>
+
                         <TextInput
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.name = text}
@@ -76,7 +84,10 @@ export class RegistrationScreen extends Component {
                             required
                         />
 
-                        <Text style={styles.text}>Email</Text>
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.text}>Email</Text>
+                            <Text style={styles.required}>*</Text>
+                        </View>
                         <TextInput
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.email = text}
@@ -132,7 +143,10 @@ export class RegistrationScreen extends Component {
                             onChangeText={text => this.controller.newUser.description = text}
                         />
 
-                        <Text style={styles.text}>Contacto</Text>
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.text}>Contacto</Text>
+                            <Text style={styles.required}>*</Text>
+                        </View>
                         {this.controller.newUser.contact_inf_list.length > 0 && this.controller.newUser.contact_inf_list.map((contact_inf, index) => (
                             <View style={styles.contactContainer} key={index}>
                                 <Picker
