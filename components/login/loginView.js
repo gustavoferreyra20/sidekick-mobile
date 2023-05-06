@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import LoginController from './loginCtrl';
 import styles from '../../assets/styles';
+import MyModal from '../popups/popupService';
 
 export class LoginScreen extends Component {
 
@@ -10,8 +11,23 @@ export class LoginScreen extends Component {
         this.controller = new LoginController(props.onLogin);
     }
 
+    btnLogin = () => {
+        this.controller.handleLogin().then(() => {
+            this.forceUpdate()
+        })
+    }
+
     handleRegistrationPress = () => {
         this.props.navigation.navigate('Registrarse');
+    }
+
+    setModalVisible = (visible) => {
+        if (typeof this.controller.function === "function") {
+            this.controller.function();
+        }
+
+        this.controller.modalVisible = visible;
+        this.forceUpdate();
     }
 
     render() {
@@ -36,7 +52,7 @@ export class LoginScreen extends Component {
                     />
 
                     <View style={styles.buttonContainer}>
-                        <Button title="Iniciar sesión" onPress={this.controller.handleLogin} color="#0eaa61" />
+                        <Button title="Iniciar sesión" onPress={this.btnLogin} color="#0eaa61" />
                     </View>
 
                     <Text style={styles.h1}>Todavia no te registraste?</Text>
@@ -50,6 +66,13 @@ export class LoginScreen extends Component {
                     </View>
 
                 </View>
+
+                <MyModal
+                    modalVisible={this.controller.modalVisible}
+                    setModalVisible={this.setModalVisible}
+                    modalType={this.controller.modalType}
+                    msg={this.controller.msg}
+                />
             </View>
         );
     }

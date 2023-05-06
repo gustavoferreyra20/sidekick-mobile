@@ -13,12 +13,12 @@ export default class RegistrationController extends Component {
             password: '',
             contact_inf_list: []
         }
-        this.msg = "",
-            this.modalType = "alert",
-            this.modalFunction = () => { };
-        this.modalVisible = false,
-            this.contactOptions = [],
-            this.toggleValue = false;
+        this.msg = "";
+        this.modalType = "alert";
+        this.modalFunction = () => { };
+        this.modalVisible = false;
+        this.contactOptions = [];
+        this.toggleValue = false;
     }
 
     handleGetOptions = () => {

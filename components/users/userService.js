@@ -75,6 +75,23 @@ class UserService {
     })
   }
 
+  static async login(obj) {
+    return new Promise((resolve, reject) => {
+      this.get(obj).then((res) => {
+        // create the cookie
+        if (res.length > 0) {
+          console.log(res)
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
+
 }
 
 export default UserService;
