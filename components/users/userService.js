@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SIDEKICK_API } from "@env"
+import TokenService from '../tokens/tokenService';
 
 class UserService {
 
@@ -80,8 +81,11 @@ class UserService {
       this.get(obj).then((res) => {
         // create the cookie
         if (res.length > 0) {
-          console.log(res)
-          resolve(true)
+          let userSession = res[0];
+          TokenService.create(userSession.id_user).then((response) => {
+            userSession.token = response;
+            resolve(true);
+          })
         } else {
           resolve(false)
         }
