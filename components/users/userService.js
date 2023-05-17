@@ -84,7 +84,7 @@ class UserService {
           let userSession = res[0];
           TokenService.create(userSession.id_user).then((response) => {
             userSession.token = response;
-            resolve(true);
+            resolve(userSession);
           })
         } else {
           resolve(false)

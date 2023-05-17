@@ -29,14 +29,14 @@ export default class LoginController {
       }
 
       UserService.login({ email: this.email, password: this.password }).then((response) => {
-        if(response){
-          this.onLogin();
+        if (response != undefined) {
+          this.onLogin(response);
         } else {
           this.msg = "Usuario y/o contraseña incorrectas"
           this.modalVisible = true
           resolve();
         }
-        
+
       })
     });
   };
