@@ -5,7 +5,6 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#535053',
         alignItems: 'center',
-        justifyContent: 'center',
     },
     formContainer: {
         paddingVertical: 30,
@@ -105,5 +104,52 @@ export default styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         flex: 1,
-      }
+      },
+      post: {
+        backgroundColor: "#3e3c3d",
+        boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
+        marginBottom: 20,
+      },
+      line: {
+        height: 1,
+        backgroundColor: "#1ded8c",
+        width: "100%",
+        marginVertical: 15,
+      },
+      userImage: {
+        borderRadius: 50,
+        height: 65,
+        width: 65,
+        resizeMode: 'cover',
+        aspectRatio: 1,
+        marginRight: 10,
+      },
+      profileHeader: {
+        flexDirection: 'row', 
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        padding: 10,
+        backgroundColor: "#3e3c3d"
+      },
+      uppercaseText: {
+        textTransform: 'uppercase',
+      },
+      line: {
+        height: 1,
+        backgroundColor: '#1ded8c',
+        width: '100%',
+      },
+      profileHeaderData: {
+        flex: 1, 
+      },
+      dot: {
+        height: 7,
+        width: 7,
+        marginLeft: 6,
+        marginRight: 6,
+        backgroundColor: '#1ded8c',
+        borderRadius: 3.5,
+        marginBottom: 10,
+      },
+    
 });
