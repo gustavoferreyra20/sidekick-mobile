@@ -26,7 +26,6 @@ class ProfileController {
     getReviews = (id_user) => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log(id_user)
                 const reviews = await ReviewService.getAll({ id_user: id_user });
                 resolve(reviews);
             } catch (error) {
