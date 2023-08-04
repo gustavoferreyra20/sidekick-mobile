@@ -1,5 +1,16 @@
 import { StyleSheet } from 'react-native';
 
+/* PALETA DE COLORES
+
+GRIS OSCURO		::	#3e3c3d
+GRIS			::	#494649
+GRIS CLARO		::	#535053
+VERDE OSCURO	::	#0eaa61
+VERDE SELLECCIONADO :: 047734
+VERDE			::	#11d077
+VERDE CLARO		::	#1ded8c
+*/
+
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -167,6 +178,18 @@ export default styles = StyleSheet.create({
   },
   FlatList: {
     width: '100%'
-  }
+  },
+  headerApplications: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileEdit: {
+    marginHorizontal: 5,
+  },
+  buttonContainerAAplications: {
+    flex: 1,
+    margin: 5,
+  },
 
 });

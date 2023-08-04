@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Button, FlatList, ActivityIndicator } from 'react-native';
+import { Text, View, Image, Button } from 'react-native';
 import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env"
 import ProfileController from './profileController';
@@ -14,7 +14,6 @@ export class ProfileScreen extends React.Component {
       visibleReviews: [],
       loading: true,
       page: 1,
-      isFetching: false,
     };
     this.controller = new ProfileController();
     this.id_profile = this.props.route.params.id_user;
@@ -35,12 +34,10 @@ export class ProfileScreen extends React.Component {
             reviews: data,
             loading: false,
             visibleReviews: data.slice(0, 5),
-            isFetching: false,
           });
         } else {
           this.setState({
             loading: false,
-            isFetching: false,
           });
         }
       });
