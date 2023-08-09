@@ -43,7 +43,7 @@ export default styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 14,
-    marginBottom: 8,
+    marginVertical: 4,
   },
   textInput: {
     backgroundColor: '#fff',
@@ -129,12 +129,7 @@ export default styles = StyleSheet.create({
     boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
     marginBottom: 20,
   },
-  line: {
-    height: 1,
-    backgroundColor: "#1ded8c",
-    width: "100%",
-    marginVertical: 15,
-  },
+
   userImage: {
     borderRadius: 50,
     height: 65,
@@ -187,9 +182,43 @@ export default styles = StyleSheet.create({
   profileEdit: {
     marginHorizontal: 5,
   },
-  buttonContainerAAplications: {
+  buttonContainerAplications: {
     flex: 1,
     margin: 5,
   },
-
+  titleContainer: {
+    flex: 8,
+    paddingRight: 5,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  usersContainer: {
+    flex: 2,
+    alignItems: 'flex-end',
+  },
+  usersText: {
+    fontSize: 16,
+    color: 'white',
+  },
+  cancelButton: {
+    marginTop: 10,
+    textAlign: 'center', 
+  },
+  sendedAppContainer: {
+    margin: 10,
+    padding: 10,
+    backgroundColor: '#3e3c3d',
+    borderRadius: 5,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  applicationsContainer: {
+    width: '100%'
+  }
 });

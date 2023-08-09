@@ -29,6 +29,36 @@ class MyModal extends Component {
                         </TouchableWithoutFeedback>
                     </TouchableOpacity>
                 )}
+
+                {this.props.modalType === "confirm" && (
+                    <>
+                        <TouchableOpacity onPress={() => this.props.setModalVisible(false)} style={styles.popupContainer}>
+                            <TouchableWithoutFeedback>
+                                <View style={styles.popupContent}>
+                                    <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
+                                    <View style={styles.buttonContainer}>
+                                        <View style={{ marginBottom: 8 }}>
+                                            <Button
+                                                title="Si"
+                                                onPress={() => {
+                                                    this.props.actionConfirm();
+                                                    this.props.setModalVisible(false);
+                                                }}
+                                                color="#0eaa61"
+                                            />
+                                        </View>
+                                        <Button
+                                            title="No"
+                                            onPress={() => this.props.setModalVisible(false)}
+                                            color="#dc3545"
+                                        />
+                                    </View>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </TouchableOpacity>
+
+                    </>
+                )}
             </Modal>
         )
     }

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Dimensions } from 'react-native';
 
 class Loader extends Component {
-    state = {
-        visibleItems: [],
-        page: 1,
-        isFetching: false,
-        hasMoreItems: true,
-        shouldLoadMore: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            visibleItems: [],
+            page: 1,
+            isFetching: false,
+            hasMoreItems: true,
+        };
+    }
 
     componentDidMount() {
         this.loadMoreItems();
@@ -48,35 +50,17 @@ class Loader extends Component {
         }
     };
 
-    onLayout = (event) => {
-        const { isFetching, hasMoreItems, shouldLoadMore } = this.state;
-
-        const screenHeight = Dimensions.get('window').height;
-
-        const bufferHeight = screenHeight * 1;
-        if (!isFetching && hasMoreItems && !shouldLoadMore) {
-            const height = event.nativeEvent.layout.height;
-
-            if (height < bufferHeight) {
-                this.setState({ shouldLoadMore: true }, () => {
-                    this.handleLoadMore();
-                });
-            }
-        }
-    };
-
-
     render() {
-        const { data, renderItem, ...otherProps } = this.props;
+        const { renderItem, ...otherProps } = this.props;
         const { visibleItems } = this.state;
 
         return (
             <FlatList
                 data={visibleItems}
                 renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
                 onEndReached={this.handleLoadMore}
                 onEndReachedThreshold={0.1}
-                onLayout={this.onLayout}
                 {...otherProps}
             />
         );
