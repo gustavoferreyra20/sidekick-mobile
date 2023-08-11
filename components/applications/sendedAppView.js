@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Button } from 'react-native';
 import styles from '../../assets/styles';
-import { SIDEKICK_API } from "@env"
 
 const SendedApp = ({ item, onCancelApplication }) => {
   return (

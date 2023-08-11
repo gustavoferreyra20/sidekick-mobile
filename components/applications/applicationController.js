@@ -49,4 +49,16 @@ export default class ApplicationController {
             }
         });
     }
+
+    changeStatus = async (id_user, id_post, status) => {
+        return new Promise((resolve, reject) => {
+            try {
+                PostService.addApplication({ id_user: id_user, id_post: id_post, status: status })
+                resolve();
+            } catch (error) {
+                console.log(error);
+                resolve(null);
+            }
+        });
+    }
 }

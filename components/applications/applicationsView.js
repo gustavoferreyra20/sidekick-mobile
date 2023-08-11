@@ -4,6 +4,7 @@ import styles from '../../assets/styles';
 import ApplicationController from './applicationController';
 import Loader from '../../assets/loader';
 import SendedApp from './sendedAppView';
+import ReceivedApp from './receivedAppView';
 import MyModal from '../popups/popupService';
 
 export class ApplicationsScreen extends Component {
@@ -36,13 +37,11 @@ export class ApplicationsScreen extends Component {
 
     showSendedApps = async () => {
         let sendedApps = await this.controller.getSendedApps(this.id_profile);
-        //console.log('Enviadas: ' + sendedApps.length)
         this.setState({ selectedButton: 'Enviadas', sendedApps: sendedApps });
     }
 
     showReceivedApp = async () => {
         let receivedApps = await this.controller.getReceivedApp(this.id_profile);
-        //console.log('Recibidas: ' + receivedApps.length)
         this.setState({ selectedButton: 'Recibidas', receivedApps: receivedApps });
     }
 
@@ -50,6 +49,44 @@ export class ApplicationsScreen extends Component {
         await this.controller.cancelApplication(id_post, this.id_profile, this.showSendedApps);
         this.setState({});
     }
+
+    btnChangeStatus = async (id_user, id_post, status) => {
+        try {
+            // Update the server first
+            await this.controller.changeStatus(id_user, id_post, status);
+    
+            // Update the state after the server update is successful
+            const updatedReceivedApps = this.state.receivedApps.map((grandparent) => {
+                if (grandparent.id_post === id_post) {
+                    const updatedUsers = grandparent.users.map((parent) => {
+                        if (parent.id_user === id_user) {
+                            return {
+                                ...parent,
+                                applications: {
+                                    ...parent.applications,
+                                    status: status
+                                }
+                            };
+                        }
+                        return parent;
+                    });
+    
+                    const updatedActualUsers = status === 'accepted' ? grandparent.actualUsers + 1 : grandparent.actualUsers - 1;
+    
+                    return {
+                        ...grandparent,
+                        users: updatedUsers,
+                        actualUsers: updatedActualUsers
+                    };
+                }
+                return grandparent;
+            });
+    
+            this.setState({ receivedApps: updatedReceivedApps });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     setModalVisible = (visible) => {
         if (typeof this.controller.function === "function") {
@@ -95,7 +132,7 @@ export class ApplicationsScreen extends Component {
                         {this.state.selectedButton === 'Recibidas' && (
                             <Loader
                                 data={receivedApps}
-                                renderItem={({ item }) => <Text>{item.title}</Text>}
+                                renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnCancelApplication} changeStatus={this.btnChangeStatus} />}
                             />
                         )}
                     </View>
