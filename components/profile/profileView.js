@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, Image, Button } from 'react-native';
 import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env"
@@ -14,38 +14,52 @@ export class ProfileScreen extends React.Component {
       visibleReviews: [],
       loading: true,
       page: 1,
+      id_profile: this.props.route.params.id_user,
+      isCurrentUser: this.props.route.params.isCurrentUser,
+      profile: null,
     };
     this.controller = new ProfileController();
-    this.id_profile = this.props.route.params.id_user;
-    this.isCurrentUser = this.props.route.params.isCurrentUser;
-    this.profile = null;
   }
+
+
+  handleUserNamePress = (id_user) => {
+
+    if (this.state.id_user !== id_user) {
+      this.setState(
+        {
+          id_user: id_user,
+          isCurrentUser: id_user == this.props.route.params.id_user,
+          loading: true,
+        },
+        () => {
+          this.loadProfileData(id_user); // Pass id_user as an argument
+        }
+      );
+    }
+  };
 
   componentDidMount() {
-    this.loadProfileData();
+    const initialIdUser = this.props.route.params.id_user; // Use the initial id_user from props
+    this.setState({ id_user: initialIdUser }, () => {
+      this.loadProfileData(initialIdUser); // Pass initialIdUser as an argument
+    });
   }
 
-  loadProfileData = () => {
-    this.controller.getProfile(this.id_profile).then((data) => {
-      this.profile = data;
-      this.controller.getReviews(this.id_profile).then((data) => {
+  loadProfileData = async (id_user) => { // Accept id_user as an argument
+    this.controller.getProfile(id_user).then((data) => { // Use id_user here
+      this.setState({ profile: data });
+      this.controller.getReviews(id_user).then((data) => { // Use id_user here
         if (data.length > 0) {
-          this.setState({
-            reviews: data,
-            loading: false,
-            visibleReviews: data.slice(0, 5),
-          });
+          this.setState({ reviews: data, visibleReviews: data.slice(0, 5), loading: false });
         } else {
-          this.setState({
-            loading: false,
-          });
+          this.setState({ loading: false });
         }
       });
     });
   };
 
   render() {
-    const { loading, visibleReviews } = this.state;
+    const { loading, profile, isCurrentUser, reviews, visibleReviews } = this.state;
 
     if (loading) {
       return (
@@ -58,22 +72,22 @@ export class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.profileHeader}>
-          <Image source={{ uri: `${SIDEKICK_API}images/${this.profile.img}` }} style={styles.userImage} />
+          <Image source={{ uri: `${SIDEKICK_API}images/${profile.img}` }} style={styles.userImage} />
           <View style={styles.profileHeaderData}>
-            <Text style={[styles.text, styles.nameText, styles.boldText]}>{this.profile.name}</Text>
+            <Text style={[styles.text, styles.nameText, styles.boldText]}>{profile.name}</Text>
             <Text style={styles.text}>
-              Habilidad: {this.profile.ability} <View style={styles.dot}></View> karma: {this.profile.karma}
+              Habilidad: {profile.ability} <View style={styles.dot}></View> karma: {profile.karma}
             </Text>
-            <Text style={styles.text}>{this.profile.description}</Text>
+            <Text style={styles.text}>{profile.description}</Text>
           </View>
-          {this.isCurrentUser ? (
+          {isCurrentUser ? (
             <Button style={styles.profileEdit} title="Editar" color="#0eaa61" />
           ) : null}
         </View>
         <View style={styles.line}></View>
         <Loader
-          data={this.state.reviews}
-          renderItem={({ item }) => <Review item={item} />}
+          data={reviews}
+          renderItem={({ item }) => <Review item={item} handleUserNamePress={this.handleUserNamePress} />}
           style={styles.FlatList}
         />
       </View>

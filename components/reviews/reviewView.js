@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env"
 
-const Review = ({ item }) => {
+const Review = ({ item, handleUserNamePress }) => {
+
     return (
         <View style={styles.reviewContainer}>
             <View style={styles.reviewHeader}>
@@ -16,7 +17,11 @@ const Review = ({ item }) => {
 
                 <View style={styles.textContainer}>
                     <View style={styles.userInfo}>
-                        <Text style={[styles.text, styles.nameText, styles.boldText]}>{item.user.name}</Text>
+                        <TouchableOpacity onPress={() => handleUserNamePress(item.id_writerUser)}>
+                            <Text style={[styles.text, styles.nameText, styles.boldText]}>
+                                {item.user.name}
+                            </Text>
+                        </TouchableOpacity>
                         <Text style={styles.text}>Habilidad: {item.abilityScore} <View style={styles.dot}></View> Karma: {item.karmaScore} id: {item.id_review}</Text>
                     </View>
                 </View>
