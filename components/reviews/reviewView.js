@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env"

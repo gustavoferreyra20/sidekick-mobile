@@ -205,7 +205,7 @@ export default styles = StyleSheet.create({
   },
   cancelButton: {
     marginTop: 10,
-    textAlign: 'center', 
+    textAlign: 'center',
   },
   sendedAppContainer: {
     margin: 10,
@@ -220,5 +220,41 @@ export default styles = StyleSheet.create({
   },
   applicationsContainer: {
     width: '100%'
-  }
+  },
+  rewardsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heading: {
+    fontSize: 20,
+    color: 'white',
+    padding: 10
+  },
+  rewardImage: {
+    height: 65,
+    width: 65,
+    resizeMode: 'cover',
+    aspectRatio: 1,
+    marginRight: 10,
+  },
+  rewardItem: {
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 8,
+    gap: 10
+  },
+  rewardPrice: {
+    fontSize: 16,
+    color: 'white',
+  },
+  rewardDescription: {
+    fontSize: 16,
+    color: 'white',
+  },
+  rewardItemContainer: {
+    width: '50%',
+    paddingHorizontal: 5,
+  },
 });

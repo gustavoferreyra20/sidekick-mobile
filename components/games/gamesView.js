@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import GamesController from './gamesController';
-import { SIDEKICK_API } from "@env"
+import GamesController from './gamesCtrl';
+import { SIDEKICK_API } from "@env";
 import styles from '../../assets/styles';
 
 export class GamesScreen extends Component {
