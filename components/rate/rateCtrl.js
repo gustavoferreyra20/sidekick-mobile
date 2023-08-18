@@ -8,7 +8,6 @@ export default class RateController extends Component {
     constructor(props) {
         super(props);
     }
-
     newReview = async (review) => {
         const { id_user, id_post } = this.props.route.params; // Assuming you're using React Navigation for navigation
         review.id_user = id_user;
@@ -27,10 +26,6 @@ export default class RateController extends Component {
         }
     };
 
-    btnAddReward = () => {
-        this.showRewards();
-    };
-
     btnSelectReward = (form, reward) => {
         form.reward = reward;
         this.setState({ rewards: [] });
@@ -47,8 +42,8 @@ export default class RateController extends Component {
         // Add navigation logic here to navigate to the Store screen
     };
 
-    showRewards = async () => {
-        const response = await rewards.getByUser(userSession.id_user);
-        this.setState({ rewards: response });
+    showRewards = async (id_user) => {
+        const response = await RewardService.getByUser(id_user);
+        return response;
     };
 }

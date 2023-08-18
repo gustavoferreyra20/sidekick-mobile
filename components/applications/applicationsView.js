@@ -105,11 +105,10 @@ export class ApplicationsScreen extends Component {
 
     render() {
         const { selectedButton, loading, sendedApps, receivedApps, rate } = this.state;
-
         return (
             <View style={styles.container}>
                 {rate.show ? (
-                    <RateView id_user={rate.id_user} id_post={rate.id_post} />
+                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} />
                 ) : (
                     <>
                         <View style={styles.headerApplications}>
