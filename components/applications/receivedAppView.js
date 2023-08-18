@@ -3,7 +3,7 @@ import { View, Text, Image, Button, FlatList } from 'react-native';
 import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env"
 
-const Item = ({ user, post, changeStatus }) => {
+const Item = ({ user, post, changeStatus, rate }) => {
     if (user.applications.status !== 'rejected') {
         return (
             <View style={styles.profileHeader}>
@@ -48,7 +48,7 @@ const Item = ({ user, post, changeStatus }) => {
                                 <Button
                                     color={'#0eaa61'}
                                     title="Calificar"
-                                    onPress={this.showSendedApps}
+                                    onPress={() => rate(user.id_user, post.id_post)}
                                 />
                             </View>
                             <View style={styles.buttonContainerAplications}>
@@ -68,7 +68,7 @@ const Item = ({ user, post, changeStatus }) => {
     }
 };
 
-const ReceivedApp = ({ post, onDeletePost, changeStatus }) => {
+const ReceivedApp = ({ post, onDeletePost, changeStatus, rate }) => {
 
     return (
         <View style={styles.sendedAppContainer}>
@@ -86,7 +86,7 @@ const ReceivedApp = ({ post, onDeletePost, changeStatus }) => {
 
             <FlatList
                 data={post.users}
-                renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} />}
+                renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} rate={rate} />}
                 keyExtractor={item => item.id_user}
             />
 

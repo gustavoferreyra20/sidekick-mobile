@@ -6,6 +6,7 @@ import Loader from '../../assets/loader';
 import SendedApp from './sendedAppView';
 import ReceivedApp from './receivedAppView';
 import MyModal from '../popups/popupService';
+import { RateView } from '../rate/rateView';
 
 export class ApplicationsScreen extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ export class ApplicationsScreen extends Component {
             selectedButton: 'Enviadas',
             sendedApps: [],
             receivedApps: [],
+            rate: { id_user: 0, id_post: 0, show: false }
         };
         this.controller = new ApplicationController();
         this.id_profile = this.props.route.params.id_user;
@@ -54,7 +56,7 @@ export class ApplicationsScreen extends Component {
         try {
             // Update the server first
             await this.controller.changeStatus(id_user, id_post, status);
-    
+
             // Update the state after the server update is successful
             const updatedReceivedApps = this.state.receivedApps.map((grandparent) => {
                 if (grandparent.id_post === id_post) {
@@ -70,9 +72,9 @@ export class ApplicationsScreen extends Component {
                         }
                         return parent;
                     });
-    
+
                     const updatedActualUsers = status === 'accepted' ? grandparent.actualUsers + 1 : grandparent.actualUsers - 1;
-    
+
                     return {
                         ...grandparent,
                         users: updatedUsers,
@@ -81,7 +83,7 @@ export class ApplicationsScreen extends Component {
                 }
                 return grandparent;
             });
-    
+
             this.setState({ receivedApps: updatedReceivedApps });
         } catch (error) {
             console.error('Error:', error);
@@ -97,47 +99,56 @@ export class ApplicationsScreen extends Component {
         this.forceUpdate();
     }
 
+    btnRate = (id_user, id_post) => {
+        this.setState({ rate: { id_user: id_user, id_post: id_post, show: true } });
+    };
+
     render() {
-        const { selectedButton, loading, sendedApps, receivedApps } = this.state;
+        const { selectedButton, loading, sendedApps, receivedApps, rate } = this.state;
 
         return (
             <View style={styles.container}>
-                <View style={styles.headerApplications}>
-                    <View style={styles.buttonContainerAplications}>
-                        <Button
-                            color={selectedButton === 'Enviadas' ? '#047734' : '#0eaa61'}
-                            title="Enviadas"
-                            onPress={this.showSendedApps}
-                        />
-                    </View>
-                    <View style={styles.buttonContainerAplications}>
-                        <Button
-                            color={selectedButton === 'Recibidas' ? '#047734' : '#0eaa61'}
-                            title="Recibidas"
-                            onPress={this.showReceivedApp}
-                        />
-                    </View>
-                </View>
-
-                {loading ? (
-                    <Text>Loading...</Text>
+                {rate.show ? (
+                    <RateView id_user={rate.id_user} id_post={rate.id_post} />
                 ) : (
-                    <View style={styles.applicationsContainer}>
-                        {this.state.selectedButton === 'Enviadas' && (
-                            <Loader
-                                data={sendedApps}
-                                renderItem={({ item }) => <SendedApp item={item} onCancelApplication={this.btnCancelApplication} />}
-                            />
-                        )}
-                        {this.state.selectedButton === 'Recibidas' && (
-                            <Loader
-                                data={receivedApps}
-                                renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnCancelApplication} changeStatus={this.btnChangeStatus} />}
-                            />
-                        )}
-                    </View>
-                )}
+                    <>
+                        <View style={styles.headerApplications}>
+                            <View style={styles.buttonContainerAplications}>
+                                <Button
+                                    color={selectedButton === 'Enviadas' ? '#047734' : '#0eaa61'}
+                                    title="Enviadas"
+                                    onPress={this.showSendedApps}
+                                />
+                            </View>
+                            <View style={styles.buttonContainerAplications}>
+                                <Button
+                                    color={selectedButton === 'Recibidas' ? '#047734' : '#0eaa61'}
+                                    title="Recibidas"
+                                    onPress={this.showReceivedApp}
+                                />
+                            </View>
+                        </View>
 
+                        {loading ? (
+                            <Text>Loading...</Text>
+                        ) : (
+                            <View style={styles.applicationsContainer}>
+                                {this.state.selectedButton === 'Enviadas' && (
+                                    <Loader
+                                        data={sendedApps}
+                                        renderItem={({ item }) => <SendedApp item={item} onCancelApplication={this.btnCancelApplication} />}
+                                    />
+                                )}
+                                {this.state.selectedButton === 'Recibidas' && (
+                                    <Loader
+                                        data={receivedApps}
+                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnCancelApplication} changeStatus={this.btnChangeStatus} rate={this.btnRate} />}
+                                    />
+                                )}
+                            </View>
+                        )}
+                    </>
+                )}
                 <MyModal
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}

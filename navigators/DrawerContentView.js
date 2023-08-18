@@ -103,7 +103,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/plays.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/cart.png')} style={styles.icon} />}
                             label="Tienda"
                             onPress={() => {
                                 this.props.navigation.navigate("Tienda");
