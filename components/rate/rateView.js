@@ -4,6 +4,7 @@ import styles from '../../assets/styles';
 import { SIDEKICK_API } from "@env";
 import RateController from './rateCtrl';
 import Slider from '@react-native-community/slider';
+import MyModal from '../popups/popupService';
 
 export class RateView extends Component {
     constructor(props) {
@@ -11,10 +12,12 @@ export class RateView extends Component {
         this.state = {
             loading: true,
             form: {
+                id_post: this.props.rated_id_post,
+                id_writerUser: this.props.id_profile,
+                id_user: this.props.rated_id_user,
                 abilityScore: 50,
                 karmaScore: 50,
                 comment: '',
-                reward: null
             }
         };
         this.controller = new RateController();
@@ -42,6 +45,15 @@ export class RateView extends Component {
         const rewards = await this.controller.showRewards(this.props.id_profile)
         this.setState({ rewards: rewards });
     };
+
+    setModalVisible = (visible) => {
+        if (typeof this.controller.function === "function") {
+            this.controller.function();
+        }
+
+        this.controller.modalVisible = visible;
+        this.forceUpdate();
+    }
 
     render() {
         return (
@@ -86,7 +98,7 @@ export class RateView extends Component {
                     {/* Rewards section */}
                     <ScrollView horizontal={true}>
                         {this.state.rewards && (this.state.rewards.map((reward, index) => (
-                            <View key={index} style={{marginRight: 10}}>
+                            <View key={index} style={{ marginRight: 10 }}>
                                 <View style={styles.rewardItem}>
                                     <Image
                                         source={{ uri: `${SIDEKICK_API}images/${reward.img}` }}
@@ -134,10 +146,22 @@ export class RateView extends Component {
                 <View style={styles.buttonContainer}>
                     <Button
                         title="Calificar"
-                        onPress={() => this.controller.newReview(this.state.form)}
+                        onPress={() => {
+                            this.controller.newReview(this.state.form, () => {
+                                this.setState({});
+                            }, this.props.changeRate);
+                        }}
                         color="#0eaa61"
                     />
                 </View>
+
+                <MyModal
+                    modalVisible={this.controller.modalVisible}
+                    setModalVisible={this.setModalVisible}
+                    modalType={this.controller.modalType}
+                    msg={this.controller.msg}
+                    actionConfirm={this.controller.modalFunction}
+                />
             </View>
         );
     }
