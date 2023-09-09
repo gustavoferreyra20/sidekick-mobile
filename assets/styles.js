@@ -26,7 +26,6 @@ export default styles = StyleSheet.create({
     marginLeft: 75
   },
   formContainer: {
-    paddingVertical: 30,
     width: '80%'
   },
   scrollContainer: {
@@ -56,6 +55,14 @@ export default styles = StyleSheet.create({
     minWidth: '100%'
   },
   buttonContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    gap: 8,
+    alignItems: 'stretch',
+    marginVertical: 8,
+  },
+  button: {
     marginVertical: 8,
   },
   h1: {
@@ -235,7 +242,7 @@ export default styles = StyleSheet.create({
     width: 65,
     resizeMode: 'cover',
     aspectRatio: 1,
-    marginRight: 10,
+    alignSelf: 'center'
   },
   rewardItem: {
     marginVertical: 10,

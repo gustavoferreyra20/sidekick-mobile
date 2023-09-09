@@ -96,7 +96,7 @@ export class RegistrationScreen extends Component {
                         />
 
                         {this.state.profilePicture && (
-                            <View style={styles.buttonContainer}>
+                            <View style={styles.button}>
                                 <Button
                                     title="Eliminar foto"
                                     onPress={() => {
@@ -109,7 +109,7 @@ export class RegistrationScreen extends Component {
                         )
                         }
 
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
                             <Button
                                 title="Seleccionar foto"
                                 disabled={this.state.profilePicture}
@@ -121,7 +121,7 @@ export class RegistrationScreen extends Component {
                                 color="#0eaa61"
                             />
                         </View>
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
                             <Button
                                 title="Tomar foto"
                                 disabled={this.state.profilePicture}
@@ -175,11 +175,11 @@ export class RegistrationScreen extends Component {
                             </View>
                         ))}
 
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
                             <Button title="Agregar otra cuenta" onPress={this.btnAddAccount} color="#0eaa61" />
                         </View>
                         {this.controller.newUser.contact_inf_list.length > 1 && (
-                            <View style={styles.buttonContainer}>
+                            <View style={styles.button}>
                                 <Button title="Eliminar último" onPress={this.btnRemoveAccount} color="#D4403A" />
                             </View>
                         )}
@@ -198,13 +198,13 @@ export class RegistrationScreen extends Component {
                             <Switch value={this.controller.toggleValue} onValueChange={this.toggleSwitch} />
                         </TouchableOpacity>
 
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
                             <Button title="Registrarse" onPress={this.btnRegistration} color="#0eaa61" />
                         </View>
 
                         <Text style={styles.h1}>Ya tienes una cuenta?</Text>
 
-                        <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
                             <Button
                                 title="Iniciar sesión"
                                 onPress={this.handleLoginPress}

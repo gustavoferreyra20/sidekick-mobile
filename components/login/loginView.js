@@ -51,13 +51,13 @@ export class LoginScreen extends Component {
                         required
                     />
 
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
                         <Button title="Iniciar sesión" onPress={this.btnLogin} color="#0eaa61" />
                     </View>
 
                     <Text style={styles.h1}>Todavia no te registraste?</Text>
 
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
                         <Button
                             title="Registrarse"
                             onPress={() => this.handleRegistrationPress()}

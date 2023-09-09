@@ -18,9 +18,30 @@ export class RateView extends Component {
                 abilityScore: 50,
                 karmaScore: 50,
                 comment: '',
-            }
+                reward: null
+            },
+            rewards: null,
+            showRewards: false
         };
         this.controller = new RateController();
+    }
+
+    async componentDidMount() {
+        try {
+
+            const rewards = await this.controller.showRewards(this.props.id_profile);
+
+            this.setState({
+                loading: false,
+                rewards: rewards,
+            });
+        } catch (error) {
+
+            console.error('Error fetching rewards:', error);
+            this.setState({
+                loading: false,
+            });
+        }
     }
 
     handleAbilityScoreChange = (value) => {
@@ -41,10 +62,24 @@ export class RateView extends Component {
         }));
     };
 
-    handleShowRewards = async () => {
-        const rewards = await this.controller.showRewards(this.props.id_profile)
-        this.setState({ rewards: rewards });
+    handleShowRewards = () => {
+        this.setState((prevState) => ({
+            showRewards: !prevState.showRewards,
+        }));
     };
+
+    handleSelectReward = (reward) => {
+        this.setState(prevState => ({
+            form: { ...prevState.form, reward: reward }
+        }));
+    };
+
+    handleDeleteReward = () => {
+        this.setState(prevState => ({
+            form: { ...prevState.form, reward: null }
+        }));
+    };
+
 
     setModalVisible = (visible) => {
         if (typeof this.controller.function === "function") {
@@ -53,6 +88,10 @@ export class RateView extends Component {
 
         this.controller.modalVisible = visible;
         this.forceUpdate();
+    }
+
+    handleGoToStore = () => {
+        this.props.navigation.navigate("Tienda")
     }
 
     render() {
@@ -91,55 +130,57 @@ export class RateView extends Component {
                         numberOfLines={4}
                     />
 
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
                         <Button title="Premiar" onPress={this.handleShowRewards} color="#0eaa61" />
                     </View>
 
                     {/* Rewards section */}
-                    <ScrollView horizontal={true}>
-                        {this.state.rewards && (this.state.rewards.map((reward, index) => (
-                            <View key={index} style={{ marginRight: 10 }}>
-                                <View style={styles.rewardItem}>
-                                    <Image
-                                        source={{ uri: `${SIDEKICK_API}images/${reward.img}` }}
-                                        style={styles.rewardImage}
-                                    />
-                                    <Text>{reward.description}</Text>
-                                    <Button
-                                        title="Seleccionar"
-                                        onPress={() => this.controller.btnSelectReward(this.state.form, reward)}
-                                        color="#0eaa61"
-                                    />
+                    {this.state.showRewards && (
+                        <ScrollView horizontal={true}>
+                            {this.state.rewards.map((reward, index) => (
+                                <View key={index} style={{ marginRight: 10 }}>
+                                    <View style={styles.rewardItem}>
+                                        <Image
+                                            source={{ uri: `${SIDEKICK_API}images/${reward.img}` }}
+                                            style={styles.rewardImage}
+                                        />
+                                        <Text style={styles.rewardDescription} >{reward.description}</Text>
+                                        <Button
+                                            title="Seleccionar"
+                                            onPress={() => this.handleSelectReward(reward)}
+                                            color="#0eaa61"
+                                        />
+                                    </View>
                                 </View>
-                            </View>
-                        )))}
-                    </ScrollView>
+                            ))}
+                        </ScrollView>
+                    )}
 
-                    {this.state.form.reward && (
-                        <View style={styles.rewardContainer}>
-                            <Image
-                                source={{ uri: this.state.form.reward.img }}
-                                style={styles.rewardImage}
-                            />
-                            <Text>{this.state.form.reward.description}</Text>
+
+                    {this.state.showRewards && (
+                        <View style={styles.noRewardContainer}>
                             <Button
-                                title="Eliminar"
-                                onPress={() => this.controller.btnDeleteReward(this.state.form)}
-                                color="#FF0000"
+                                title="Comprar medallas"
+                                onPress={() => this.handleGoToStore()}
+                                color="#0eaa61"
                             />
                         </View>
                     )}
 
-                    {this.state.rewards && (this.state.rewards.length === 0 && (
-                        <View style={styles.noRewardContainer}>
-                            <Text style={styles.text}>No tienes ninguna medalla, quieres comprar alguna?</Text>
+                    {this.state.form.reward && (
+                        <View style={styles.rewardItem}>
+                            <Image
+                                source={{ uri: `${SIDEKICK_API}images/${this.state.form.reward.img}` }}
+                                style={styles.rewardImage}
+                            />
+                            <Text style={styles.rewardDescription}>{this.state.form.reward.description}</Text>
                             <Button
-                                title="Comprar"
-                                onPress={this.controller.btnGoToStore}
-                                color="#0eaa61"
+                                title="Eliminar"
+                                onPress={() => this.handleDeleteReward()}
+                                color="#FF0000"
                             />
                         </View>
-                    ))}
+                    )}
                 </View>
 
                 {/* Calificar button */}
@@ -149,9 +190,15 @@ export class RateView extends Component {
                         onPress={() => {
                             this.controller.newReview(this.state.form, () => {
                                 this.setState({});
-                            }, this.props.changeRate);
+                            }, this.props.updateReview);
                         }}
                         color="#0eaa61"
+                    />
+
+                    <Button
+                        title="Volver"
+                        onPress={() => { this.props.updateReview() }}
+                        color="#FF0000"
                     />
                 </View>
 

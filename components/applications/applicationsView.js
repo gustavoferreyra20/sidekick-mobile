@@ -103,8 +103,9 @@ export class ApplicationsScreen extends Component {
         this.setState({ rate: { id_user: id_user, id_post: id_post, show: true } });
     };
 
-    changeRate = () => {
+    updateReview = async () => {
         this.setState({ rate: !this.state.rate });
+        await this.showReceivedApp();
     };
 
     render() {
@@ -112,7 +113,7 @@ export class ApplicationsScreen extends Component {
         return (
             <View style={styles.container}>
                 {rate.show ? (
-                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} navigation={this.props.navigation} changeRate={this.changeRate} />
+                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} navigation={this.props.navigation} updateReview={this.updateReview} />
                 ) : (
                     <>
                         <View style={styles.headerApplications}>

@@ -18,7 +18,7 @@ class MyModal extends Component {
                         <TouchableWithoutFeedback>
                             <View style={styles.popupContent}>
                                 <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                <View style={styles.buttonContainer}>
+                                <View style={styles.button}>
                                     <Button
                                         title="Aceptar"
                                         onPress={() => {
@@ -38,7 +38,7 @@ class MyModal extends Component {
                         <TouchableWithoutFeedback>
                             <View style={styles.popupContent}>
                                 <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                <View style={styles.buttonContainer}>
+                                <View style={styles.button}>
                                     <Button
                                         title="Aceptar"
                                         onPress={() => this.props.setModalVisible(false)}
@@ -56,7 +56,7 @@ class MyModal extends Component {
                             <TouchableWithoutFeedback>
                                 <View style={styles.popupContent}>
                                     <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                    <View style={styles.buttonContainer}>
+                                    <View style={styles.button}>
                                         <View style={{ marginBottom: 8 }}>
                                             <Button
                                                 title="Si"

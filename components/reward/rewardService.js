@@ -16,9 +16,9 @@ class RewardService {
         });
     }
 
-    static async use(id_reward) {
+    static async use(id_user, id_reward) {
         return new Promise((resolve, reject) => {
-            const url = `${SIDEKICK_API}rewards/join?id_reward=${id_reward}&id_user=${userSession.id_user}`;
+            const url = `${SIDEKICK_API}rewards/join?id_reward=${id_reward}&id_user=${id_user}`;
 
             axios.delete(url)
                 .then((res) => {
