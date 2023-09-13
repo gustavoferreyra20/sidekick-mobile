@@ -26,7 +26,9 @@ export default styles = StyleSheet.create({
     marginLeft: 75
   },
   formContainer: {
-    width: '80%'
+    paddingTop: 20,
+    width: '80%',
+    height: '80%',
   },
   scrollContainer: {
     alignItems: 'center',
@@ -53,6 +55,21 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     minWidth: '100%'
+  },
+  pickerContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#bdc3c7',
+    overflow: 'hidden',
+    marginBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
+  },
+  pickerInput: {
+    flex: 1,
+    minWidth: '100%',
   },
   buttonContainer: {
     display: 'flex',
