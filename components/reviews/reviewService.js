@@ -5,9 +5,9 @@ class ReviewService {
   static async getAll(args = null) {
     return new Promise((resolve, reject) => {
       var url = `${SIDEKICK_API}reviews`;
-      const params = new URLSearchParams(args);
 
       if (args !== null) {
+        const params = new URLSearchParams(args);
         url = `${url}/join?${params}`;
       }
 

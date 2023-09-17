@@ -1,22 +1,61 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
-import Slider from '@react-native-community/slider';
+import { Text, View, TextInput, Button } from 'react-native';
+import NewPostCtrl from './newPostCtrl';
 import styles from '../../assets/styles';
 import { Picker } from '@react-native-picker/picker';
+import MyModal from '../popups/popupService';
 
 export class NewPostScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             form: {
+                id_user: this.props.route.params.id_user,
                 title: '',
                 gameSelected: 'game1',
                 platformSelected: 'platform1',
                 modeSelected: 'mode1',
                 userRequire: '1',
                 description: '',
-            }
+            },
+            gameOptions: [],
+            platformOptions: [],
+            modeOptions: [],
         };
+        this.controller = new NewPostCtrl();
+    }
+
+
+    async componentDidMount() {
+        try {
+            // Fetch and update game options
+            const gameOptions = await this.controller.fetchGameOptions();
+            // Fetch and update platform options
+            const platformOptions = await this.controller.setPlatforms();
+            // Fetch and update mode options
+            const modeOptions = await this.controller.fetchModeOptions();
+
+            this.setState({
+                gameOptions,
+                platformOptions,
+                modeOptions,
+            });
+        } catch (error) {
+
+            console.error('Error fetching rewards:', error);
+            this.setState({
+                loading: false,
+            });
+        }
+    }
+
+    setModalVisible = (visible) => {
+        if (typeof this.controller.function === "function") {
+            this.controller.function();
+        }
+
+        this.controller.modalVisible = visible;
+        this.forceUpdate();
     }
 
     handleTitleChange = (text) => {
@@ -28,12 +67,16 @@ export class NewPostScreen extends Component {
         }));
     };
 
-    handleGameSelect = (value) => {
+    handleGameSelect = async (value) => {
+        const platformOptions = await this.controller.setPlatforms(value);
+
         this.setState((prevState) => ({
             form: {
                 ...prevState.form,
                 gameSelected: value,
             },
+            platformOptions: platformOptions,
+            platformSelected: platformOptions[0],
         }));
     };
 
@@ -73,9 +116,36 @@ export class NewPostScreen extends Component {
         }));
     };
 
-    handleCreatePost = () => {
-        console.log(this.state.form)
+    handleCreatePost = async () => {
+        this.controller.createPost(this.state.form, this.reloadForm)
     };
+
+
+    reloadForm = async () => {
+        // Fetch and update game options
+        const gameOptions = await this.controller.fetchGameOptions();
+        // Fetch and update platform options
+        const platformOptions = await this.controller.setPlatforms();
+        // Fetch and update mode options
+        const modeOptions = await this.controller.fetchModeOptions();
+
+        this.setState((prevState) => ({
+            form: {
+                ...prevState.form,
+                id_user: this.props.route.params.id_user,
+                title: '',
+                gameSelected: 'game1',
+                platformSelected: 'platform1',
+                modeSelected: 'mode1',
+                userRequire: '1',
+                description: '',
+            },
+            gameOptions,
+            platformOptions,
+            modeOptions,
+        }));
+
+    }
 
     render() {
         return (
@@ -89,7 +159,7 @@ export class NewPostScreen extends Component {
                     <TextInput
                         style={styles.textInput}
                         placeholder="Ingrese el título"
-                        value={this.state.title}
+                        value={this.state.form.title}
                         onChangeText={this.handleTitleChange}
                     />
 
@@ -101,9 +171,14 @@ export class NewPostScreen extends Component {
                             selectedValue={this.state.form.gameSelected}
                             onValueChange={this.handleGameSelect}
                         >
-                            <Picker.Item label="Game 1" value="game1" />
-                            <Picker.Item label="Game 2" value="game2" />
-                            {/* Add more games as needed */}
+                            {this.state.gameOptions.map((gameOption) => (
+                                <Picker.Item
+                                    key={gameOption.value}
+                                    label={gameOption.name}
+                                    value={gameOption.value}
+                                />
+                            ))}
+
                         </Picker>
                     </View>
 
@@ -115,9 +190,15 @@ export class NewPostScreen extends Component {
                             selectedValue={this.state.form.platformSelected}
                             onValueChange={this.handlePlatformSelect}
                         >
-                            <Picker.Item label="Platform 1" value="platform1" />
-                            <Picker.Item label="Platform 2" value="platform2" />
-                            {/* Add more platforms as needed */}
+
+                            {this.state.platformOptions.map((platformOption) => (
+                                <Picker.Item
+                                    key={platformOption.value}
+                                    label={platformOption.name}
+                                    value={platformOption.value}
+                                />
+                            ))}
+
                         </Picker>
                     </View>
 
@@ -129,9 +210,15 @@ export class NewPostScreen extends Component {
                             selectedValue={this.state.form.modeSelected}
                             onValueChange={this.handleModeSelect}
                         >
-                            <Picker.Item label="Mode 1" value="mode1" />
-                            <Picker.Item label="Mode 2" value="mode2" />
-                            {/* Add more modes as needed */}
+
+                            {this.state.modeOptions.map((modeOption) => (
+                                <Picker.Item
+                                    key={modeOption.value}
+                                    label={modeOption.name}
+                                    value={modeOption.value}
+                                />
+                            ))}
+
                         </Picker>
                     </View>
 
@@ -156,7 +243,7 @@ export class NewPostScreen extends Component {
                     <TextInput
                         style={styles.textInput}
                         placeholder="Description"
-                        value={this.state.description}
+                        value={this.state.form.description}
                         multiline={true}
                         numberOfLines={4}
                         onChangeText={this.handleDescriptionChange}
@@ -164,6 +251,14 @@ export class NewPostScreen extends Component {
 
                     <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#0eaa61" />
                 </View>
+
+                <MyModal
+                    modalVisible={this.controller.modalVisible}
+                    setModalVisible={this.setModalVisible}
+                    modalType={this.controller.modalType}
+                    msg={this.controller.msg}
+                    actionConfirm={this.controller.modalFunction}
+                />
             </View>
         );
     }

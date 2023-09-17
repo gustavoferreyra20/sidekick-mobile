@@ -4,10 +4,10 @@ import { SIDEKICK_API } from "@env";
 class PostService {
   static async getAll(args = null) {
     return new Promise((resolve, reject) => {
-      const params = new URLSearchParams(args);
       var url = `${SIDEKICK_API}posts`;
 
       if (args !== null) {
+        const params = new URLSearchParams(args);
         url = `${url}/bo?${params}`;
       }
 
@@ -25,19 +25,16 @@ class PostService {
     const url = `${SIDEKICK_API}posts`;
     let data = {
       id_user: post.id_user,
-      id_game: post.game.value,
-      id_platform: post.platform.value,
-      id_mode: post.mode.value,
+      id_game: post.gameSelected,
+      id_platform: post.platformSelected,
+      id_mode: post.modeSelected,
       requiredUsers: post.userRequire,
       actualUsers: 0,
       title: post.title,
       description: (post.description != null) ? post.description : ''
     };
 
-    axios.post(url, data)
-      .then(() => {
-        popups.function("Anuncio creado con exito", function () { (location.reload()) });
-      })
+    await axios.post(url, data)
       .catch(function (error) {
         console.log(error);
       });

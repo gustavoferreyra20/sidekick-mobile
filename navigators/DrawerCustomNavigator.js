@@ -29,7 +29,7 @@ export class DrawerCustomNavigator extends Component {
             >
                 <Drawer.Screen name="Inicio" component={HomeScreen} />
                 <Drawer.Screen name="Juegos" component={GamesScreen} />
-                <Drawer.Screen name="Crear anuncio" component={NewPostScreen} />
+                <Drawer.Screen name="Crear anuncio" component={NewPostScreen} initialParams={{ id_user: this.props.userSession.id_user }} />
                 <Drawer.Screen name="Solicitudes" component={ApplicationsScreen} initialParams={{ id_user: this.props.userSession.id_user }} />
                 <Drawer.Screen name="Perfil" component={ProfileScreen} initialParams={{ id_user: this.props.userSession.id_user, isCurrentUser: true }} />
                 <Drawer.Screen name="Tienda" component={StoreScreen} />
