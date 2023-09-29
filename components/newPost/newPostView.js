@@ -42,7 +42,8 @@ export class NewPostScreen extends Component {
             });
         } catch (error) {
 
-            console.error('Error fetching rewards:', error);
+            console.error(error);
+            
             this.setState({
                 loading: false,
             });

@@ -281,4 +281,11 @@ export default styles = StyleSheet.create({
     width: '50%',
     paddingHorizontal: 5,
   },
+  hr_main: {
+    borderBottomWidth: 1,
+    width: '90%',
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1ded8c',
+  },
 });
