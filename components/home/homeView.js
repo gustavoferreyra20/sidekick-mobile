@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Picker } from '@react-native-picker/picker';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Modal } from 'react-native';
+import PostSearchForm from '../PostSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
 import styles from '../../assets/styles';
 import HomeCtrl from './homeCtrl';
+import MyModal from '../popups/popupService';
 
 export class HomeScreen extends Component {
     constructor(props) {
@@ -11,9 +12,7 @@ export class HomeScreen extends Component {
             gameOptions: [],
             platformOptions: [],
             modeOptions: [],
-            gameSelected: '',
-            platformSelected: '',
-            modeSelected: '',
+            isPostSearchFormVisible: false,
         };
         this.controller = new HomeCtrl();
     }
@@ -33,38 +32,31 @@ export class HomeScreen extends Component {
                 modeOptions,
             });
         } catch (error) {
-
             console.error(error);
-
             this.setState({
                 loading: false,
             });
         }
     }
 
-    handleGameSelect = async (gameSelected) => {
-        const platformOptions = await this.controller.setPlatforms(gameSelected); // Call the controller function to update platforms
-
-        this.setState({
-            gameSelected,
-            platformOptions,
-        });
+    handleSubmit = (game, platform, mode) => {
+        this.controller.btnSearchPost(game, platform, mode);
     };
 
-    handlePlatformSelect = (value) => {
-        this.setState({ platformSelected: value });
+    setModalVisible = (visible) => {
+        if (typeof this.controller.function === "function") {
+            this.controller.function();
+        }
+
+        this.controller.modalVisible = visible;
+        this.forceUpdate();
     };
 
-    handleModeSelect = (value) => {
-        this.setState({ modeSelected: value });
-    };
-
-    handleSubmit = () => {
-        this.controller.btnSearchPost(
-            this.state.gameSelected,
-            this.state.platformSelected,
-            this.state.modeSelected
-        );
+    // Toggle the visibility of the PostSearchForm modal
+    togglePostSearchFormModal = () => {
+        this.setState((prevState) => ({
+            isPostSearchFormVisible: !prevState.isPostSearchFormVisible,
+        }));
     };
 
     render() {
@@ -73,57 +65,34 @@ export class HomeScreen extends Component {
                 <Text style={styles.heading}>Posts más recientes</Text>
                 <View style={styles.hr_main} />
 
-                <View style={styles.formContainer}>
-                    <View style={styles.pickerContainer}>
-                        <Picker
-                            style={styles.pickerInput}
-                            selectedValue={this.state.gameSelected}
-                            onValueChange={this.handleGameSelect}
-                        >
-                            {this.state.gameOptions.map((gameOption) => (
-                                <Picker.Item
-                                    key={gameOption.value}
-                                    label={gameOption.name}
-                                    value={gameOption.value}
-                                />
-                            ))}
-                        </Picker>
-                    </View>
+                <Button
+                    title="Show PostSearchForm"
+                    onPress={this.togglePostSearchFormModal}
+                    color="#0eaa61"
+                />
 
-                    <View style={styles.pickerContainer}>
-                        <Picker
-                            style={styles.pickerInput}
-                            selectedValue={this.state.platformSelected}
-                            onValueChange={this.handlePlatformSelect}
-                        >
-                            {this.state.platformOptions.map((platformOption) => (
-                                <Picker.Item
-                                    key={platformOption.value}
-                                    label={platformOption.name}
-                                    value={platformOption.value}
-                                />
-                            ))}
-                        </Picker>
-                    </View>
+                <MyModal
+                    modalVisible={this.controller.modalVisible}
+                    setModalVisible={this.setModalVisible}
+                    modalType={this.controller.modalType}
+                    msg={this.controller.msg}
+                    actionConfirm={this.controller.modalFunction}
+                />
 
-                    <View style={styles.pickerContainer}>
-                        <Picker
-                            style={styles.pickerInput}
-                            selectedValue={this.state.modeSelected}
-                            onValueChange={this.handleModeSelect}
-                        >
-                            {this.state.modeOptions.map((modeOption) => (
-                                <Picker.Item
-                                    key={modeOption.value}
-                                    label={modeOption.name}
-                                    value={modeOption.value}
-                                />
-                            ))}
-                        </Picker>
-                    </View>
+                <Modal // Assuming you have a Modal component
+                    transparent={true}
+                    visible={this.state.isPostSearchFormVisible}
+                    onRequestClose={this.togglePostSearchFormModal}
+                >
 
-                    <Button title="Buscar" onPress={this.handleSubmit} color="#0eaa61" />
-                </View>
+                    <PostSearchForm
+                        gameOptions={this.state.gameOptions}
+                        platformOptions={this.state.platformOptions}
+                        modeOptions={this.state.modeOptions}
+                        handleSubmit={this.handleSubmit}
+                        togglePostSearchFormModal={this.togglePostSearchFormModal}
+                    />
+                </Modal>
             </View>
         );
     }

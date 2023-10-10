@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Component } from 'react';
 
 // Import your services
 import GameService from '../games/gameService';
@@ -11,15 +10,12 @@ export default class HomeCtrl extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            SIDEKICK_API: process.env.SIDEKICK_API,
             posts: [],
-            gameOptions: [],
-            gameSelected: '',
-            modeOptions: [],
-            modeSelected: '',
-            platformOptions: [],
-            platformSelected: '',
         };
+        this.msg = "";
+        this.modalType = "alert";
+        this.modalFunction = () => { };
+        this.modalVisible = false;
     }
     fetchGameOptions = async () => {
         return await GameService.getOptions(false);
@@ -52,6 +48,7 @@ export default class HomeCtrl extends Component {
 
         PostService.getAll(params).then((response) => {
             //this.setState({ posts: response });
+            console.log(response.length)
         });
     };
 }

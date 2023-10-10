@@ -29,7 +29,7 @@ export class StoreScreen extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>Resalta a los mejores jugadores</Text>
-                <View style={styles.line}></View>
+                <View style={styles.hr_main}></View>
 
                 <View style={styles.container}>
                     {loading ? (
