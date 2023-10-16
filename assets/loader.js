@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { FlatList, Text } from 'react-native';
+import styles from './styles';
 
 class Loader extends Component {
     constructor(props) {
@@ -56,12 +57,16 @@ class Loader extends Component {
 
         return (
             <FlatList
+            contentContainerStyle={{ paddingBottom: 100 }}
                 data={visibleItems}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 onEndReached={this.handleLoadMore}
                 onEndReachedThreshold={0.1}
                 {...otherProps}
+                ListEmptyComponent={() => (
+                    <Text style={styles.noItems}>No se encontraron resultados</Text>
+                )}
             />
         );
     }

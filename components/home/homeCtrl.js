@@ -9,16 +9,13 @@ import PlatformService from '../platforms/platformService';
 export default class HomeCtrl extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            posts: [],
-        };
         this.msg = "";
         this.modalType = "alert";
         this.modalFunction = () => { };
         this.modalVisible = false;
     }
     fetchGameOptions = async () => {
-        return await GameService.getOptions(false);
+        return await GameService.getOptions(true);
     }
 
     fetchModeOptions = async () => {
@@ -31,7 +28,11 @@ export default class HomeCtrl extends Component {
         return await PlatformService.getOptions(game, true);
     }
 
-    btnSearchPost = (game, platform, mode) => {
+    getPosts = async () => {
+        return await PostService.getAll();
+    }
+
+    btnSearchPost = async (game, platform, mode) => {
         const params = {};
 
         if (game !== 'any') {
@@ -46,9 +47,6 @@ export default class HomeCtrl extends Component {
             params.id_mode = mode;
         }
 
-        PostService.getAll(params).then((response) => {
-            //this.setState({ posts: response });
-            console.log(response.length)
-        });
+        return await PostService.getAll(params);
     };
 }

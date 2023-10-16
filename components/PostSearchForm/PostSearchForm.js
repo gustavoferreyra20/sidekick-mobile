@@ -47,6 +47,7 @@ class PostSearchForm extends Component {
                 selectedValue={this.state.gameSelected}
                 onValueChange={this.handleGameSelect}
               >
+
                 {this.props.gameOptions.map((gameOption) => (
                   <Picker.Item
                     key={gameOption.value}

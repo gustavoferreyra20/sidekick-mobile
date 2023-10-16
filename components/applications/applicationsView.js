@@ -134,7 +134,7 @@ export class ApplicationsScreen extends Component {
                         </View>
 
                         {loading ? (
-                            <Text>Loading...</Text>
+                             <Text style={styles.text}>Loading...</Text>
                         ) : (
                             <View style={styles.applicationsContainer}>
                                 {this.state.selectedButton === 'Enviadas' && (

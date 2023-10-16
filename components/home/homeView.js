@@ -4,14 +4,18 @@ import PostSearchForm from '../PostSearchForm/PostSearchForm'; // Update the pat
 import styles from '../../assets/styles';
 import HomeCtrl from './homeCtrl';
 import MyModal from '../popups/popupService';
+import Loader from '../../assets/loader';
+import Post from '../posts/postsView';
 
 export class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             gameOptions: [],
             platformOptions: [],
             modeOptions: [],
+            posts: [],
             isPostSearchFormVisible: false,
         };
         this.controller = new HomeCtrl();
@@ -26,6 +30,8 @@ export class HomeScreen extends Component {
             // Fetch and update mode options
             const modeOptions = await this.controller.fetchModeOptions();
 
+            await this.fetchPosts();
+
             this.setState({
                 gameOptions,
                 platformOptions,
@@ -39,8 +45,15 @@ export class HomeScreen extends Component {
         }
     }
 
-    handleSubmit = (game, platform, mode) => {
-        this.controller.btnSearchPost(game, platform, mode);
+    handleSubmit = async (game, platform, mode) => {
+        try {
+            let posts = await this.controller.btnSearchPost(game, platform, mode);
+            this.setState({ loading: false, posts: posts });
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+            this.setState({ loading: false });
+        }
+        
     };
 
     setModalVisible = (visible) => {
@@ -52,24 +65,46 @@ export class HomeScreen extends Component {
         this.forceUpdate();
     };
 
-    // Toggle the visibility of the PostSearchForm modal
     togglePostSearchFormModal = () => {
         this.setState((prevState) => ({
             isPostSearchFormVisible: !prevState.isPostSearchFormVisible,
         }));
     };
 
+    fetchPosts = async () => {
+        try {
+            let posts = await this.controller.getPosts();
+            this.setState({ loading: false, posts: posts });
+
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+            this.setState({ loading: false });
+        }
+    };
+
     render() {
+        const { posts, loading, gameOptions, platformOptions, modeOptions, isPostSearchFormVisible } = this.state;
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>Posts más recientes</Text>
                 <View style={styles.hr_main} />
 
                 <Button
-                    title="Show PostSearchForm"
+                    title="Buscar"
                     onPress={this.togglePostSearchFormModal}
                     color="#0eaa61"
                 />
+
+                {loading ? (
+                    <Text style={styles.text}>Loading...</Text>
+                ) : (
+                    <View style={styles.postsContainer}>
+                        <Loader
+                            data={posts}
+                            renderItem={({ item }) => <Post post={item} />}
+                        />
+                    </View>
+                )}
 
                 <MyModal
                     modalVisible={this.controller.modalVisible}
@@ -79,16 +114,16 @@ export class HomeScreen extends Component {
                     actionConfirm={this.controller.modalFunction}
                 />
 
-                <Modal // Assuming you have a Modal component
+                <Modal
                     transparent={true}
-                    visible={this.state.isPostSearchFormVisible}
+                    visible={isPostSearchFormVisible}
                     onRequestClose={this.togglePostSearchFormModal}
                 >
 
                     <PostSearchForm
-                        gameOptions={this.state.gameOptions}
-                        platformOptions={this.state.platformOptions}
-                        modeOptions={this.state.modeOptions}
+                        gameOptions={gameOptions}
+                        platformOptions={platformOptions}
+                        modeOptions={modeOptions}
                         handleSubmit={this.handleSubmit}
                         togglePostSearchFormModal={this.togglePostSearchFormModal}
                     />

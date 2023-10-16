@@ -64,7 +64,7 @@ export class ProfileScreen extends React.Component {
     if (loading) {
       return (
         <View style={styles.container}>
-          <Text>Loading...</Text>
+           <Text style={styles.text}>Loading...</Text>
         </View>
       );
     }

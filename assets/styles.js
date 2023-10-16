@@ -107,19 +107,19 @@ export default styles = StyleSheet.create({
   gamesContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
     height: "100%",
   },
   gameContainer: {
     alignItems: "center",
     margin: 10,
-    width: "45%",
   },
   gameImage: {
-    width: "100%",
-    height: undefined,
-    aspectRatio: 1,
-    resizeMode: "contain",
-    maxWidth: "100%",
+    width: 144,
+    height: 192,
+    resizeMode: 'contain',
+    alignSelf: 'flex-start',
   },
   gameName: {
     color: "#fff",
@@ -218,6 +218,14 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
+    marginBottom: 8,
+  },
+  postTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 4,
+    marginTop: 4,
   },
   usersContainer: {
     flex: 2,
@@ -287,5 +295,59 @@ export default styles = StyleSheet.create({
     marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#1ded8c',
+  },
+  dot: {
+    color: '#0eaa61',
+  },
+  postContainer: {
+    margin: 10,
+    padding: 10,
+    backgroundColor: '#3e3c3d',
+    borderRadius: 5,
+  },
+  postsContainer: {
+    width: "100%",
+    marginTop: 8,
+  },
+  userInfo: {
+    flexDirection: 'column',
+    flex: 1,
+  },
+  userInfoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textRight: {
+    textAlign: 'right',
+  },
+  postRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  postTitleContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  postContent: {
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: 8,
+  },
+  description: {
+    flex: 1,
+    fontSize: 16,
+    marginLeft: 8,
+    flexWrap: 'wrap',
+    color: 'white',
+  },
+  noItems: {
+    color: 'white',
+    textAlign: 'center',
   },
 });

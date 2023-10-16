@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SIDEKICK_API } from "@env";
+import { log } from 'react-native-reanimated';
 
 class GameService {
   static async getAll() {
