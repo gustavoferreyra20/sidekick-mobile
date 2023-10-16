@@ -49,4 +49,26 @@ export default class HomeCtrl extends Component {
 
         return await PostService.getAll(params);
     };
+
+    submitApplication = (id_post, id_user) => {
+        return new Promise((resolve, reject) => {
+            PostService.getApplications({ id_post: id_post, id_user: id_user, type: 'sended' }).then((res) => {
+                if (res[0]) {
+                    this.msg = "Ya existe una solicitud pendiente";
+                    this.modalVisible = true;
+                    resolve();
+                    return;
+                } else {
+                    PostService.addApplication({ id_post: id_post, id_user: id_user })
+                        .then(() => {
+                            this.msg = "Solicitud enviada";
+                            this.modalVisible = true;
+                            resolve();
+                            return;
+                        });
+                }
+            });
+        });
+    }
+
 }

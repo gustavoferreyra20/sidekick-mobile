@@ -27,7 +27,7 @@ export class DrawerCustomNavigator extends Component {
                     headerTintColor: 'black'
                 }}
             >
-                <Drawer.Screen name="Inicio" component={HomeScreen} />
+                <Drawer.Screen name="Inicio" component={HomeScreen} initialParams={{ id_user: this.props.userSession.id_user }}/>
                 <Drawer.Screen name="Juegos" component={GamesScreen} />
                 <Drawer.Screen name="Crear anuncio" component={NewPostScreen} initialParams={{ id_user: this.props.userSession.id_user }} />
                 <Drawer.Screen name="Solicitudes" component={ApplicationsScreen} initialParams={{ id_user: this.props.userSession.id_user }} />

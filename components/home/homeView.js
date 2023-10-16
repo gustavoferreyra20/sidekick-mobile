@@ -19,6 +19,7 @@ export class HomeScreen extends Component {
             isPostSearchFormVisible: false,
         };
         this.controller = new HomeCtrl();
+        this.id_user = this.props.route.params.id_user;
     }
 
     async componentDidMount() {
@@ -53,7 +54,7 @@ export class HomeScreen extends Component {
             console.error('Error fetching posts:', error);
             this.setState({ loading: false });
         }
-        
+
     };
 
     setModalVisible = (visible) => {
@@ -82,6 +83,12 @@ export class HomeScreen extends Component {
         }
     };
 
+    btnSubmitApplication = (id_post) => {
+        this.controller.submitApplication(id_post, this.id_user).then(() => {
+            this.forceUpdate()
+        })
+    };
+
     render() {
         const { posts, loading, gameOptions, platformOptions, modeOptions, isPostSearchFormVisible } = this.state;
         return (
@@ -101,7 +108,7 @@ export class HomeScreen extends Component {
                     <View style={styles.postsContainer}>
                         <Loader
                             data={posts}
-                            renderItem={({ item }) => <Post post={item} />}
+                            renderItem={({ item }) => <Post post={item} btnSubmitApplication={this.btnSubmitApplication} />}
                         />
                     </View>
                 )}
