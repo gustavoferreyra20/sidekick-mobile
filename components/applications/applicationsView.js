@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import ApplicationController from './applicationController';
-import Loader from '../../assets/loader';
-import SendedApp from './sendedAppView';
+import Loader from '../../assets/scripts/loader';
+import SentApp from './sentAppView';
 import ReceivedApp from './receivedAppView';
 import MyModal from '../popups/popupService';
 import { RateView } from '../rate/rateView';
@@ -14,12 +14,12 @@ export class ApplicationsScreen extends Component {
         this.state = {
             loading: true,
             selectedButton: 'Enviadas',
-            sendedApps: [],
+            sentApps: [],
             receivedApps: [],
             rate: { id_user: 0, id_post: 0, show: false }
         };
         this.controller = new ApplicationController();
-        this.id_profile = this.props.route.params.id_user;
+        this.id_profile = this.props.route.params.sessionId;
     }
 
     componentDidMount() {
@@ -28,63 +28,38 @@ export class ApplicationsScreen extends Component {
 
     fetchApplications = async () => {
         try {
-            let receivedApps = await this.controller.getReceivedApp(this.id_profile);
-            let sendedApps = await this.controller.getSendedApps(this.id_profile);
-            this.setState({ loading: false, receivedApps: receivedApps, sendedApps: sendedApps });
+            let receivedApps = await this.controller.getApplications(this.id_profile, 'received');
+            let sentApps = await this.controller.getApplications(this.id_profile, 'sent');
+            this.setState({ loading: false, receivedApps: receivedApps, sentApps: sentApps });
         } catch (error) {
             console.error('Error fetching applications:', error);
             this.setState({ loading: false });
         }
     };
 
-    showSendedApps = async () => {
-        let sendedApps = await this.controller.getSendedApps(this.id_profile);
-        this.setState({ selectedButton: 'Enviadas', sendedApps: sendedApps });
+    showSentApps = async () => {
+        let sentApps = await this.controller.getApplications(this.id_profile, 'sent');
+        this.setState({ selectedButton: 'Enviadas', sentApps: sentApps });
     }
 
     showReceivedApp = async () => {
-        let receivedApps = await this.controller.getReceivedApp(this.id_profile);
+        let receivedApps = await this.controller.getApplications(this.id_profile, 'received');
         this.setState({ selectedButton: 'Recibidas', receivedApps: receivedApps });
     }
 
-    btnCancelApplication = async (id_post) => {
-        await this.controller.cancelApplication(id_post, this.id_profile, this.showSendedApps);
+    btnCancelApplication = async (id_post, id_application) => {
+        await this.controller.cancelApplication(id_post, id_application, this.showSentApps);
+        this.setState({});
+    }
+
+    btnDeletePost = async (id_post) => {
+        await this.controller.remove(id_post, this.showReceivedApp);
         this.setState({});
     }
 
     btnChangeStatus = async (id_user, id_post, status) => {
         try {
-            // Update the server first
-            await this.controller.changeStatus(id_user, id_post, status);
-
-            // Update the state after the server update is successful
-            const updatedReceivedApps = this.state.receivedApps.map((grandparent) => {
-                if (grandparent.id_post === id_post) {
-                    const updatedUsers = grandparent.users.map((parent) => {
-                        if (parent.id_user === id_user) {
-                            return {
-                                ...parent,
-                                applications: {
-                                    ...parent.applications,
-                                    status: status
-                                }
-                            };
-                        }
-                        return parent;
-                    });
-
-                    const updatedActualUsers = status === 'accepted' ? grandparent.actualUsers + 1 : grandparent.actualUsers - 1;
-
-                    return {
-                        ...grandparent,
-                        users: updatedUsers,
-                        actualUsers: updatedActualUsers
-                    };
-                }
-                return grandparent;
-            });
-
-            this.setState({ receivedApps: updatedReceivedApps });
+            this.controller.changeStatus(id_user, id_post, status).then(this.showReceivedApp());
         } catch (error) {
             console.error('Error:', error);
         }
@@ -109,7 +84,7 @@ export class ApplicationsScreen extends Component {
     };
 
     render() {
-        const { selectedButton, loading, sendedApps, receivedApps, rate } = this.state;
+        const { selectedButton, loading, sentApps, receivedApps, rate } = this.state;
         return (
             <View style={styles.container}>
                 {rate.show ? (
@@ -121,7 +96,7 @@ export class ApplicationsScreen extends Component {
                                 <Button
                                     color={selectedButton === 'Enviadas' ? '#047734' : '#0eaa61'}
                                     title="Enviadas"
-                                    onPress={this.showSendedApps}
+                                    onPress={this.showSentApps}
                                 />
                             </View>
                             <View style={styles.buttonContainerAplications}>
@@ -134,19 +109,19 @@ export class ApplicationsScreen extends Component {
                         </View>
 
                         {loading ? (
-                             <Text style={styles.text}>Loading...</Text>
+                            <Text style={styles.text}>Loading...</Text>
                         ) : (
                             <View style={styles.applicationsContainer}>
                                 {this.state.selectedButton === 'Enviadas' && (
                                     <Loader
-                                        data={sendedApps}
-                                        renderItem={({ item }) => <SendedApp item={item} onCancelApplication={this.btnCancelApplication} />}
+                                        data={sentApps}
+                                        renderItem={({ item }) => <SentApp item={item} onCancelApplication={this.btnCancelApplication} />}
                                     />
                                 )}
                                 {this.state.selectedButton === 'Recibidas' && (
                                     <Loader
                                         data={receivedApps}
-                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnCancelApplication} changeStatus={this.btnChangeStatus} rate={this.btnRate} />}
+                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnDeletePost} changeStatus={this.btnChangeStatus} rate={this.btnRate} />}
                                     />
                                 )}
                             </View>

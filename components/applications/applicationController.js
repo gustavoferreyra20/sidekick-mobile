@@ -1,4 +1,5 @@
 import PostService from "../posts/postService";
+import UserService from "../users/userService";
 
 export default class ApplicationController {
     constructor() {
@@ -8,10 +9,10 @@ export default class ApplicationController {
         this.modalVisible = false;
     }
 
-    getSendedApps = (id_profile) => {
+    getApplications = (id_profile, type) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const applications = await PostService.getApplications({ id_user: id_profile, type: 'sended' })
+                const applications = await UserService.getApplications(id_profile, type)
                 resolve(applications)
             } catch (error) {
                 console.log(error);
@@ -20,26 +21,32 @@ export default class ApplicationController {
         });
     }
 
-    getReceivedApp = async (id_profile) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const applications = await PostService.getApplications({ id_user: id_profile, type: 'received' })
-                resolve(applications)
-            } catch (error) {
-                console.log(error);
-                resolve(null);
-            }
-        });
-    }
-
-    cancelApplication = (id_post, id_profile, afterCancelCallback) => {
+    cancelApplication = (id_post, id_application, afterCancelCallback) => {
         return new Promise((resolve, reject) => {
             try {
                 this.modalType = "confirm";
                 this.msg = "Seguro desea eliminar la solicitud?"
                 this.modalVisible = true;
                 this.modalFunction = async () => {
-                    await PostService.removeApplication(id_post, id_profile);
+                    await PostService.removeApplication(id_post, id_application);
+                    afterCancelCallback();
+                };
+                resolve();
+            } catch (error) {
+                console.log(error);
+                resolve(null);
+            }
+        });
+    }
+
+    remove = (id_post, afterCancelCallback) => {
+        return new Promise((resolve, reject) => {
+            try {
+                this.modalType = "confirm";
+                this.msg = "Seguro desea eliminar el post?"
+                this.modalVisible = true;
+                this.modalFunction = async () => {
+                    await PostService.remove(id_post);
                     afterCancelCallback();
                 };
                 resolve();
@@ -53,7 +60,7 @@ export default class ApplicationController {
     changeStatus = async (id_user, id_post, status) => {
         return new Promise((resolve, reject) => {
             try {
-                PostService.addApplication({ id_user: id_user, id_post: id_post, status: status })
+                PostService.updateApplication(id_user, id_post, status)
                 resolve();
             } catch (error) {
                 console.log(error);

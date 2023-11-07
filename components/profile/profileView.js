@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, Image, Button } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 import ProfileController from './profileController';
 import Review from '../reviews/reviewView'
-import Loader from '../../assets/loader';
+import Loader from '../../assets/scripts/loader';
 
 export class ProfileScreen extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export class ProfileScreen extends React.Component {
       visibleReviews: [],
       loading: true,
       page: 1,
-      id_profile: this.props.route.params.id_user,
+      id_profile: this.props.route.params.sessionId,
       isCurrentUser: this.props.route.params.isCurrentUser,
       profile: null,
     };
@@ -28,7 +28,7 @@ export class ProfileScreen extends React.Component {
       this.setState(
         {
           id_user: id_user,
-          isCurrentUser: id_user == this.props.route.params.id_user,
+          isCurrentUser: id_user == this.props.route.params.sessionId,
           loading: true,
         },
         () => {
@@ -39,7 +39,7 @@ export class ProfileScreen extends React.Component {
   };
 
   componentDidMount() {
-    const initialIdUser = this.props.route.params.id_user; // Use the initial id_user from props
+    const initialIdUser = this.props.route.params.sessionId; // Use the initial id_user from props
     this.setState({ id_user: initialIdUser }, () => {
       this.loadProfileData(initialIdUser); // Pass initialIdUser as an argument
     });
@@ -48,13 +48,14 @@ export class ProfileScreen extends React.Component {
   loadProfileData = async (id_user) => { // Accept id_user as an argument
     this.controller.getProfile(id_user).then((data) => { // Use id_user here
       this.setState({ profile: data });
-      this.controller.getReviews(id_user).then((data) => { // Use id_user here
-        if (data.length > 0) {
+      this.controller.getReviews(id_user)
+        .then((data) => { // Use id_user here
           this.setState({ reviews: data, visibleReviews: data.slice(0, 5), loading: false });
-        } else {
+        })
+        .catch(function (error) {
+          console.log(error);
           this.setState({ loading: false });
-        }
-      });
+        });
     });
   };
 
@@ -64,7 +65,7 @@ export class ProfileScreen extends React.Component {
     if (loading) {
       return (
         <View style={styles.container}>
-           <Text style={styles.text}>Loading...</Text>
+          <Text style={styles.text}>Loading...</Text>
         </View>
       );
     }

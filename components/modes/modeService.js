@@ -1,17 +1,9 @@
-import axios from 'axios';
-import { SIDEKICK_API } from "@env";
+import axiosInstance from '../../middleware/axiosInstance ';
 
 class ModeService {
-    static async getAll(args = null) {
+    static async getAll() {
         return new Promise((resolve, reject) => {
-            var url = `${SIDEKICK_API}modes`;
-
-            if (args !== null) {
-                url = `${url}/bo?${params}`;
-                const params = new URLSearchParams(args);
-            }
-
-            axios.get(url)
+            axiosInstance.get(`modes`)
                 .then((res) => {
                     resolve(res.data);
                 })

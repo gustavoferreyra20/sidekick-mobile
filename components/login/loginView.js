@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import LoginController from './loginCtrl';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import MyModal from '../popups/popupService';
 
 export class LoginScreen extends Component {

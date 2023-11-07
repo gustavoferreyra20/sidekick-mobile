@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
 import { SIDEKICK_API } from "@env"
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { LoginScreen } from "./components/login/loginView.js";
 import { RegistrationScreen } from "./components/registration/registrationView.js";
@@ -23,35 +24,42 @@ export default class App extends Component {
     }
   }
 
-  async componentDidMount() {
-    const storedSession = await SecureStore.getItemAsync('isLoggedIn');
+  componentDidMount = async () => {
+    try {
+      const storedSession = await SecureStore.getItemAsync('isLoggedIn');
 
-    if (storedSession != undefined) {
-      const userSession = JSON.parse(storedSession);
-      const url = `${SIDEKICK_API}tokens/bo?id_user=${userSession.id_user}&token=${userSession.token}`;
-      axios.get(url)
-        .then((response) => {
-          if (response.data.length > 0) {
-            const dbToken = response.data[0];
+      const storeData = async (value) => {
+        try {
+          await AsyncStorage.setItem('my-key', value);
+        } catch (e) {
+          // saving error
+        }
+      };
 
-            if (this.isTokenValid(dbToken)) {
-              this.setState({ isLoggedIn: true, isLoading: false, userSession: userSession });
-            } else {
-              this.setState({ isLoading: false });
-            }
-          } else {
+      if (storedSession !== undefined) {
+
+        const userSession = JSON.parse(storedSession);
+        storeData(storedSession);
+
+        const url = `${SIDEKICK_API}auth/validate`;
+
+        axios.post(url, { token: userSession.token })
+          .then((res) => {
+            this.setState({ isLoggedIn: true, isLoading: false, sessionId: userSession.id });
+          })
+          .catch(function (error) {
             this.setState({ isLoading: false });
-          }
-        }).catch(function (error) {
-          console.log(error);
-        });
-
+          });
+      }
+    } catch (error) {
+      console.log("Error: " + error);
+      this.setState({ isLoading: false });
     }
-  }
+  };
 
   setLogin = async (userSession) => {
     await SecureStore.setItemAsync('isLoggedIn', JSON.stringify(userSession));
-    this.setState({ isLoggedIn: true, userSession: userSession });
+    this.setState({ isLoggedIn: true, sessionId: userSession.id });
   };
 
   setLogout = async () => {
@@ -81,7 +89,7 @@ export default class App extends Component {
         <NavigationContainer>
           <DrawerCustomNavigator
             onLogout={() => this.setLogout()}
-            userSession={this.state.userSession} />
+            sessionId={this.state.sessionId} />
         </NavigationContainer>
       );
     } else {

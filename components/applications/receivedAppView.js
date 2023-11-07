@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Button, FlatList } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
 const Item = ({ user, post, changeStatus, rate }) => {
@@ -16,14 +16,14 @@ const Item = ({ user, post, changeStatus, rate }) => {
                                 <Button
                                     color={'#0eaa61'}
                                     title="Aceptar"
-                                    onPress={() => changeStatus(user.id_user, post.id_post, 'accepted')}
+                                    onPress={() => changeStatus(post.id_post, user.applications.id_application, 'accepted')}
                                 />
                             </View>
                             <View style={styles.buttonContainerAplications}>
                                 <Button
                                     color={'#dc3545'}
                                     title="Rechazar"
-                                    onPress={() => changeStatus(user.id_user, post.id_post, 'rejected')}
+                                    onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
                                 />
                             </View>
                         </View>
@@ -55,7 +55,7 @@ const Item = ({ user, post, changeStatus, rate }) => {
                                 <Button
                                     color={'#dc3545'}
                                     title="Eliminar"
-                                    onPress={() => changeStatus(user.id_user, post.id_post, 'rejected')}
+                                    onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
                                 />
                             </View>
                         </View>
@@ -91,7 +91,7 @@ const ReceivedApp = ({ post, onDeletePost, changeStatus, rate }) => {
             />
 
             <View style={styles.cancelButton} >
-                <Button title="Eliminar post" color={"#dc3545"} onPress={() => onDeletePost(item.id_post)} />
+                <Button title="Eliminar post" color={"#dc3545"} onPress={() => onDeletePost(post.id_post)} />
             </View>
         </View>
     );

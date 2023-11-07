@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Modal } from 'react-native';
 import PostSearchForm from '../PostSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import HomeCtrl from './homeCtrl';
 import MyModal from '../popups/popupService';
-import Loader from '../../assets/loader';
+import Loader from '../../assets/scripts/loader';
 import Post from '../posts/postsView';
 
 export class HomeScreen extends Component {
@@ -19,7 +19,7 @@ export class HomeScreen extends Component {
             isPostSearchFormVisible: false,
         };
         this.controller = new HomeCtrl();
-        this.id_user = this.props.route.params.id_user;
+        this.id_user = this.props.route.params.sessionId;
     }
 
     async componentDidMount() {

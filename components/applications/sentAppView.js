@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, Button } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 
-const SendedApp = ({ item, onCancelApplication }) => {
+const SentApp = ({ item, onCancelApplication }) => {
   return (
     <View style={styles.sendedAppContainer}>
       <View style={styles.row}>
@@ -26,10 +26,10 @@ const SendedApp = ({ item, onCancelApplication }) => {
       ) : null}
 
       <View style={styles.cancelButton} >
-        <Button title="Cancelar" color={"#dc3545"} onPress={() => onCancelApplication(item.id_post)} />
+        <Button title="Cancelar" color={"#dc3545"} onPress={() => onCancelApplication(item.id_post, item.applications.id_application)} />
       </View>
     </View>
   );
 };
 
-export default SendedApp;
+export default SentApp;

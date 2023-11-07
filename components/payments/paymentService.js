@@ -1,19 +1,19 @@
 import axiosInstance from '../../middleware/axiosInstance ';
 
-class RewardService {
-    static async getAll(args = null) {
-        return new Promise((resolve, reject) => {
-            var url = `rewards`;
+class PaymentService {
 
-            axiosInstance.get(url)
+    static async newPayment(reward) {
+        return new Promise((resolve, reject) => {
+            axiosInstance.post(`payment`, reward)
                 .then((res) => {
                     resolve(res.data);
                 })
                 .catch(function (error) {
                     console.log(error);
+                    reject(error);
                 });
         });
     }
 }
 
-export default RewardService;
+export default PaymentService;

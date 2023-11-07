@@ -1,4 +1,4 @@
-import UserService from '../users/userService';
+import AuthService from '../auth/authService';
 
 export default class LoginController {
   constructor(onLogin) {
@@ -28,7 +28,7 @@ export default class LoginController {
         return;
       }
 
-      UserService.login({ email: this.email, password: this.password }).then((response) => {
+      AuthService.login({ email: this.email, password: this.password }).then((response) => {
         if (response != undefined) {
           this.onLogin(response);
         } else {

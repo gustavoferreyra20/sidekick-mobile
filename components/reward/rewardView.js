@@ -1,5 +1,5 @@
 import { View, Text, Image, Button } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env";
 
 const Reward = ({ item, handleBuyReward }) => {

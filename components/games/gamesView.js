@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import GamesController from './gamesCtrl';
 import { SIDEKICK_API } from "@env";
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 
 export class GamesScreen extends Component {
   constructor(props) {

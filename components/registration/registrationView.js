@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationController from './registrationCtrl';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import MyModal from '../popups/popupService';
 
 export class RegistrationScreen extends Component {

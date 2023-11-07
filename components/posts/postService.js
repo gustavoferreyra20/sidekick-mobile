@@ -1,17 +1,16 @@
-import axios from 'axios';
-import { SIDEKICK_API } from "@env";
+import axiosInstance from '../../middleware/axiosInstance ';
 
 class PostService {
   static async getAll(args = null) {
     return new Promise((resolve, reject) => {
-      var url = `${SIDEKICK_API}posts`;
+      var url = `posts`;
 
       if (args !== null) {
         const params = new URLSearchParams(args);
-        url = `${url}/bo?${params}`;
+        url = `${url}?${params}`;
       }
 
-      axios.get(url)
+      axiosInstance.get(url)
         .then((res) => {
           resolve(res.data);
         })
@@ -22,7 +21,7 @@ class PostService {
   }
 
   static async save(post) {
-    const url = `${SIDEKICK_API}posts`;
+    const url = `posts`;
     let data = {
       id_user: post.id_user,
       id_game: post.gameSelected,
@@ -34,48 +33,40 @@ class PostService {
       description: (post.description != null) ? post.description : ''
     };
 
-    await axios.post(url, data)
+    await axiosInstance.post(url, data)
       .catch(function (error) {
         console.log(error);
       });
   }
 
   static async remove(id_post) {
-    const url = `${SIDEKICK_API}posts/bo?id_post=${id_post}`;
-    await axios.delete(url)
+    await axiosInstance.delete('posts/' + id_post)
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  static async getApplications(args) {
-    return new Promise((resolve, reject) => {
-      var url = `${SIDEKICK_API}posts/join?`;
-      const params = new URLSearchParams(args);
-
-      axios.get(`${url}${params}`)
-        .then((res) => {
-          resolve(res.data)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    });
-  }
-
-  static async removeApplication(id_post, id_user) {
-    const url = `${SIDEKICK_API}posts/join?id_post=${id_post}&id_user=${id_user}`;
-    await axios.delete(url)
+  static async removeApplication(id_post, id_application) {
+    const url = 'posts/' + id_post + '/applications/' + id_application;
+    await axiosInstance.delete(url)
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  static async addApplication(args) {
-    const url = `${SIDEKICK_API}posts/join?`;
-    const params = new URLSearchParams(args);
+  static async addApplication(id_post, id_user) {
+    const url = 'posts/' + id_post + '/applications/' + id_user;
 
-    await axios.put(`${url}${params}`)
+    await axiosInstance.post(url)
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  static async updateApplication(id_post, id_application, status) {
+    const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
+
+    await axiosInstance.put(url)
       .catch(function (error) {
         console.log(error);
       });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env";
 import RateController from './rateCtrl';
 import Slider from '@react-native-community/slider';

@@ -5,6 +5,7 @@ import GameService from '../games/gameService';
 import PostService from '../posts/postService';
 import ModeService from '../modes/modeService';
 import PlatformService from '../platforms/platformService';
+import UserService from '../users/userService';
 
 export default class HomeCtrl extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class HomeCtrl extends Component {
         this.modalFunction = () => { };
         this.modalVisible = false;
     }
+
     fetchGameOptions = async () => {
         return await GameService.getOptions(true);
     }
@@ -52,14 +54,15 @@ export default class HomeCtrl extends Component {
 
     submitApplication = (id_post, id_user) => {
         return new Promise((resolve, reject) => {
-            PostService.getApplications({ id_post: id_post, id_user: id_user, type: 'sended' }).then((res) => {
-                if (res[0]) {
+            UserService.getApplications(id_user, 'sent').then((res) => {
+
+                if (res.some((item) => item.id_post === id_post)) {
                     this.msg = "Ya existe una solicitud pendiente";
                     this.modalVisible = true;
                     resolve();
                     return;
                 } else {
-                    PostService.addApplication({ id_post: id_post, id_user: id_user })
+                    PostService.addApplication(id_post, id_user)
                         .then(() => {
                             this.msg = "Solicitud enviada";
                             this.modalVisible = true;

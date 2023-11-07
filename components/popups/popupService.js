@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, View, Text, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 
 class MyModal extends Component {
     constructor(props) {

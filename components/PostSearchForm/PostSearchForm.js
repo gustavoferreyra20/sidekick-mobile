@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 
 class PostSearchForm extends Component {

@@ -1,19 +1,18 @@
 
-import axios from 'axios';
-import { SIDEKICK_API } from "@env";
+import axiosInstance from '../../middleware/axiosInstance ';
 
 class PlatformService {
     static async getAll(args = null) {
         return new Promise((resolve, reject) => {
 
-            var url = `${SIDEKICK_API}platforms`;
+            var url = `platforms`;
 
             if (args !== null) {
                 const params = new URLSearchParams(args);
                 url = `${url}/bo?${params}`;
             }
 
-            axios.get(url)
+            axiosInstance.get(url)
                 .then((res) => {
                     resolve(res.data);
                 })
@@ -41,20 +40,6 @@ class PlatformService {
         return options;
     }
 
-    static async getByGame(id_game) {
-        return new Promise((resolve, reject) => {
-
-            const url = `${SIDEKICK_API}platforms/join?id_game=${id_game}`;
-
-            axios.get(url)
-                .then((res) => {
-                    resolve(res.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-    }
 }
 
 export default PlatformService;

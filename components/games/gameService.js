@@ -1,27 +1,10 @@
-import axios from 'axios';
-import { SIDEKICK_API } from "@env";
-import { log } from 'react-native-reanimated';
+import axiosInstance from '../../middleware/axiosInstance ';
 
 class GameService {
+
   static async getAll() {
     return new Promise((resolve, reject) => {
-      axios.get(`${SIDEKICK_API}games`)
-        .then((res) => {
-          resolve(res.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-          reject(error);
-        });
-    });
-  }
-
-  static async getOne(condition) {
-    return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}games/bo`;
-      const params = new URLSearchParams(condition);
-
-      axios.get(`${url}?${params}`)
+      axiosInstance.get(`games`)
         .then((res) => {
           resolve(res.data);
         })
@@ -48,6 +31,24 @@ class GameService {
       }
 
       return options;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async getPlatforms(id_game) {
+    try {
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('games/' + id_game + '/platforms')
+          .then((res) => {
+            resolve(res.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+            reject(error);
+          });
+      });
     } catch (error) {
       console.log(error);
       throw error;

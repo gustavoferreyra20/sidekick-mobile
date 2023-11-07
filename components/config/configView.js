@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, View } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 
 export class ConfigScreen extends Component {
 

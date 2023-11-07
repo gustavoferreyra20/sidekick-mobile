@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import StoreController from './storeCtrl';
 import Reward from '../reward/rewardView';
 

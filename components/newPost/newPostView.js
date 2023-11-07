@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import NewPostCtrl from './newPostCtrl';
-import styles from '../../assets/styles';
+import styles from '../../assets/scripts/styles';
 import { Picker } from '@react-native-picker/picker';
 import MyModal from '../popups/popupService';
 
@@ -10,7 +10,7 @@ export class NewPostScreen extends Component {
         super(props);
         this.state = {
             form: {
-                id_user: this.props.route.params.id_user,
+                id_user: this.props.route.params.sessionId,
                 title: '',
                 gameSelected: 'game1',
                 platformSelected: 'platform1',
@@ -133,7 +133,7 @@ export class NewPostScreen extends Component {
         this.setState((prevState) => ({
             form: {
                 ...prevState.form,
-                id_user: this.props.route.params.id_user,
+                id_user: this.props.route.params.sessionId,
                 title: '',
                 gameSelected: 'game1',
                 platformSelected: 'platform1',

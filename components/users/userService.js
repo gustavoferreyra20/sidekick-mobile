@@ -1,15 +1,12 @@
-import axios from 'axios';
+import axiosInstance from '../../middleware/axiosInstance ';
 import { SIDEKICK_API } from "@env"
-import TokenService from '../tokens/tokenService';
 
 class UserService {
 
-  static async get(condition) {
+  static async get(id_user) {
     return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}users/bo?`;
-      const params = new URLSearchParams(condition);
 
-      axios.get(url + params)
+      axiosInstance.get('users/' + id_user)
         .then((res) => {
           resolve(res.data);
         })
@@ -19,13 +16,12 @@ class UserService {
     });
   }
 
-  static async save(obj) {
+  static async getApplications(id_user, type) {
     return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}users`;
 
-      axios.post(url, obj)
-        .then(function (response) {
-          resolve(response.data);
+      axiosInstance.get('users/' + id_user + '/applications?type=' + type)
+        .then((res) => {
+          resolve(res.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -33,16 +29,54 @@ class UserService {
     });
   }
 
-  static async addContact_inf_list(args) {
+  static async getReviews(id_user) {
     return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}users/join?`;
 
-      axios.put(url, args)
+      axiosInstance.get('users/' + id_user + '/reviews')
+        .then((res) => {
+          resolve(res.data);
+        })
         .catch(function (error) {
           console.log(error);
         });
     });
   }
+
+  static async getStats(id_user) {
+    return new Promise((resolve, reject) => {
+
+      axiosInstance.get('users/' + id_user + '/stats')
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
+
+  static async addReview(id_user, data, sessionId) {
+    return new Promise((resolve, reject) => {
+      const url = 'users/' + id_user + '/reviews/' + sessionId;
+
+      axiosInstance.put(url, data)
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
+
+  static async addReview(id_user) {
+    return new Promise((resolve, reject) => {
+      const url = 'users/' + id_user + '/rewards';
+
+      axiosInstance.put(url, data)
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
+
 
   static async saveImage(file) {
     return new Promise((resolve, reject) => {
@@ -76,20 +110,15 @@ class UserService {
     })
   }
 
-  static async login(obj) {
+  static async addContact_inf_list(id_user, id_contact_inf, nickname) {
     return new Promise((resolve, reject) => {
-      this.get(obj).then((res) => {
-        // create the cookie
-        if (res.length > 0) {
-          let userSession = res[0];
-          TokenService.create(userSession.id_user).then((response) => {
-            userSession.token = response;
-            resolve(userSession);
-          })
-        } else {
-          resolve(false)
-        }
-      })
+      const url = 'auth/' + id_user + '/contact_inf/' + id_contact_inf;
+
+      const data = {
+        nickname: nickname
+      };
+
+      axiosInstance.post(url, data)
         .catch(function (error) {
           console.log(error);
         });
