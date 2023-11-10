@@ -11,15 +11,15 @@ const Item = ({ user, post, changeStatus, rate }) => {
                 <View style={styles.profileHeaderData}>
                     <Text style={[styles.text, styles.nameText, styles.boldText]}>{user.name}</Text>
                     {user.applications.status === 'pending' && post.actualUsers < post.requiredUsers && (
-                        <View style={styles.headerApplications}>
-                            <View style={styles.buttonContainerAplications}>
+                        <View style={styles.headerColumns}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#0eaa61'}
                                     title="Aceptar"
                                     onPress={() => changeStatus(post.id_post, user.applications.id_application, 'accepted')}
                                 />
                             </View>
-                            <View style={styles.buttonContainerAplications}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#dc3545'}
                                     title="Rechazar"
@@ -30,8 +30,8 @@ const Item = ({ user, post, changeStatus, rate }) => {
                     )}
 
                     {user.applications.status === 'pending' && post.actualUsers == post.requiredUsers && (
-                        <View style={styles.headerApplications}>
-                            <View style={styles.buttonContainerAplications}>
+                        <View style={styles.headerColumns}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#dc3545'}
                                     title="Post completo"
@@ -43,15 +43,15 @@ const Item = ({ user, post, changeStatus, rate }) => {
                     )}
 
                     {user.applications.status === 'accepted' && (
-                        <View style={styles.headerApplications}>
-                            <View style={styles.buttonContainerAplications}>
+                        <View style={styles.headerColumns}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#0eaa61'}
                                     title="Calificar"
                                     onPress={() => rate(user.id_user, post.id_post)}
                                 />
                             </View>
-                            <View style={styles.buttonContainerAplications}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#dc3545'}
                                     title="Eliminar"

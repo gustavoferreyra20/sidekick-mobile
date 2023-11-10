@@ -20,30 +20,35 @@ export class HomeScreen extends Component {
         };
         this.controller = new HomeCtrl();
         this.id_user = this.props.route.params.sessionId;
+        this.fetchData = this.fetchData.bind(this);
     }
 
     async componentDidMount() {
         try {
-            // Fetch and update game options
-            const gameOptions = await this.controller.fetchGameOptions();
-            // Fetch and update platform options
-            const platformOptions = await this.controller.setPlatforms();
-            // Fetch and update mode options
-            const modeOptions = await this.controller.fetchModeOptions();
-
-            await this.fetchPosts();
-
-            this.setState({
-                gameOptions,
-                platformOptions,
-                modeOptions,
-            });
+            this.fetchData();
         } catch (error) {
             console.error(error);
             this.setState({
                 loading: false,
             });
         }
+    }
+
+    async fetchData() {
+        // Fetch and update game options
+        const gameOptions = await this.controller.fetchGameOptions();
+        // Fetch and update platform options
+        const platformOptions = await this.controller.setPlatforms();
+        // Fetch and update mode options
+        const modeOptions = await this.controller.fetchModeOptions();
+
+        await this.fetchPosts();
+
+        this.setState({
+            gameOptions,
+            platformOptions,
+            modeOptions,
+        });
     }
 
     handleSubmit = async (game, platform, mode) => {
@@ -96,11 +101,24 @@ export class HomeScreen extends Component {
                 <Text style={styles.heading}>Posts más recientes</Text>
                 <View style={styles.hr_main} />
 
-                <Button
-                    title="Buscar"
-                    onPress={this.togglePostSearchFormModal}
-                    color="#0eaa61"
-                />
+                <View style={styles.headerColumns}>
+                    <View style={styles.buttonContainerColumns}>
+                        <Button
+                            title="Buscar"
+                            onPress={this.togglePostSearchFormModal}
+                            color="#0eaa61"
+                        />
+
+                    </View>
+                    <View style={styles.buttonContainerColumns}>
+                        <Button
+                            title="Actualizar"
+                            onPress={this.fetchData}
+                            color="#0eaa61"
+                        />
+                    </View>
+                </View>
+
 
                 {loading ? (
                     <Text style={styles.text}>Loading...</Text>

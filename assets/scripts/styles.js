@@ -198,7 +198,7 @@ export default styles = StyleSheet.create({
   FlatList: {
     width: '100%'
   },
-  headerApplications: {
+  headerColumns: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -206,7 +206,7 @@ export default styles = StyleSheet.create({
   profileEdit: {
     marginHorizontal: 5,
   },
-  buttonContainerAplications: {
+  buttonContainerColumns: {
     flex: 1,
     margin: 5,
   },

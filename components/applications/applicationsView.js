@@ -91,15 +91,15 @@ export class ApplicationsScreen extends Component {
                     <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} navigation={this.props.navigation} updateReview={this.updateReview} />
                 ) : (
                     <>
-                        <View style={styles.headerApplications}>
-                            <View style={styles.buttonContainerAplications}>
+                        <View style={styles.headerColumns}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={selectedButton === 'Enviadas' ? '#047734' : '#0eaa61'}
                                     title="Enviadas"
                                     onPress={this.showSentApps}
                                 />
                             </View>
-                            <View style={styles.buttonContainerAplications}>
+                            <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={selectedButton === 'Recibidas' ? '#047734' : '#0eaa61'}
                                     title="Recibidas"
