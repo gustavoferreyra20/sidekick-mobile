@@ -20,9 +20,9 @@ class PostSearchForm extends Component {
     GameService.getPlatforms(value).then((platforms) => {
       let data = [
         { "name": "Cualquier plataforma", "value": "any" },
-        ...platforms.map(platform => ({ "name": platform.name, "value": platform.value }))
+        ...platforms.map(platform => ({ "name": platform.name, "value": platform.id_platform }))
       ];
-  
+
       this.setState({ gameSelected: value, platformOptions: data });
     });
 

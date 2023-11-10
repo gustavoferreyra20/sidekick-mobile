@@ -31,13 +31,23 @@ export default class NewPostCtrl extends Component {
   }
 
   createPost = async (postData, reloadForm) => {
-    PostService.save(postData).then(() => {
+    if (!postData.title.length) {
+      this.modalType = "alert";
+      this.msg = "Por favor complete todos los campos requeridos";
+      this.modalVisible = true;
+      return;
+    }
+
+    try {
+      await PostService.save(postData);
       this.modalType = "action";
       this.msg = "Anuncio creado con exito";
       this.modalVisible = true;
       reloadForm();
-
-    });
+    } catch (error) {
+      console.error("Error saving post:", error);
+      // Handle error as needed
+    }
 
   }
 }

@@ -81,7 +81,6 @@ export class RegistrationScreen extends Component {
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.name = text}
                             placeholder="Ingrese su nombre"
-                            required
                         />
 
                         <View style={styles.labelContainer}>
@@ -92,7 +91,6 @@ export class RegistrationScreen extends Component {
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.email = text}
                             placeholder="Ingrese su email"
-                            required
                         />
 
                         {this.state.profilePicture && (
@@ -190,7 +188,6 @@ export class RegistrationScreen extends Component {
                             secureTextEntry={true}
                             onChangeText={text => this.controller.newUser.password = text}
                             placeholder="**********"
-                            required
                         />
 
                         <TouchableOpacity style={styles.switchContainer} onPress={this.toggleSwitch}>

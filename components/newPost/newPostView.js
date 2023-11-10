@@ -4,6 +4,7 @@ import NewPostCtrl from './newPostCtrl';
 import styles from '../../assets/scripts/styles';
 import { Picker } from '@react-native-picker/picker';
 import MyModal from '../popups/popupService';
+import GameService from '../games/gameService';
 
 export class NewPostScreen extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export class NewPostScreen extends Component {
                 id_user: this.props.route.params.sessionId,
                 title: '',
                 gameSelected: 'game1',
-                platformSelected: 'platform1',
+                platformSelected: '1',
                 modeSelected: 'mode1',
                 userRequire: '1',
                 description: '',
@@ -43,7 +44,7 @@ export class NewPostScreen extends Component {
         } catch (error) {
 
             console.error(error);
-            
+
             this.setState({
                 loading: false,
             });
@@ -69,16 +70,21 @@ export class NewPostScreen extends Component {
     };
 
     handleGameSelect = async (value) => {
-        const platformOptions = await this.controller.setPlatforms(value);
+        GameService.getPlatforms(value).then((platforms) => {
 
-        this.setState((prevState) => ({
-            form: {
-                ...prevState.form,
-                gameSelected: value,
-            },
-            platformOptions: platformOptions,
-            platformSelected: platformOptions[0],
-        }));
+            let data = [
+                ...platforms.map(platform => ({ "name": platform.name, "value": platform.id_platform }))
+            ];
+
+            this.setState((prevState) => ({
+                form: {
+                    ...prevState.form,
+                    gameSelected: value,
+                },
+                platformOptions: data,
+                platformSelected: data[0],
+            }));
+        });
     };
 
     handlePlatformSelect = (value) => {
@@ -118,7 +124,9 @@ export class NewPostScreen extends Component {
     };
 
     handleCreatePost = async () => {
-        this.controller.createPost(this.state.form, this.reloadForm)
+        this.controller.createPost(this.state.form, this.reloadForm).then(() => {
+            this.forceUpdate()
+        })
     };
 
 
@@ -155,6 +163,7 @@ export class NewPostScreen extends Component {
 
                     <View style={styles.labelContainer}>
                         <Text style={styles.text}>Título</Text>
+                        <Text style={styles.required}>*</Text>
                     </View>
 
                     <TextInput
