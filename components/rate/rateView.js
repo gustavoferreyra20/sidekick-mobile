@@ -190,7 +190,7 @@ export class RateView extends Component {
                         onPress={() => {
                             this.controller.newReview(this.state.form, () => {
                                 this.setState({});
-                            }, this.props.updateReview);
+                            }, this.props.updateReview, this.props.id_application);
                         }}
                         color="#0eaa61"
                     />

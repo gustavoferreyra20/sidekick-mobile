@@ -48,7 +48,7 @@ const Item = ({ user, post, changeStatus, rate }) => {
                                 <Button
                                     color={'#0eaa61'}
                                     title="Calificar"
-                                    onPress={() => rate(user.id_user, post.id_post)}
+                                    onPress={() => rate(user.id_user, post.id_post, user.applications.id_application)}
                                 />
                             </View>
                             <View style={styles.buttonContainerColumns}>

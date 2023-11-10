@@ -55,28 +55,32 @@ class UserService {
     });
   }
 
-  static async addReview(id_user, data, sessionId) {
+  static async getRewards(id_user) {
     return new Promise((resolve, reject) => {
-      const url = 'users/' + id_user + '/reviews/' + sessionId;
 
-      axiosInstance.put(url, data)
+      axiosInstance.get('users/' + id_user + '/rewards')
+        .then((res) => {
+          resolve(res.data);
+        })
         .catch(function (error) {
           console.log(error);
         });
     });
   }
 
-  static async addReview(id_user) {
+  static async addReview(review) {
     return new Promise((resolve, reject) => {
-      const url = 'users/' + id_user + '/rewards';
+      const url = 'users/' + review.id_user + '/reviews/' + review.id_writerUser;
 
-      axiosInstance.put(url, data)
+      axiosInstance.post(url, review)
+        .then(response => {
+          resolve(response.data);  // Resolve with the response data
+        })
         .catch(function (error) {
           console.log(error);
         });
     });
   }
-
 
   static async saveImage(file) {
     return new Promise((resolve, reject) => {

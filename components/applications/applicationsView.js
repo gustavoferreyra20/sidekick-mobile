@@ -16,7 +16,7 @@ export class ApplicationsScreen extends Component {
             selectedButton: 'Enviadas',
             sentApps: [],
             receivedApps: [],
-            rate: { id_user: 0, id_post: 0, show: false }
+            rate: { id_user: 0, id_post: 0, id_application: 0, show: false }
         };
         this.controller = new ApplicationController();
         this.id_profile = this.props.route.params.sessionId;
@@ -74,8 +74,8 @@ export class ApplicationsScreen extends Component {
         this.forceUpdate();
     }
 
-    btnRate = (id_user, id_post) => {
-        this.setState({ rate: { id_user: id_user, id_post: id_post, show: true } });
+    btnRate = (id_user, id_post, id_application) => {
+        this.setState({ rate: { id_user: id_user, id_post: id_post, id_application: id_application, show: true } });
     };
 
     updateReview = async () => {
@@ -88,7 +88,7 @@ export class ApplicationsScreen extends Component {
         return (
             <View style={styles.container}>
                 {rate.show ? (
-                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} navigation={this.props.navigation} updateReview={this.updateReview} />
+                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} id_application={rate.id_application} navigation={this.props.navigation} updateReview={this.updateReview} />
                 ) : (
                     <>
                         <View style={styles.headerColumns}>

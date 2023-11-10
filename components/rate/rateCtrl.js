@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { Linking } from 'react-native';
-import axios from 'axios';
 import RewardService from '../reward/rewardService';
 import ReviewService from '../reviews/reviewService';
 import PostService from '../posts/postService';
+import UserService from '../users/userService';
+//import UserService from '../users/userService';
 
 export default class RateController extends Component {
 
@@ -13,22 +13,22 @@ export default class RateController extends Component {
         this.modalType = "alert";
         this.modalFunction = () => { };
         this.modalVisible = false;
-    }
-    newReview = async (review, callback, updateReview) => {
+    };
 
-        try {
-            console.log(review.reward)
-            if (review.reward !== null) {
-                review.reward = review.reward.id_reward;
+    newReview = async (review, callback, updateReview, id_application) => {
+        if (review.reward != null) review.reward = review.reward.id_reward;
 
-                await ReviewService.save(review);
-                await RewardService.use(review.id_writerUser, review.reward)
-            } else {
-                await ReviewService.save(review);
-            }
-
-
-            PostService.addApplication({ id_user: review.id_user, id_post: review.id_post, status: 'reviewed' }).then(() => {
+        UserService.addReview(review)
+            .then((res) => {
+ 
+                if (review.reward !== null) {
+                    return ReviewService.addReward(res.reviewId, review.reward);
+                }
+            })
+            .then(() => {
+                return PostService.updateApplication(review.id_post, id_application, 'pending');
+            })
+            .then(() => {
                 this.modalType = "action";
                 this.msg = "Calificacion enviada";
                 this.modalVisible = true;
@@ -36,19 +36,18 @@ export default class RateController extends Component {
                     updateReview();
                 };
 
-
                 if (typeof callback === 'function') {
                     callback();
                 }
+            })
+            .catch(function (error) {
+                console.log(error);
             });
 
-        } catch (error) {
-            console.log(error);
-        }
     };
 
     showRewards = async (id_user) => {
-        const response = await RewardService.getByUser(id_user);
+        const response = await UserService.getRewards(id_user);
         return response;
     };
 }

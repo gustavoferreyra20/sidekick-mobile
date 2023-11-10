@@ -5,9 +5,9 @@ class ReviewService {
     return new Promise((resolve, reject) => {
       const url = 'reviews/' + id_review + '/rewards/' + id_reward;
 
-      axiosInstance.post(url, data)
+      axiosInstance.post(url)
         .then((res) => {
-          resolve(res.data);
+          resolve(res);
         })
         .catch(function (error) {
           console.log(error);
