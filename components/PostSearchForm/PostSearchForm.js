@@ -3,6 +3,7 @@ import { View, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../../assets/scripts/styles';
 import { TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import GameService from '../games/gameService';
 
 class PostSearchForm extends Component {
   constructor(props) {
@@ -11,11 +12,20 @@ class PostSearchForm extends Component {
       gameSelected: '',
       platformSelected: '',
       modeSelected: '',
+      platformOptions: this.props.platformOptions,
     };
   }
 
   handleGameSelect = (value) => {
-    this.setState({ gameSelected: value });
+    GameService.getPlatforms(value).then((platforms) => {
+      let data = [
+        { "name": "Cualquier plataforma", "value": "any" },
+        ...platforms.map(platform => ({ "name": platform.name, "value": platform.value }))
+      ];
+  
+      this.setState({ gameSelected: value, platformOptions: data });
+    });
+
   };
 
   handlePlatformSelect = (value) => {
@@ -64,7 +74,7 @@ class PostSearchForm extends Component {
                 selectedValue={this.state.platformSelected}
                 onValueChange={this.handlePlatformSelect}
               >
-                {this.props.platformOptions.map((platformOption) => (
+                {this.state.platformOptions.map((platformOption) => (
                   <Picker.Item
                     key={platformOption.value}
                     label={platformOption.name}
