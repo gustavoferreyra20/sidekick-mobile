@@ -106,7 +106,7 @@ export class HomeScreen extends Component {
                         <Button
                             title="Buscar"
                             onPress={this.togglePostSearchFormModal}
-                            color="#0eaa61"
+                            color="#28a745"
                         />
 
                     </View>
@@ -114,7 +114,7 @@ export class HomeScreen extends Component {
                         <Button
                             title="Actualizar"
                             onPress={this.fetchData}
-                            color="#0eaa61"
+                            color="#28a745"
                         />
                     </View>
                 </View>

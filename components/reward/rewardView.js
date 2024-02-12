@@ -14,7 +14,7 @@ const Reward = ({ item, handleBuyReward }) => {
                 />
                 <Text style={styles.rewardPrice}>${item.price}</Text>
                 <Text style={styles.rewardDescription}>{item.description}</Text>
-                <Button title="Comprar" onPress={() => handleBuyReward(item)} color="#0eaa61" />
+                <Button title="Comprar" onPress={() => handleBuyReward(item)} color="#28a745" />
             </View>
         </View>
     );

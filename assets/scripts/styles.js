@@ -5,17 +5,24 @@ import { StyleSheet } from 'react-native';
 GRIS OSCURO		::	#3e3c3d
 GRIS			::	#494649
 GRIS CLARO		::	#535053
-VERDE OSCURO	::	#0eaa61
+VERDE OSCURO	::	#28a745
 VERDE SELLECCIONADO :: 047734
 VERDE			::	#11d077
-VERDE CLARO		::	#1ded8c
+VERDE CLARO		::	#28a745
 */
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#535053',
+    backgroundColor: '#020202',
     alignItems: 'center',
+    width: "100%"
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#020202',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   reviewContainer: {
     flex: 1,
@@ -31,9 +38,7 @@ export default styles = StyleSheet.create({
     height: '80%',
   },
   scrollContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%'
+    alignItems: 'center'
   },
   boldText: {
     fontWeight: 'bold',
@@ -42,34 +47,36 @@ export default styles = StyleSheet.create({
     fontSize: 20,
   },
   text: {
-    color: '#fff',
+    color: '#E7E9EA',
     fontSize: 14,
     marginVertical: 4,
   },
   textInput: {
-    backgroundColor: '#fff',
+    backgroundColor: '#020202',
+    color: '#E7E9EA',
     height: 40,
-    borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 16,
-    paddingHorizontal: 10,
+    borderColor: '#ced4da',
     borderRadius: 5,
-    minWidth: '100%'
+    paddingHorizontal: 10,
+    marginBottom: 16,
   },
   pickerContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 5,
+    backgroundColor: '#020202',
     borderWidth: 1,
-    borderColor: '#bdc3c7',
-    overflow: 'hidden',
+    borderColor: '#ced4da',
+    borderRadius: 5,
+    paddingHorizontal: 10,
     marginBottom: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 40,
+    overflow: 'hidden',
   },
-  pickerInput: {
-    flex: 1,
-    minWidth: '100%',
+  picker: {
+    color: '#E7E9EA',
+    backgroundColor: '#020202',
+  },
+  pickerItem: {
+    color: "#E7E9EA",
+    backgroundColor: "#020202"
   },
   buttonContainer: {
     display: 'flex',
@@ -87,10 +94,10 @@ export default styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#fff',
+    color: '#E7E9EA',
   },
   header: {
-    backgroundColor: '#1ded8c',
+    backgroundColor: '#28a745',
     height: 60,
     paddingTop: 20,
     justifyContent: 'center',
@@ -101,7 +108,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   switchText: {
-    color: '#fff',
+    color: '#E7E9EA',
     fontSize: 16,
   },
   gamesContainer: {
@@ -122,7 +129,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   gameName: {
-    color: "#fff",
+    color: "#E7E9EA",
   },
   contactContainer: {
     marginBottom: 8
@@ -133,10 +140,13 @@ export default styles = StyleSheet.create({
     flex: 1
   },
   popupContent: {
-    backgroundColor: "#535051",
+    backgroundColor: "#020202",
+    color: '#E7E9EA',
     margin: 50,
     padding: 15,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#1ded8c",
   },
   labelContainer: {
     flexDirection: 'row',
@@ -180,7 +190,7 @@ export default styles = StyleSheet.create({
   },
   line: {
     height: 1,
-    backgroundColor: '#1ded8c',
+    backgroundColor: '#28a745',
     width: '100%',
   },
   profileHeaderData: {
@@ -191,7 +201,7 @@ export default styles = StyleSheet.create({
     width: 7,
     marginLeft: 6,
     marginRight: 6,
-    backgroundColor: '#1ded8c',
+    backgroundColor: '#28a745',
     borderRadius: 3.5,
     marginBottom: 10,
   },
@@ -294,10 +304,10 @@ export default styles = StyleSheet.create({
     width: '90%',
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#1ded8c',
+    borderBottomColor: '#28a745',
   },
   dot: {
-    color: '#0eaa61',
+    color: '#28a745',
   },
   postContainer: {
     margin: 10,

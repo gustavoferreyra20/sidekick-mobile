@@ -94,14 +94,14 @@ export class ApplicationsScreen extends Component {
                         <View style={styles.headerColumns}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
-                                    color={selectedButton === 'Enviadas' ? '#047734' : '#0eaa61'}
+                                    color={selectedButton === 'Enviadas' ? '#047734' : '#28a745'}
                                     title="Enviadas"
                                     onPress={this.showSentApps}
                                 />
                             </View>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
-                                    color={selectedButton === 'Recibidas' ? '#047734' : '#0eaa61'}
+                                    color={selectedButton === 'Recibidas' ? '#047734' : '#28a745'}
                                     title="Recibidas"
                                     onPress={this.showReceivedApp}
                                 />

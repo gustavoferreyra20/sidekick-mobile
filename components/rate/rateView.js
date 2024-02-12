@@ -131,7 +131,7 @@ export class RateView extends Component {
                     />
 
                     <View style={styles.button}>
-                        <Button title="Premiar" onPress={this.handleShowRewards} color="#0eaa61" />
+                        <Button title="Premiar" onPress={this.handleShowRewards} color="#28a745" />
                     </View>
 
                     {/* Rewards section */}
@@ -148,7 +148,7 @@ export class RateView extends Component {
                                         <Button
                                             title="Seleccionar"
                                             onPress={() => this.handleSelectReward(reward)}
-                                            color="#0eaa61"
+                                            color="#28a745"
                                         />
                                     </View>
                                 </View>
@@ -162,7 +162,7 @@ export class RateView extends Component {
                             <Button
                                 title="Comprar medallas"
                                 onPress={() => this.handleGoToStore()}
-                                color="#0eaa61"
+                                color="#28a745"
                             />
                         </View>
                     )}
@@ -192,7 +192,7 @@ export class RateView extends Component {
                                 this.setState({});
                             }, this.props.updateReview, this.props.id_application);
                         }}
-                        color="#0eaa61"
+                        color="#28a745"
                     />
 
                     <Button

@@ -100,7 +100,7 @@ class PostSearchForm extends Component {
               </Picker>
             </View>
 
-            <Button title="Buscar" onPress={this.handleSubmit} color={"#0eaa61"} />
+            <Button title="Buscar" onPress={this.handleSubmit} color={"#28a745"} />
           </View>
         </TouchableWithoutFeedback>
       </TouchableOpacity>

@@ -23,7 +23,7 @@ export class DrawerCustomNavigator extends Component {
                 initialRouteName="Inicio"
                 drawerContent={props => <DrawerContentScreen {...props} />}
                 screenOptions={{
-                    headerStyle: { backgroundColor: '#1ded8c' },
+                    headerStyle: { backgroundColor: '#28a745' },
                     headerTintColor: 'black'
                 }}
             >

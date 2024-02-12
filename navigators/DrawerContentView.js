@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         flex: -1,
         justifyContent: 'flex-end',
         marginBottom: 15,
-        borderTopColor: '#1ded8c',
+        borderTopColor: '#28a745',
         borderTopWidth: 1
     }
 });

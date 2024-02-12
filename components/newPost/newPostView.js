@@ -259,7 +259,7 @@ export class NewPostScreen extends Component {
                         onChangeText={this.handleDescriptionChange}
                     />
 
-                    <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#0eaa61" />
+                    <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#28a745" />
                 </View>
 
                 <MyModal

@@ -25,7 +25,7 @@ class MyModal extends Component {
                                             this.props.actionConfirm();
                                             this.props.setModalVisible(false);
                                         }}
-                                        color="#0eaa61"
+                                        color="#28a745"
                                     />
                                 </View>
                             </View>
@@ -42,7 +42,7 @@ class MyModal extends Component {
                                     <Button
                                         title="Aceptar"
                                         onPress={() => this.props.setModalVisible(false)}
-                                        color="#0eaa61"
+                                        color="#28a745"
                                     />
                                 </View>
                             </View>
@@ -64,7 +64,7 @@ class MyModal extends Component {
                                                     this.props.actionConfirm();
                                                     this.props.setModalVisible(false);
                                                 }}
-                                                color="#0eaa61"
+                                                color="#28a745"
                                             />
                                         </View>
                                         <Button

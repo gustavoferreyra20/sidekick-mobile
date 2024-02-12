@@ -14,7 +14,7 @@ const Item = ({ user, post, changeStatus, rate }) => {
                         <View style={styles.headerColumns}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
-                                    color={'#0eaa61'}
+                                    color={'#28a745'}
                                     title="Aceptar"
                                     onPress={() => changeStatus(post.id_post, user.applications.id_application, 'accepted')}
                                 />
@@ -46,7 +46,7 @@ const Item = ({ user, post, changeStatus, rate }) => {
                         <View style={styles.headerColumns}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
-                                    color={'#0eaa61'}
+                                    color={'#28a745'}
                                     title="Calificar"
                                     onPress={() => rate(user.id_user, post.id_post, user.applications.id_application)}
                                 />

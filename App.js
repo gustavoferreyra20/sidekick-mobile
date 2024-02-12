@@ -7,6 +7,7 @@ import * as SecureStore from 'expo-secure-store';
 import { SIDEKICK_API } from "@env"
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './assets/scripts/styles.js';
 
 import { LoginScreen } from "./components/login/loginView.js";
 import { RegistrationScreen } from "./components/registration/registrationView.js";
@@ -47,7 +48,7 @@ export default class App extends Component {
           .then((res) => {
             this.setState({ isLoggedIn: true, isLoading: false, sessionId: userSession.id });
           })
-          .catch(function (error) {
+          .catch((error) => {
             this.setState({ isLoading: false });
           });
       }
@@ -98,7 +99,7 @@ export default class App extends Component {
           <Stack.Navigator
             initialRouteName="Iniciar sesión"
             screenOptions={{
-              headerStyle: { backgroundColor: '#1ded8c' },
+              headerStyle: { backgroundColor: '#28a745' },
               headerTintColor: 'black',
             }}>
             <Stack.Screen
@@ -112,12 +113,3 @@ export default class App extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#535053',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -82,7 +82,7 @@ export class ProfileScreen extends React.Component {
             <Text style={styles.text}>{profile.description}</Text>
           </View>
           {isCurrentUser ? (
-            <Button style={styles.profileEdit} title="Editar" color="#0eaa61" />
+            <Button style={styles.profileEdit} title="Editar" color="#28a745" />
           ) : null}
         </View>
         <View style={styles.line}></View>

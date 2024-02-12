@@ -66,7 +66,7 @@ const Post = ({ post, btnSubmitApplication }) => {
                 <Button
                     title="Unirse"
                     onPress={() => btnSubmitApplication(post.id_post)}
-                    color={'#0eaa61'}
+                    color={'#28a745'}
                 />
             )}
 

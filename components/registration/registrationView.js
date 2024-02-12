@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationController from './registrationCtrl';
 import styles from '../../assets/scripts/styles';
@@ -69,7 +69,7 @@ export class RegistrationScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={{ backgroundColor: "#020202" }}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer} >
                     <View style={styles.formContainer}>
                         <View style={styles.labelContainer}>
@@ -81,6 +81,7 @@ export class RegistrationScreen extends Component {
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.name = text}
                             placeholder="Ingrese su nombre"
+                            placeholderTextColor="#495057"
                         />
 
                         <View style={styles.labelContainer}>
@@ -91,6 +92,7 @@ export class RegistrationScreen extends Component {
                             style={styles.textInput}
                             onChangeText={text => this.controller.newUser.email = text}
                             placeholder="Ingrese su email"
+                            placeholderTextColor="#495057"
                         />
 
                         {this.state.profilePicture && (
@@ -116,7 +118,7 @@ export class RegistrationScreen extends Component {
                                         this.setState({ profilePicture: res });
                                     })
                                 }}
-                                color="#0eaa61"
+                                color="#28a745"
                             />
                         </View>
                         <View style={styles.button}>
@@ -128,7 +130,7 @@ export class RegistrationScreen extends Component {
                                         this.setState({ profilePicture: res });
                                     })
                                 }}
-                                color="#0eaa61"
+                                color="#28a745"
                             />
                         </View>
 
@@ -139,6 +141,7 @@ export class RegistrationScreen extends Component {
                             numberOfLines={3}
                             maxLength={280}
                             onChangeText={text => this.controller.newUser.description = text}
+                            placeholderTextColor="#495057"
                         />
 
                         <View style={styles.labelContainer}>
@@ -147,20 +150,27 @@ export class RegistrationScreen extends Component {
                         </View>
                         {this.controller.newUser.contact_inf_list.length > 0 && this.controller.newUser.contact_inf_list.map((contact_inf, index) => (
                             <View style={styles.contactContainer} key={index}>
-                                <Picker
-                                    style={styles.textInput}
-                                    selectedValue={contact_inf?.platform}
-                                    onValueChange={(value) => {
-                                        const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
-                                        this.controller.newUser.contact_inf_list[index].platform = value;
-                                        this.setState({})
-                                    }}
-                                    prompt="Seleccione una opción"
+                                <View
+                                    style={styles.pickerContainer}
                                 >
-                                    {this.controller.contactOptions.map(option => (
-                                        <Picker.Item key={option.id_contact_inf} label={option.name} value={option} />
-                                    ))}
-                                </Picker>
+                                    <Picker
+                                        style={styles.picker}
+                                        selectedValue={contact_inf?.platform}
+                                        onValueChange={(value) => {
+                                            const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
+                                            this.controller.newUser.contact_inf_list[index].platform = value;
+                                            this.setState({})
+                                        }}
+                                        itemStyle={{ backgroundColor: "red" }}
+                                        dropdownIconColor="#495057"
+                                        mode="dropdown"
+                                    >
+                                        {this.controller.contactOptions.map(option => (
+                                            <Picker.Item key={option.id_contact_inf} label={option.name} value={option} style={styles.pickerItem} color='E7E9EA' />
+                                        ))}
+                                    </Picker>
+                                </View>
+
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Ingrese su cuenta o id"
@@ -169,12 +179,13 @@ export class RegistrationScreen extends Component {
                                         const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
                                         this.controller.newUser.contact_inf_list[index].account = text;
                                     }}
+                                    placeholderTextColor="#495057"
                                 />
                             </View>
                         ))}
 
                         <View style={styles.button}>
-                            <Button title="Agregar otra cuenta" onPress={this.btnAddAccount} color="#0eaa61" />
+                            <Button title="Agregar otra cuenta" onPress={this.btnAddAccount} color="#28a745" />
                         </View>
                         {this.controller.newUser.contact_inf_list.length > 1 && (
                             <View style={styles.button}>
@@ -188,6 +199,7 @@ export class RegistrationScreen extends Component {
                             secureTextEntry={true}
                             onChangeText={text => this.controller.newUser.password = text}
                             placeholder="**********"
+                            placeholderTextColor="#495057"
                         />
 
                         <TouchableOpacity style={styles.switchContainer} onPress={this.toggleSwitch}>
@@ -196,7 +208,7 @@ export class RegistrationScreen extends Component {
                         </TouchableOpacity>
 
                         <View style={styles.button}>
-                            <Button title="Registrarse" onPress={this.btnRegistration} color="#0eaa61" />
+                            <Button title="Registrarse" onPress={this.btnRegistration} color="#28a745" />
                         </View>
 
                         <Text style={styles.h1}>Ya tienes una cuenta?</Text>
@@ -205,7 +217,7 @@ export class RegistrationScreen extends Component {
                             <Button
                                 title="Iniciar sesión"
                                 onPress={this.handleLoginPress}
-                                color="#0eaa61" />
+                                color="#28a745" />
                         </View>
                     </View>
                 </ScrollView>

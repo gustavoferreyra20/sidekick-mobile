@@ -14,7 +14,7 @@ export class ConfigScreen extends Component {
                 <Button
                     onPress={() => this.handlerLogout()}
                     title="Cerrar Sesión"
-                    color="#0eaa61"
+                    color="#28a745"
                 />
             </View>
         );
