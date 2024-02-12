@@ -29,7 +29,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Inicio");
                                 this.setState({ focusedItemIndex: 1 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 1}
                             style={
                                 this.state.focusedItemIndex === 1 ?
@@ -45,7 +45,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Juegos");
                                 this.setState({ focusedItemIndex: 2 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 2}
                             style={
                                 this.state.focusedItemIndex === 2 ?
@@ -61,7 +61,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Crear anuncio");
                                 this.setState({ focusedItemIndex: 3 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 3}
                             style={
                                 this.state.focusedItemIndex === 3 ?
@@ -77,7 +77,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Solicitudes");
                                 this.setState({ focusedItemIndex: 4 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 4}
                             style={
                                 this.state.focusedItemIndex === 4 ?
@@ -93,7 +93,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Perfil");
                                 this.setState({ focusedItemIndex: 5 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 5}
                             style={
                                 this.state.focusedItemIndex === 5 ?
@@ -109,7 +109,7 @@ export class DrawerContentScreen extends Component {
                                 this.props.navigation.navigate("Tienda");
                                 this.setState({ focusedItemIndex: 6 });
                             }}
-                            labelStyle={{ color: "#fff" }}
+                            labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 6}
                             style={
                                 this.state.focusedItemIndex === 6 ?
@@ -125,7 +125,7 @@ export class DrawerContentScreen extends Component {
                         icon={() => <Image source={require('../assets/img/icons/settings.png')} style={styles.icon} />}
                         label="Configuracion"
                         onPress={() => this.props.navigation.navigate("configuracion")}
-                        labelStyle={{ color: "#fff" }}
+                        labelStyle={{ color: "#E7E9EA" }}
                     />
                 </View>
             </View>
@@ -136,7 +136,7 @@ export class DrawerContentScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#3e3c3d',
+        backgroundColor: '#020202',
     },
     icon: {
         height: 45,

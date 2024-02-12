@@ -71,28 +71,31 @@ const Item = ({ user, post, changeStatus, rate }) => {
 const ReceivedApp = ({ post, onDeletePost, changeStatus, rate }) => {
 
     return (
-        <View style={styles.sendedAppContainer}>
-            <View style={styles.row}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{post.title}</Text>
+        <View >
+            <View style={styles.sendedAppContainer}>
+                <View style={styles.row}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>{post.title}</Text>
+                    </View>
+                    <View style={styles.usersContainer}>
+                        <Text style={styles.usersText}>
+                            {post.actualUsers} / {post.requiredUsers}
+                        </Text>
+                    </View>
                 </View>
-                <View style={styles.usersContainer}>
-                    <Text style={styles.usersText}>
-                        {post.actualUsers} / {post.requiredUsers}
-                    </Text>
+
+
+                <FlatList
+                    data={post.users}
+                    renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} rate={rate} />}
+                    keyExtractor={item => item.id_user}
+                />
+
+                <View style={styles.cancelButton} >
+                    <Button title="Eliminar post" color={"#dc3545"} onPress={() => onDeletePost(post.id_post)} />
                 </View>
             </View>
             <View style={styles.line} />
-
-            <FlatList
-                data={post.users}
-                renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} rate={rate} />}
-                keyExtractor={item => item.id_user}
-            />
-
-            <View style={styles.cancelButton} >
-                <Button title="Eliminar post" color={"#dc3545"} onPress={() => onDeletePost(post.id_post)} />
-            </View>
         </View>
     );
 };

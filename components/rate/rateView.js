@@ -128,6 +128,7 @@ export class RateView extends Component {
                         value={this.state.form.comment}
                         multiline={true}
                         numberOfLines={4}
+                        placeholderTextColor="#495057"
                     />
 
                     <View style={styles.button}>

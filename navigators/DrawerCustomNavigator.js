@@ -19,7 +19,6 @@ export class DrawerCustomNavigator extends Component {
     render() {
         return (
             <Drawer.Navigator
-                useLegacyImplementation={true}
                 initialRouteName="Inicio"
                 drawerContent={props => <DrawerContentScreen {...props} />}
                 screenOptions={{

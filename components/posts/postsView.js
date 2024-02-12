@@ -5,7 +5,7 @@ import { SIDEKICK_API } from "@env"
 
 const Post = ({ post, btnSubmitApplication }) => {
     return (
-        <View style={styles.postContainer}>
+        <View>
             <View style={styles.profileHeader}>
                 <Image
                     style={styles.userImage}
@@ -43,9 +43,7 @@ const Post = ({ post, btnSubmitApplication }) => {
 
             </View>
 
-            <View style={styles.line} />
-
-            <View style={styles.userInfo}>
+            <View style={styles.postBody}>
                 <View style={styles.userInfoRow}>
                     <Text style={styles.postTitle}>{post.title}</Text>
                 </View>
@@ -60,9 +58,7 @@ const Post = ({ post, btnSubmitApplication }) => {
                     <Text style={styles.description}>{post.description}</Text>
                 </View>
 
-            </View>
-
-            {post.actualUsers < post.requiredUsers && (
+                {post.actualUsers < post.requiredUsers && (
                 <Button
                     title="Unirse"
                     onPress={() => btnSubmitApplication(post.id_post)}
@@ -73,6 +69,9 @@ const Post = ({ post, btnSubmitApplication }) => {
             {post.actualUsers === post.requiredUsers && (
                 <Button title="Post completo" disabled style={styles.completeButton} />
             )}
+            </View>
+
+            <View style={styles.line} />
         </View>
     );
 };

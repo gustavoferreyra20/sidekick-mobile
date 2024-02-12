@@ -171,21 +171,26 @@ export class NewPostScreen extends Component {
                         placeholder="Ingrese el título"
                         value={this.state.form.title}
                         onChangeText={this.handleTitleChange}
+                        placeholderTextColor="#495057"
                     />
 
                     {/* Game selection */}
                     <Text style={styles.text}>Juego:</Text>
                     <View style={styles.pickerContainer}>
                         <Picker
-                            style={styles.pickerInput}
+                            style={styles.picker}
                             selectedValue={this.state.form.gameSelected}
                             onValueChange={this.handleGameSelect}
+                            dropdownIconColor="#495057"
+                            mode="dropdown"
                         >
                             {this.state.gameOptions.map((gameOption) => (
                                 <Picker.Item
                                     key={gameOption.value}
                                     label={gameOption.name}
                                     value={gameOption.value}
+                                    style={styles.pickerItem}
+                                    color='E7E9EA'
                                 />
                             ))}
 
@@ -196,9 +201,11 @@ export class NewPostScreen extends Component {
                     <Text style={styles.text}>Plataforma:</Text>
                     <View style={styles.pickerContainer}>
                         <Picker
-                            style={styles.pickerInput}
+                            style={styles.picker}
                             selectedValue={this.state.form.platformSelected}
                             onValueChange={this.handlePlatformSelect}
+                            dropdownIconColor="#495057"
+                            mode="dropdown"
                         >
 
                             {this.state.platformOptions.map((platformOption) => (
@@ -206,6 +213,8 @@ export class NewPostScreen extends Component {
                                     key={platformOption.value}
                                     label={platformOption.name}
                                     value={platformOption.value}
+                                    style={styles.pickerItem}
+                                    color='E7E9EA'
                                 />
                             ))}
 
@@ -216,9 +225,11 @@ export class NewPostScreen extends Component {
                     <Text style={styles.text}>Modo de juego:</Text>
                     <View style={styles.pickerContainer}>
                         <Picker
-                            style={styles.pickerInput}
+                            style={styles.picker}
                             selectedValue={this.state.form.modeSelected}
                             onValueChange={this.handleModeSelect}
+                            dropdownIconColor="#495057"
+                            mode="dropdown"
                         >
 
                             {this.state.modeOptions.map((modeOption) => (
@@ -226,6 +237,8 @@ export class NewPostScreen extends Component {
                                     key={modeOption.value}
                                     label={modeOption.name}
                                     value={modeOption.value}
+                                    style={styles.pickerItem}
+                                    color='E7E9EA'
                                 />
                             ))}
 
@@ -236,13 +249,18 @@ export class NewPostScreen extends Component {
                     <Text style={styles.text}>Usuarios requeridos:</Text>
                     <View style={styles.pickerContainer}>
                         <Picker
-                            style={styles.pickerInput}
+                            style={styles.picker}
                             selectedValue={this.state.form.userRequire}
                             onValueChange={this.handleUserRequireSelect}
+                            dropdownIconColor="#495057"
+                            mode="dropdown"
                         >
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
-                            <Picker.Item label="3" value="3" />
+                            <Picker.Item label="1" value="1" style={styles.pickerItem}
+                                color='E7E9EA' />
+                            <Picker.Item label="2" value="2" style={styles.pickerItem}
+                                color='E7E9EA' />
+                            <Picker.Item label="3" value="3" style={styles.pickerItem}
+                                color='E7E9EA' />
                         </Picker>
                     </View>
 
@@ -257,6 +275,7 @@ export class NewPostScreen extends Component {
                         multiline={true}
                         numberOfLines={4}
                         onChangeText={this.handleDescriptionChange}
+                        placeholderTextColor="#495057"
                     />
 
                     <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#28a745" />

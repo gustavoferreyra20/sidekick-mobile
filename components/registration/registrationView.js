@@ -161,7 +161,6 @@ export class RegistrationScreen extends Component {
                                             this.controller.newUser.contact_inf_list[index].platform = value;
                                             this.setState({})
                                         }}
-                                        itemStyle={{ backgroundColor: "red" }}
                                         dropdownIconColor="#495057"
                                         mode="dropdown"
                                     >

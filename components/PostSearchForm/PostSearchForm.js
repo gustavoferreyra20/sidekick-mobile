@@ -53,9 +53,11 @@ class PostSearchForm extends Component {
 
             <View style={styles.pickerContainer}>
               <Picker
-                style={styles.pickerInput}
+                style={styles.picker}
                 selectedValue={this.state.gameSelected}
                 onValueChange={this.handleGameSelect}
+                dropdownIconColor="#495057"
+                mode="dropdown"
               >
 
                 {this.props.gameOptions.map((gameOption) => (
@@ -63,6 +65,8 @@ class PostSearchForm extends Component {
                     key={gameOption.value}
                     label={gameOption.name}
                     value={gameOption.value}
+                    style={styles.pickerItem}
+                    color='E7E9EA'
                   />
                 ))}
               </Picker>
@@ -70,15 +74,19 @@ class PostSearchForm extends Component {
 
             <View style={styles.pickerContainer}>
               <Picker
-                style={styles.pickerInput}
+                style={styles.picker}
                 selectedValue={this.state.platformSelected}
                 onValueChange={this.handlePlatformSelect}
+                dropdownIconColor="#495057"
+                mode="dropdown"
               >
                 {this.state.platformOptions.map((platformOption) => (
                   <Picker.Item
                     key={platformOption.value}
                     label={platformOption.name}
                     value={platformOption.value}
+                    style={styles.pickerItem}
+                    color='E7E9EA'
                   />
                 ))}
               </Picker>
@@ -86,15 +94,19 @@ class PostSearchForm extends Component {
 
             <View style={styles.pickerContainer}>
               <Picker
-                style={styles.pickerInput}
+                style={styles.picker}
                 selectedValue={this.state.modeSelected}
                 onValueChange={this.handleModeSelect}
+                dropdownIconColor="#495057"
+                mode="dropdown"
               >
                 {this.props.modeOptions.map((modeOption) => (
                   <Picker.Item
                     key={modeOption.value}
                     label={modeOption.name}
                     value={modeOption.value}
+                    style={styles.pickerItem}
+                    color='E7E9EA'
                   />
                 ))}
               </Picker>

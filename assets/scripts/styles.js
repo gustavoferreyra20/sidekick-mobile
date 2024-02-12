@@ -177,7 +177,6 @@ export default styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: "#3e3c3d"
   },
   reviewHeader: {
     flexDirection: 'row',
@@ -252,7 +251,6 @@ export default styles = StyleSheet.create({
   sendedAppContainer: {
     margin: 10,
     padding: 10,
-    backgroundColor: '#3e3c3d',
     borderRadius: 5,
   },
   row: {
@@ -309,11 +307,8 @@ export default styles = StyleSheet.create({
   dot: {
     color: '#28a745',
   },
-  postContainer: {
+  postBody: {
     margin: 10,
-    padding: 10,
-    backgroundColor: '#3e3c3d',
-    borderRadius: 5,
   },
   postsContainer: {
     width: "100%",
