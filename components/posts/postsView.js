@@ -3,7 +3,7 @@ import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
-const Post = ({ post, btnSubmitApplication }) => {
+const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
         <View>
             <View style={styles.profileHeader}>
@@ -15,10 +15,7 @@ const Post = ({ post, btnSubmitApplication }) => {
                 <View style={styles.userInfo}>
                     <View style={styles.userInfoRow}>
                         <TouchableOpacity
-                            onPress={() => {
-                                // Handle navigation to the profile here
-                            }}
-                        >
+                            onPress={() => handleUserNamePress(post.id_user)}>
                             <Text style={[styles.text, styles.nameText, styles.boldText]}>
                                 {post.userName}
                             </Text>
@@ -59,16 +56,16 @@ const Post = ({ post, btnSubmitApplication }) => {
                 </View>
 
                 {post.actualUsers < post.requiredUsers && (
-                <Button
-                    title="Unirse"
-                    onPress={() => btnSubmitApplication(post.id_post)}
-                    color={'#28a745'}
-                />
-            )}
+                    <Button
+                        title="Unirse"
+                        onPress={() => btnSubmitApplication(post.id_post)}
+                        color={'#28a745'}
+                    />
+                )}
 
-            {post.actualUsers === post.requiredUsers && (
-                <Button title="Post completo" disabled style={styles.completeButton} />
-            )}
+                {post.actualUsers === post.requiredUsers && (
+                    <Button title="Post completo" disabled style={styles.completeButton} />
+                )}
             </View>
 
             <View style={styles.line} />

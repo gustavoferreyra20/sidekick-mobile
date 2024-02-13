@@ -94,6 +94,10 @@ export class HomeScreen extends Component {
         })
     };
 
+    handleUserNamePress = (id_user) => {
+        console.log(id_user)
+    };
+
     render() {
         const { posts, loading, gameOptions, platformOptions, modeOptions, isPostSearchFormVisible } = this.state;
         return (
@@ -126,7 +130,7 @@ export class HomeScreen extends Component {
                     <View style={styles.postsContainer}>
                         <Loader
                             data={posts}
-                            renderItem={({ item }) => <Post post={item} btnSubmitApplication={this.btnSubmitApplication} />}
+                            renderItem={({ item }) => <Post post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
                         />
                     </View>
                 )}

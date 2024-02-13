@@ -226,13 +226,13 @@ export default styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#E7E9EA',
     marginBottom: 8,
   },
   postTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#E7E9EA',
     marginBottom: 4,
     marginTop: 4,
   },
@@ -242,7 +242,7 @@ export default styles = StyleSheet.create({
   },
   usersText: {
     fontSize: 16,
-    color: 'white',
+    color: '#E7E9EA',
   },
   cancelButton: {
     marginTop: 10,
@@ -267,7 +267,7 @@ export default styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
-    color: 'white',
+    color: '#E7E9EA',
     padding: 10
   },
   rewardImage: {
@@ -287,11 +287,11 @@ export default styles = StyleSheet.create({
   },
   rewardPrice: {
     fontSize: 16,
-    color: 'white',
+    color: '#E7E9EA',
   },
   rewardDescription: {
     fontSize: 16,
-    color: 'white',
+    color: '#E7E9EA',
   },
   rewardItemContainer: {
     width: '50%',
@@ -349,10 +349,25 @@ export default styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 8,
     flexWrap: 'wrap',
-    color: 'white',
+    color: '#E7E9EA',
   },
   noItems: {
-    color: 'white',
+    color: '#E7E9EA',
     textAlign: 'center',
   },
+  rewardImageProfile: {
+    height: 20,
+    width: 20,
+  },
+  rewardContainer: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  rewardAmount: {
+    fontSize: 16,
+    color: '#E7E9EA',
+  },
+  rewardItem: {
+    flexDirection: "row"
+  }
 });

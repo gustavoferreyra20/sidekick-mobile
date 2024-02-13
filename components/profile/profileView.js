@@ -11,7 +11,7 @@ export class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      visibleReviews: [],
+      rewards: [],
       loading: true,
       page: 1,
       id_profile: this.props.route.params.sessionId,
@@ -32,35 +32,31 @@ export class ProfileScreen extends React.Component {
           loading: true,
         },
         () => {
-          this.loadProfileData(id_user); // Pass id_user as an argument
+          this.loadProfileData(id_user);
         }
       );
     }
   };
 
   componentDidMount() {
-    const initialIdUser = this.props.route.params.sessionId; // Use the initial id_user from props
+    const initialIdUser = this.props.route.params.sessionId;
     this.setState({ id_user: initialIdUser }, () => {
-      this.loadProfileData(initialIdUser); // Pass initialIdUser as an argument
+      this.loadProfileData(initialIdUser);
     });
   }
 
-  loadProfileData = async (id_user) => { // Accept id_user as an argument
-    this.controller.getProfile(id_user).then((data) => { // Use id_user here
-      this.setState({ profile: data });
-      this.controller.getReviews(id_user)
-        .then((data) => { // Use id_user here
-          this.setState({ reviews: data, visibleReviews: data.slice(0, 5), loading: false });
-        })
-        .catch(function (error) {
-          console.log(error);
-          this.setState({ loading: false });
-        });
-    });
+  loadProfileData = async (id_user) => {
+    const profileData = await this.controller.getProfile(id_user);
+
+    this.setState({ profile: profileData });
+
+    const reviewsData = await this.controller.getReviews(id_user);
+
+    this.setState({ rewards: reviewsData.rewards, reviews: reviewsData.reviews, loading: false });
   };
 
   render() {
-    const { loading, profile, isCurrentUser, reviews, visibleReviews } = this.state;
+    const { loading, profile, isCurrentUser, reviews, rewards } = this.state;
 
     if (loading) {
       return (
@@ -81,9 +77,14 @@ export class ProfileScreen extends React.Component {
             </Text>
             <Text style={styles.text}>{profile.description}</Text>
           </View>
-          {isCurrentUser ? (
-            <Button style={styles.profileEdit} title="Editar" color="#28a745" />
-          ) : null}
+          <View style={styles.rewardContainer}>
+            {rewards.map((reward, index) => (
+              <View key={index} style={styles.rewardItem}>
+                <Image source={{ uri: `${SIDEKICK_API}images/${reward.img}` }} style={styles.rewardImageProfile} />
+                <Text style={styles.rewardAmount}>{reward.amount}</Text>
+              </View>
+            ))}
+          </View>
         </View>
         <View style={styles.line}></View>
         <Loader

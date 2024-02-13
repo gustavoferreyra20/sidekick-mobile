@@ -87,7 +87,7 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/home.png')} style={styles.icon} />}
+                            icon={() => <Image source={require('../assets/img/icons/profile.png')} style={styles.icon} />}
                             label="Perfil"
                             onPress={() => {
                                 this.props.navigation.navigate("Perfil");
