@@ -39,10 +39,10 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/plays.png')} style={styles.icon} />}
-                            label="Juegos"
+                            icon={() => <Image source={require('../assets/img/icons/notifications.png')} style={styles.icon} />}
+                            label="Notificaciones"
                             onPress={() => {
-                                this.props.navigation.navigate("Juegos");
+                                this.props.navigation.navigate("Notificaciones");
                                 this.setState({ focusedItemIndex: 2 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
@@ -55,10 +55,10 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/plus.png')} style={styles.icon} />}
-                            label="Crear anuncio"
+                            icon={() => <Image source={require('../assets/img/icons/plays.png')} style={styles.icon} />}
+                            label="Juegos"
                             onPress={() => {
-                                this.props.navigation.navigate("Crear anuncio");
+                                this.props.navigation.navigate("Juegos");
                                 this.setState({ focusedItemIndex: 3 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
@@ -71,10 +71,10 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/messages.png')} style={styles.icon} />}
-                            label="Solicitudes"
+                            icon={() => <Image source={require('../assets/img/icons/plus.png')} style={styles.icon} />}
+                            label="Crear anuncio"
                             onPress={() => {
-                                this.props.navigation.navigate("Solicitudes");
+                                this.props.navigation.navigate("Crear anuncio");
                                 this.setState({ focusedItemIndex: 4 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
@@ -87,10 +87,10 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/profile.png')} style={styles.icon} />}
-                            label="Perfil"
+                            icon={() => <Image source={require('../assets/img/icons/messages.png')} style={styles.icon} />}
+                            label="Solicitudes"
                             onPress={() => {
-                                this.props.navigation.navigate("Perfil");
+                                this.props.navigation.navigate("Solicitudes");
                                 this.setState({ focusedItemIndex: 5 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
@@ -103,16 +103,32 @@ export class DrawerContentScreen extends Component {
                             }
                         />
                         <DrawerItem
-                            icon={() => <Image source={require('../assets/img/icons/cart.png')} style={styles.icon} />}
-                            label="Tienda"
+                            icon={() => <Image source={require('../assets/img/icons/profile.png')} style={styles.icon} />}
+                            label="Perfil"
                             onPress={() => {
-                                this.props.navigation.navigate("Tienda");
+                                this.props.navigation.navigate("Perfil");
                                 this.setState({ focusedItemIndex: 6 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 6}
                             style={
                                 this.state.focusedItemIndex === 6 ?
+                                    { backgroundColor: "rgba(255, 255, 255, 0.1)" }
+                                    :
+                                    null
+                            }
+                        />
+                        <DrawerItem
+                            icon={() => <Image source={require('../assets/img/icons/cart.png')} style={styles.icon} />}
+                            label="Tienda"
+                            onPress={() => {
+                                this.props.navigation.navigate("Tienda");
+                                this.setState({ focusedItemIndex: 7 });
+                            }}
+                            labelStyle={{ color: "#E7E9EA" }}
+                            focused={this.state.focusedItemIndex === 7}
+                            style={
+                                this.state.focusedItemIndex === 7 ?
                                     { backgroundColor: "rgba(255, 255, 255, 0.1)" }
                                     :
                                     null

@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // Screens
 import { HomeScreen } from "../components/home/homeView";
+import { NotificationScreen } from "../components/notifications/notificationView";
 import { GamesScreen } from "../components/games/gamesView";
 import { NewPostScreen } from "../components/newPost/newPostView";
 import { ApplicationsScreen } from "../components/applications/applicationsView";
@@ -27,6 +28,7 @@ export class DrawerCustomNavigator extends Component {
                 }}
             >
                 <Drawer.Screen name="Inicio" component={HomeScreen} initialParams={{ sessionId: this.props.sessionId }} />
+                <Drawer.Screen name="Notificaciones" component={NotificationScreen} initialParams={{ sessionId: this.props.sessionId }} />
                 <Drawer.Screen name="Juegos" component={GamesScreen} initialParams={{ sessionId: this.props.sessionId }} />
                 <Drawer.Screen name="Crear anuncio" component={NewPostScreen} initialParams={{ sessionId: this.props.sessionId }} />
                 <Drawer.Screen name="Solicitudes" component={ApplicationsScreen} initialParams={{ sessionId: this.props.sessionId }} />
