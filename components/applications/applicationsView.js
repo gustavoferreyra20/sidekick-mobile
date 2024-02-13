@@ -78,6 +78,11 @@ export class ApplicationsScreen extends Component {
         this.setState({ rate: { id_user: id_user, id_post: id_post, id_application: id_application, show: true } });
     };
 
+    btnContact = async (id_user) => {
+        await this.controller.contact(id_user);
+        this.setState({});
+    };
+
     updateReview = async () => {
         this.setState({ rate: !this.state.rate });
         await this.showReceivedApp();
@@ -121,7 +126,7 @@ export class ApplicationsScreen extends Component {
                                 {this.state.selectedButton === 'Recibidas' && (
                                     <Loader
                                         data={receivedApps}
-                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnDeletePost} changeStatus={this.btnChangeStatus} rate={this.btnRate} />}
+                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnDeletePost} changeStatus={this.btnChangeStatus} rate={this.btnRate} contact={this.btnContact} />}
                                     />
                                 )}
                             </View>
@@ -132,6 +137,7 @@ export class ApplicationsScreen extends Component {
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}
+                    contactInf={this.controller.contactInf}
                     msg={this.controller.msg}
                     actionConfirm={this.controller.modalFunction}
                 />

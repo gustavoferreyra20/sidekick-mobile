@@ -87,7 +87,11 @@ export default styles = StyleSheet.create({
     marginVertical: 8,
   },
   button: {
-    marginVertical: 8,
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   h1: {
     marginVertical: 12,
@@ -219,6 +223,10 @@ export default styles = StyleSheet.create({
     flex: 1,
     margin: 5,
   },
+  buttonText: {
+    fontSize: 12,
+    color: '#E7E9EA',
+  },
   titleContainer: {
     flex: 8,
     paddingRight: 5,
@@ -283,7 +291,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     borderRadius: 8,
-    gap: 10
+    gap: 10,
+    flexDirection: "row"
   },
   rewardPrice: {
     fontSize: 16,
@@ -367,7 +376,25 @@ export default styles = StyleSheet.create({
     fontSize: 16,
     color: '#E7E9EA',
   },
-  rewardItem: {
-    flexDirection: "row"
+  contactInfImg: {
+    borderRadius: 50,
+    width: 45,
+    height: 45,
+    resizeMode: 'cover',
+    aspectRatio: 1,
+    marginRight: 10,
+  },
+  contactNickname: {
+    fontSize: 12,
+    color: '#E7E9EA',
+  },
+  contactItem:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  contactContainer: {
+    gap: 10
   }
 });

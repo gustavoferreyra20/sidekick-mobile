@@ -16,6 +16,20 @@ class UserService {
     });
   }
 
+  static async getContactInf(id_user) {
+    return new Promise((resolve, reject) => {
+      const url = `${SIDEKICK_API}users/${id_user}/contact_inf`;
+      axiosInstance.get(`users/${id_user}/contact_inf`)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
+
   static async getApplications(id_user, type) {
     return new Promise((resolve, reject) => {
 

@@ -7,6 +7,7 @@ export default class ApplicationController {
         this.modalType = "alert";
         this.modalFunction = () => { };
         this.modalVisible = false;
+        this.contactInf = [];
     }
 
     getApplications = (id_profile, type) => {
@@ -61,6 +62,21 @@ export default class ApplicationController {
         return new Promise((resolve, reject) => {
             try {
                 PostService.updateApplication(id_user, id_post, status)
+                resolve();
+            } catch (error) {
+                console.log(error);
+                resolve(null);
+            }
+        });
+    }
+
+    contact = async (id_user) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                this.contactInf = await UserService.getContactInf(id_user);
+                this.modalType = "contactInf";
+                this.msg = id_user
+                this.modalVisible = true;
                 resolve();
             } catch (error) {
                 console.log(error);

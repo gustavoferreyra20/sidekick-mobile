@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, Button, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
+import { SIDEKICK_API } from "@env"
 
 class MyModal extends Component {
     constructor(props) {
@@ -78,6 +79,31 @@ class MyModal extends Component {
                         </TouchableOpacity>
 
                     </>
+                )}
+
+                {this.props.modalType === "contactInf" && (
+                    <TouchableOpacity onPress={() => this.props.setModalVisible(false)} style={styles.popupContainer}>
+                        <TouchableWithoutFeedback>
+                            <View style={styles.popupContent}>
+                                <View style={styles.contactContainer}>
+                                    {this.props.contactInf.map((contact, index) => (
+                                        <View key={index} style={styles.contactItem}>
+                                            {/* Assuming contact.img is the image URL */}
+                                            <Image source={{ uri: `${SIDEKICK_API}images/${contact.img}` }} style={styles.contactInfImg} />
+                                            <Text style={styles.contactNickname}>{contact.users_contact_inf.nickname || "No nickname"}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                                <View style={styles.button}>
+                                    <Button
+                                        title="Aceptar"
+                                        onPress={() => this.props.setModalVisible(false)}
+                                        color="#28a745"
+                                    />
+                                </View>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </TouchableOpacity>
                 )}
             </Modal>
         )
