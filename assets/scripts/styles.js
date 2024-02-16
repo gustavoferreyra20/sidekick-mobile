@@ -261,6 +261,11 @@ export default styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
+  notificationContainer: {
+    margin: 10,
+    padding: 10,
+    borderRadius: 5,
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',

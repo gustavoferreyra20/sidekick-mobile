@@ -24,6 +24,11 @@ export class NotificationScreen extends React.Component {
         this.setState({ notifications: notifications, loading: false });
     };
 
+    btnDelete = async (id_notification) => {
+        await this.controller.removeNotification(id_notification);
+        await this.loadNotifications()
+    }
+
     render() {
         const { loading, notifications } = this.state;
 
@@ -40,7 +45,7 @@ export class NotificationScreen extends React.Component {
                 <View style={styles.line}></View>
                 <Loader
                     data={notifications}
-                    renderItem={({ item }) => <NotificationItem notification={item} />}
+                    renderItem={({ item }) => <NotificationItem notification={item} onDelete={this.btnDelete} />}
                     style={styles.FlatList}
                 />
             </View>
