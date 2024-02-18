@@ -6,17 +6,9 @@ import { SIDEKICK_API } from "@env"
 class MyModal extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            password: '',
-            newPassword: ''
-        };
     }
 
     render() {
-
-        const { password, newPassword } = this.state;
-        const isPasswordValid = password.length > 8;
-        const isNewPassword = newPassword.length > 8;
 
         return (
             <Modal
@@ -24,7 +16,7 @@ class MyModal extends Component {
                 visible={this.props.modalVisible}
             >
                 {this.props.modalType === "action" && (
-                    <TouchableOpacity onPress={() => this.props.setModalVisible(false)} style={styles.popupContainer}>
+                    <TouchableOpacity onPress={() => { this.props.actionConfirm(); this.props.setModalVisible(false) }} style={styles.popupContainer}>
                         <TouchableWithoutFeedback>
                             <View style={styles.popupContent}>
                                 <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>

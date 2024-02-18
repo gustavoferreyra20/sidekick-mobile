@@ -21,6 +21,10 @@ export class LoginScreen extends Component {
         this.props.navigation.navigate('Registrarse');
     }
 
+    handleForgotPassword = () => {
+        this.props.navigation.navigate('Recuperar contraseña');
+    }
+
     setModalVisible = (visible) => {
         if (typeof this.controller.function === "function") {
             this.controller.function();
@@ -39,7 +43,7 @@ export class LoginScreen extends Component {
                         style={styles.textInput}
                         onChangeText={text => this.controller.email = text}
                         placeholder="Ingrese su email"
-                        placeholderTextColor="#495057" 
+                        placeholderTextColor="#495057"
                         required
                     />
 
@@ -49,12 +53,20 @@ export class LoginScreen extends Component {
                         secureTextEntry={true}
                         onChangeText={text => this.controller.password = text}
                         placeholder="**********"
-                        placeholderTextColor="#495057" 
+                        placeholderTextColor="#495057"
                         required
                     />
 
                     <View style={styles.button}>
                         <Button title="Iniciar sesión" onPress={this.btnLogin} color="#28a745" />
+                    </View>
+
+                    <View style={styles.button}>
+                        <Button
+                            title="Olvidaste tu contraseña?"
+                            onPress={() => this.handleForgotPassword()}
+                            color="#28a745"
+                        />
                     </View>
 
                     <Text style={styles.h1}>Todavia no te registraste?</Text>

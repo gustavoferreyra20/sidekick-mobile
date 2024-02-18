@@ -11,6 +11,7 @@ import styles from './assets/scripts/styles.js';
 
 import { LoginScreen } from "./components/login/loginView.js";
 import { RegistrationScreen } from "./components/registration/registrationView.js";
+import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPasswordView.js';
 
 const Stack = createStackNavigator();
 
@@ -107,6 +108,7 @@ export default class App extends Component {
               children={(props) => <LoginScreen {...props} onLogin={(res) => this.setLogin(res)} />}
             />
             <Stack.Screen name="Registrarse" component={RegistrationScreen} />
+            <Stack.Screen name="Recuperar contraseña" component={ForgotPasswordScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );

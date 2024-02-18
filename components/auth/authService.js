@@ -26,6 +26,21 @@ class AuthService {
     });
   }
 
+  static async resetPassword(obj) {
+    const url = `${SIDEKICK_API}auth/resetPassword`;
+
+    return new Promise((resolve, reject) => {
+      axios.post(url, obj)
+        .then(function (response) {
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject("Error en el registro");
+        });
+    });
+  }
+
   static async register(obj) {
     const url = `${SIDEKICK_API}auth/register`;
 
