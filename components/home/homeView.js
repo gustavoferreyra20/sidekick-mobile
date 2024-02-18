@@ -105,7 +105,7 @@ export class HomeScreen extends Component {
                 <Text style={styles.heading}>Posts más recientes</Text>
                 <View style={styles.hr_main} />
 
-                <View style={styles.headerColumns}>
+                <View style={styles.headerRows}>
                     <View style={styles.buttonContainerColumns}>
                         <Button
                             title="Buscar"

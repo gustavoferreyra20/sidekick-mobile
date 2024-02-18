@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, Button, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native';
+import { Modal, View, Text, TextInput, Button, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
 class MyModal extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            password: '',
+            newPassword: ''
+        };
     }
 
     render() {
+
+        const { password, newPassword } = this.state;
+        const isPasswordValid = password.length > 8;
+        const isNewPassword = newPassword.length > 8;
+
         return (
             <Modal
                 transparent={true}

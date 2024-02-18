@@ -96,7 +96,7 @@ export class ApplicationsScreen extends Component {
                     <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} id_application={rate.id_application} navigation={this.props.navigation} updateReview={this.updateReview} />
                 ) : (
                     <>
-                        <View style={styles.headerColumns}>
+                        <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={selectedButton === 'Enviadas' ? '#047734' : '#28a745'}

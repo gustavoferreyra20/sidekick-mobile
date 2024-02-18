@@ -79,7 +79,7 @@ export default class App extends Component {
     if (this.state.isLoading) {
       // Display a loading indicator while checking the login status
       return (
-        <View style={styles.loadingContainer}>
+        <View style={styles.centerContainer}>
           <ActivityIndicator color="#28a745" size="large" />
         </View>
       );

@@ -28,16 +28,15 @@ export default class LoginController {
         return;
       }
 
-      AuthService.login({ email: this.email, password: this.password }).then((response) => {
-        if (response != undefined) {
+      AuthService.login({ email: this.email, password: this.password })
+        .then((response) => {
           this.onLogin(response);
-        } else {
+        })
+        .catch(() => {
           this.msg = "Usuario y/o contraseña incorrectas"
           this.modalVisible = true
           resolve();
-        }
-
-      })
+        });
     });
   };
 }

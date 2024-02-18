@@ -140,7 +140,7 @@ export class DrawerContentScreen extends Component {
                     <DrawerItem
                         icon={() => <Image source={require('../assets/img/icons/settings.png')} style={styles.icon} />}
                         label="Configuracion"
-                        onPress={() => this.props.navigation.navigate("configuracion")}
+                        onPress={() => this.props.navigation.navigate("Configuracion")}
                         labelStyle={{ color: "#E7E9EA" }}
                     />
                 </View>

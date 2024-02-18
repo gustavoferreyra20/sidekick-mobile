@@ -18,7 +18,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     width: "100%"
   },
-  loadingContainer: {
+  centerContainer: {
     flex: 1,
     backgroundColor: '#020202',
     alignItems: 'center',
@@ -211,10 +211,17 @@ export default styles = StyleSheet.create({
   FlatList: {
     width: '100%'
   },
-  headerColumns: {
+  headerRows: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  configColumns: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 18,
+    width: "10px"
   },
   profileEdit: {
     marginHorizontal: 5,

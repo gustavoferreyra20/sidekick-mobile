@@ -157,6 +157,24 @@ class UserService {
     });
   }
 
+  static async update(id_user, data) {
+    return axiosInstance.put('users/' + id_user, data)
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  static async checkPassword(id_user, originalPassword) {
+    return new Promise((resolve, reject) => {
+      axiosInstance.post('users/' + id_user + '/checkPassword', originalPassword)
+        .then((res) => {
+          resolve(res.data.match);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
 }
 
 export default UserService;

@@ -11,7 +11,7 @@ const Item = ({ user, post, changeStatus, rate, contact }) => {
                 <View style={styles.profileHeaderData}>
                     <Text style={[styles.text, styles.nameText, styles.boldText]}>{user.name}</Text>
                     {user.applications.status === 'pending' && post.actualUsers < post.requiredUsers && (
-                        <View style={styles.headerColumns}>
+                        <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
                                     style={[styles.button, { backgroundColor: '#28a745' }]}
@@ -32,7 +32,7 @@ const Item = ({ user, post, changeStatus, rate, contact }) => {
                     )}
 
                     {user.applications.status === 'pending' && post.actualUsers == post.requiredUsers && (
-                        <View style={styles.headerColumns}>
+                        <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
                                     color={'#dc3545'}
@@ -45,7 +45,7 @@ const Item = ({ user, post, changeStatus, rate, contact }) => {
                     )}
 
                     {user.applications.status === 'accepted' && (
-                        <View style={styles.headerColumns}>
+                        <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
                                     style={[styles.button, { backgroundColor: '#008CBA' }]}
