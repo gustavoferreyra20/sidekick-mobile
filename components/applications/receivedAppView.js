@@ -3,13 +3,16 @@ import { View, Text, Image, Button, FlatList, TouchableOpacity } from 'react-nat
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
-const Item = ({ user, post, changeStatus, rate, contact }) => {
+const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) => {
     if (user.applications.status !== 'rejected') {
         return (
             <View style={styles.profileHeader}>
                 <Image source={{ uri: `${SIDEKICK_API}images/${user.img}` }} style={styles.userImage} />
                 <View style={styles.profileHeaderData}>
-                    <Text style={[styles.text, styles.nameText, styles.boldText]}>{user.name}</Text>
+                    <TouchableOpacity
+                        onPress={() => handleUserNamePress(user.id_user)}>
+                        <Text style={[styles.text, styles.nameText, styles.boldText]}>{user.name}</Text>
+                    </TouchableOpacity>
                     {user.applications.status === 'pending' && post.actualUsers < post.requiredUsers && (
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
@@ -80,7 +83,7 @@ const Item = ({ user, post, changeStatus, rate, contact }) => {
     }
 };
 
-const ReceivedApp = ({ post, onDeletePost, changeStatus, rate, contact }) => {
+const ReceivedApp = ({ post, onDeletePost, changeStatus, rate, contact, handleUserNamePress }) => {
 
     return (
         <View >
@@ -99,7 +102,7 @@ const ReceivedApp = ({ post, onDeletePost, changeStatus, rate, contact }) => {
 
                 <FlatList
                     data={post.users}
-                    renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} rate={rate} contact={contact} />}
+                    renderItem={({ item }) => <Item user={item} post={post} changeStatus={changeStatus} rate={rate} contact={contact} handleUserNamePress={handleUserNamePress} />}
                     keyExtractor={item => item.id_user}
                 />
 

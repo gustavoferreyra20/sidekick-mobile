@@ -23,19 +23,10 @@ export class ProfileScreen extends React.Component {
 
 
   handleUserNamePress = (id_user) => {
-
-    if (this.state.id_user !== id_user) {
-      this.setState(
-        {
-          id_user: id_user,
-          isCurrentUser: id_user == this.props.route.params.sessionId,
-          loading: true,
-        },
-        () => {
-          this.loadProfileData(id_user);
-        }
-      );
-    }
+    this.props.navigation.navigate("Perfil", {
+      sessionId: id_user,
+      isCurrentUser: false
+    });
   };
 
   componentDidMount() {
@@ -43,6 +34,22 @@ export class ProfileScreen extends React.Component {
     this.setState({ id_user: initialIdUser }, () => {
       this.loadProfileData(initialIdUser);
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    // Check if route params have changed
+    if (prevProps.route.params.sessionId !== this.props.route.params.sessionId) {
+      const newIdUser = this.props.route.params.sessionId;
+      this.setState(
+        {
+          id_user: newIdUser,
+          loading: true, // Set loading to true when switching to new user profile
+        },
+        () => {
+          this.loadProfileData(newIdUser);
+        }
+      );
+    }
   }
 
   loadProfileData = async (id_user) => {

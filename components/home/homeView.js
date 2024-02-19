@@ -6,6 +6,7 @@ import HomeCtrl from './homeCtrl';
 import MyModal from '../popups/popupService';
 import Loader from '../../assets/scripts/loader';
 import Post from '../posts/postsView';
+import { useNavigation } from '@react-navigation/native';
 
 export class HomeScreen extends Component {
     constructor(props) {
@@ -95,7 +96,10 @@ export class HomeScreen extends Component {
     };
 
     handleUserNamePress = (id_user) => {
-        console.log(id_user)
+        this.props.navigation.navigate("Perfil", {
+            sessionId: id_user,
+            isCurrentUser: false
+        });
     };
 
     render() {

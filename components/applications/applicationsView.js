@@ -26,6 +26,13 @@ export class ApplicationsScreen extends Component {
         this.fetchApplications();
     }
 
+    handleUserNamePress = (id_user) => {
+        this.props.navigation.navigate("Perfil", {
+            sessionId: id_user,
+            isCurrentUser: false
+        });
+    };
+
     fetchApplications = async () => {
         try {
             let receivedApps = await this.controller.getApplications(this.id_profile, 'received');
@@ -126,7 +133,7 @@ export class ApplicationsScreen extends Component {
                                 {this.state.selectedButton === 'Recibidas' && (
                                     <Loader
                                         data={receivedApps}
-                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnDeletePost} changeStatus={this.btnChangeStatus} rate={this.btnRate} contact={this.btnContact} />}
+                                        renderItem={({ item }) => <ReceivedApp post={item} onDeletePost={this.btnDeletePost} changeStatus={this.btnChangeStatus} rate={this.btnRate} contact={this.btnContact} handleUserNamePress={this.handleUserNamePress} />}
                                     />
                                 )}
                             </View>

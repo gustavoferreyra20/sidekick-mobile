@@ -54,8 +54,8 @@ class PostService {
       });
   }
 
-  static async addApplication(id_post, id_user) {
-    const url = 'posts/' + id_post + '/applications/' + id_user;
+  static async addApplication(id_post) {
+    const url = 'posts/' + id_post + '/applications';
 
     await axiosInstance.post(url)
       .catch(function (error) {
