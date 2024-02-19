@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Contact_infService from '../contact_inf/contact_infService';
 import UserService from '../users/userService';
+import AuthService from '../auth/authService';
 import * as ImagePicker from 'expo-image-picker';
 
 export default class RegistrationController extends Component {
@@ -70,70 +71,104 @@ export default class RegistrationController extends Component {
 
     handleRegistration = () => {
         return new Promise((resolve, reject) => {
-            let conditions = {
-                email: this.newUser.email
+            if (!this.checkParams()) {
+                resolve();
+                return;
             }
 
-            UserService.get(conditions)
-                .then((existentUser) => {
+            const registerUser = () => {
+                return new Promise((resolve, reject) => {
+                    const registerPromise = AuthService.register(this.newUser);
 
-                    if (!this.toggleValue) {
-                        this.msg = "Debe aceptar los terminos"
-                        this.modalVisible = true
-                        resolve();
-                        return
-                    }
-
-                    if (!this.newUser.name.length || !this.newUser.email.length || !this.newUser.password.length || !this.newUser.contact_inf_list[0].account.length) {
-                        this.msg = "Por favor complete todos los campos requeridos"
-                        this.modalVisible = true
-                        resolve();
-                        return
-                    }
-
-                    if (this.newUser.password.length < 8) {
-                        this.msg = "Contraseña demasiado corta"
-                        this.modalVisible = true
-                        resolve();
-                        return
-                    }
-
-                    if (existentUser.length > 0) {
-                        this.msg = "Usuario existente"
-                        this.modalVisible = true
-                        resolve();
-                        return
-                    }
-
-                    if (this.newUser.profilePicture != undefined) {
-                        UserService.saveImage(this.newUser.profilePicture).then((res) => {
-                            this.newUser.img = `profiles/${res.filename}`;
-                        }).then(() => {
-                            this.saveUser( this.newUser).then(() => {
-                                this.msg = "Usuario registrado con exito"
-                                this.modalVisible = true
-                                this.function = () => {
-                                    this.props.navigation.navigate('Iniciar sesión');
-                                };
+                    if (this.newUser.profilePicture) {
+                        // Save image and register user only if the user is new
+                        registerPromise
+                            .then((user) => {
+                                // Add contact info after user registration
+                                const contactInfoPromises = this.newUser.contact_inf_list.map(element => {
+                                    return UserService.addContact_inf_list(user.id_user, element.platform.id_contact_inf, element.account);
+                                });
+                                return Promise.all(contactInfoPromises)
+                                    .then(() => UserService.saveImage(this.newUser.profilePicture, user.id_user)); // Save image after adding contact info
+                            })
+                            .then(() => {
                                 resolve();
-                                return
+                            })
+                            .catch((error) => {
+                                console.error("Error saving image:", error);
+                                reject(error);
                             });
-                        })
                     } else {
-                        this.saveUser(this.newUser).then(() => {
-                            this.msg = "Usuario registrado con exito"
-                            this.modalVisible = true
-                            this.function = () => {
-                                this.props.navigation.navigate('Iniciar sesión');
-                            };
-                            resolve();
-                            return
-                        });
+                        // Register user without saving image
+                        registerPromise
+                            .then((user) => {
+                                const contactInfoPromises = this.newUser.contact_inf_list.map(element => {
+                                    return UserService.addContact_inf_list(user.id_user, element.platform.id_contact_inf, element.account);
+                                });
+                                return Promise.all(contactInfoPromises)
+                            })
+                            .then(() => {
+                                resolve();
+                            })
+                            .catch((error) => {
+                                console.error("Error registering user:", error);
+                                reject(error);
+                            });
                     }
+                });
+            };
 
+            registerUser()
+                .then(() => {
+                    this.msg = "Usuario registrado con éxito";
+                    this.modalVisible = true;
+                    this.function = () => {
+                        this.props.navigation.navigate('Iniciar sesión');
+                    };
+                    resolve();
+                })
+                .catch((error) => {
+                    if (error == "Usuario existente") {
+                        this.msg = "Usuario existente";
+                        this.modalVisible = true;
+                    } else {
+                        console.log("Error registering user:", error);
+                        this.msg = "Ocurrio un error";
+                        this.modalVisible = true;
+                    }
+                    resolve();
                 });
         });
+    };
 
+    checkParams = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!this.toggleValue) {
+            this.msg = "Debe aceptar los terminos"
+            this.modalVisible = true
+            return false;
+        }
+
+        if (!this.newUser.name || !this.newUser.email || !this.newUser.password || !this.newUser.contact_inf_list[0].account) {
+            this.msg = "Por favor complete todos los campos requeridos";
+            this.modalVisible = true;
+            return false;
+        }
+
+        if (this.newUser.password.length < 8) {
+            this.msg = "Contraseña demasiado corta";
+            this.modalVisible = true;
+            return false;
+        }
+
+        if (!emailRegex.test(this.newUser.email)) {
+            this.msg = "Por favor ingrese un correo electrónico válido";
+            this.modalVisible = true;
+            return false;
+        }
+
+        return true;
     };
 
     saveUser = async (user) => {

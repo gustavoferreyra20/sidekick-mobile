@@ -110,9 +110,9 @@ class UserService {
     });
   }
 
-  static async saveImage(file) {
+  static async saveImage(file, id_user) {
     return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}imageupload`;
+      const url = `${SIDEKICK_API}images/${id_user}`;
 
       // ImagePicker saves the taken photo to disk and returns a local URI to it
       let localUri = file;
@@ -134,11 +134,16 @@ class UserService {
           'content-type': 'multipart/form-data',
         },
       }).then((response) => {
-        return response.json();
-      })
-        .then((data) => {
-          resolve(data)
-        }).catch(console.error)
+        if (response.status === 200) {
+          resolve("Image uploaded successfully");
+        } else if (response.status === 404) {
+          reject("404 - Not found");
+        } else {
+          reject("Error uploading image");
+        }
+      }).catch((error) => {
+        reject(error);
+      });
     })
   }
 
@@ -151,6 +156,9 @@ class UserService {
       };
 
       axiosInstance.post(url, data)
+        .then(response => {
+          resolve(response.data);
+        })
         .catch(function (error) {
           console.log(error);
         });

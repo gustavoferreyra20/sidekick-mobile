@@ -50,7 +50,7 @@ class AuthService {
           resolve(response.data);
         })
         .catch(function (error) {
-          if (error.response && error.response.status === 400) {
+          if (error.response && error.response.status === 409) {
             reject("Usuario existente");
           } else {
             console.log(error);
