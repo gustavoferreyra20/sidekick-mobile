@@ -87,7 +87,7 @@ export default styles = StyleSheet.create({
     marginVertical: 8,
   },
   button: {
-    borderRadius: 5,
+    borderRadius: 2,
     paddingVertical: 10,
     paddingHorizontal: 15,
     justifyContent: 'center',

@@ -120,7 +120,7 @@ export class ApplicationsScreen extends Component {
                                 {this.state.selectedButton === 'Enviadas' && (
                                     <Loader
                                         data={sentApps}
-                                        renderItem={({ item }) => <SentApp item={item} onCancelApplication={this.btnCancelApplication} />}
+                                        renderItem={({ item }) => <SentApp item={item} onCancelApplication={this.btnCancelApplication} contact={this.btnContact} />}
                                     />
                                 )}
                                 {this.state.selectedButton === 'Recibidas' && (

@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
 
-const SentApp = ({ item, onCancelApplication }) => {
+const SentApp = ({ item, onCancelApplication, contact }) => {
   return (
     <View >
       <View style={styles.sendedAppContainer}>
@@ -23,7 +23,18 @@ const SentApp = ({ item, onCancelApplication }) => {
         ) : null}
 
         {item.applications.status === 'accepted' ? (
-          <Text style={styles.text}>Solicitud aceptada</Text>
+          <View>
+            <Text style={styles.text}>Solicitud aceptada</Text>
+            <View style={styles.buttonContainerColumns}>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: '#008CBA' }]}
+                onPress={() => contact(item.id_user)}
+              >
+                <Text style={styles.buttonText}>Contactar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
         ) : null}
 
         <View style={styles.cancelButton} >
