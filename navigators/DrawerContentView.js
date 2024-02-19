@@ -27,7 +27,7 @@ export class DrawerContentScreen extends Component {
                             label="Inicio"
                             onPress={() => {
                                 this.props.navigation.navigate("Inicio");
-                                this.setState({ focusedItemIndex: 1 });
+                                //this.setState({ focusedItemIndex: 1 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 1}
@@ -43,7 +43,7 @@ export class DrawerContentScreen extends Component {
                             label="Notificaciones"
                             onPress={() => {
                                 this.props.navigation.navigate("Notificaciones");
-                                this.setState({ focusedItemIndex: 2 });
+                                // this.setState({ focusedItemIndex: 2 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 2}
@@ -59,7 +59,7 @@ export class DrawerContentScreen extends Component {
                             label="Juegos"
                             onPress={() => {
                                 this.props.navigation.navigate("Juegos");
-                                this.setState({ focusedItemIndex: 3 });
+                                //this.setState({ focusedItemIndex: 3 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 3}
@@ -75,7 +75,7 @@ export class DrawerContentScreen extends Component {
                             label="Crear anuncio"
                             onPress={() => {
                                 this.props.navigation.navigate("Crear anuncio");
-                                this.setState({ focusedItemIndex: 4 });
+                                //this.setState({ focusedItemIndex: 4 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 4}
@@ -91,7 +91,7 @@ export class DrawerContentScreen extends Component {
                             label="Solicitudes"
                             onPress={() => {
                                 this.props.navigation.navigate("Solicitudes");
-                                this.setState({ focusedItemIndex: 5 });
+                                //this.setState({ focusedItemIndex: 5 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 5}
@@ -107,7 +107,7 @@ export class DrawerContentScreen extends Component {
                             label="Perfil"
                             onPress={() => {
                                 this.props.navigation.navigate("Perfil");
-                                this.setState({ focusedItemIndex: 6 });
+                                //this.setState({ focusedItemIndex: 6 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 6}
@@ -123,7 +123,7 @@ export class DrawerContentScreen extends Component {
                             label="Tienda"
                             onPress={() => {
                                 this.props.navigation.navigate("Tienda");
-                                this.setState({ focusedItemIndex: 7 });
+                                //this.setState({ focusedItemIndex: 7 });
                             }}
                             labelStyle={{ color: "#E7E9EA" }}
                             focused={this.state.focusedItemIndex === 7}

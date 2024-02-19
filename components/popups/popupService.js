@@ -61,7 +61,7 @@ class MyModal extends Component {
                                     <View style={styles.button}>
                                         <View style={{ marginBottom: 8 }}>
                                             <Button
-                                                title="Si"
+                                                title=" Si "
                                                 onPress={() => {
                                                     this.props.actionConfirm();
                                                     this.props.setModalVisible(false);
@@ -69,11 +69,15 @@ class MyModal extends Component {
                                                 color="#28a745"
                                             />
                                         </View>
-                                        <Button
-                                            title="No"
-                                            onPress={() => this.props.setModalVisible(false)}
-                                            color="#dc3545"
-                                        />
+                                        <View style={styles.button}>
+                                            <View style={{ marginBottom: 8 }}>
+                                                <Button
+                                                    title="No"
+                                                    onPress={() => this.props.setModalVisible(false)}
+                                                    color="#dc3545"
+                                                />
+                                            </View>
+                                        </View>
                                     </View>
                                 </View>
                             </TouchableWithoutFeedback>
