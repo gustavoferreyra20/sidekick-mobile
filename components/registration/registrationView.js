@@ -38,6 +38,12 @@ export class RegistrationScreen extends Component {
         });
     }
 
+    btnTerms = () => {
+        this.controller.showTerms().then(() => {
+            this.forceUpdate();
+        });
+    }
+
     componentDidMount = () => {
         this.controller.handleGetOptions().then(() => {
             this.setState({ loading: false });
@@ -192,7 +198,11 @@ export class RegistrationScreen extends Component {
                             </View>
                         )}
 
-                        <Text style={styles.text}>Password</Text>
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.text}>Password</Text>
+                            <Text style={styles.required}>*</Text>
+                        </View>
+
                         <TextInput
                             style={styles.textInput}
                             secureTextEntry={true}
@@ -200,7 +210,12 @@ export class RegistrationScreen extends Component {
                             placeholder="**********"
                             placeholderTextColor="#495057"
                         />
+                        <Text style={styles.text}>Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mímimo.</Text>
 
+
+                        <View style={styles.button}>
+                            <Button title="Ver terminos y condiciones" onPress={this.btnTerms} color="#28a745" />
+                        </View>
                         <TouchableOpacity style={styles.switchContainer} onPress={this.toggleSwitch}>
                             <Text style={styles.switchText}>Aceptar términos y condiciones</Text>
                             <Switch value={this.controller.toggleValue} onValueChange={this.toggleSwitch} />

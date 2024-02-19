@@ -49,6 +49,7 @@ export class ForgotPasswordScreen extends Component {
                             color="#28a745"
                         />
                     </View>
+                    <Text style={styles.text}>Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mímimo.</Text>
 
                     <MyModal
                         modalVisible={this.controller.modalVisible}

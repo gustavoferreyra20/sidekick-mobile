@@ -47,6 +47,14 @@ export default class RegistrationController extends Component {
         });
     }
 
+    showTerms = () => {
+        return new Promise((resolve, reject) => {
+            this.msg = "Al usar nuestro servicio, aceptas cumplir con nuestros términos y condiciones. Esto incluye el respeto a la privacidad y el cumplimiento de las leyes aplicables. Nos reservamos el derecho de realizar cambios en cualquier momento. Gracias por tu comprensión y cooperación.";
+            this.modalVisible = true;
+            resolve();
+        });
+    }
+
     pickProfilePicture = async () => {
         const result = await ImagePicker.launchImageLibraryAsync();
         if (!result.canceled) {
