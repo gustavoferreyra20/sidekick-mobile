@@ -33,8 +33,9 @@ export default class App extends Component {
       const storeData = async (value) => {
         try {
           await AsyncStorage.setItem('my-key', value);
-        } catch (e) {
-          // saving error
+        } catch (error) {
+          console.log("Error: " + error);
+          this.setState({ isLoading: false });
         }
       };
 

@@ -65,11 +65,8 @@ export class ApplicationsScreen extends Component {
     }
 
     btnChangeStatus = async (id_user, id_post, status) => {
-        try {
-            this.controller.changeStatus(id_user, id_post, status).then(this.showReceivedApp());
-        } catch (error) {
-            console.error('Error:', error);
-        }
+        await this.controller.changeStatus(id_user, id_post, status, this.showReceivedApp);
+        this.setState({});
     };
 
     setModalVisible = (visible) => {

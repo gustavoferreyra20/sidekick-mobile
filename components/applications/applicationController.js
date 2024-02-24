@@ -11,16 +11,15 @@ export default class ApplicationController {
     }
 
     getApplications = (id_profile, type) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const applications = await UserService.getApplications(id_profile, type)
-                resolve(applications)
-            } catch (error) {
+        return UserService.getApplications(id_profile, type)
+            .then(applications => {
+                return applications;
+            })
+            .catch(error => {
                 console.log(error);
-                resolve(null);
-            }
-        });
-    }
+                return null;
+            });
+    };
 
     cancelApplication = (id_post, id_application, afterCancelCallback) => {
         return new Promise((resolve, reject) => {
@@ -58,11 +57,14 @@ export default class ApplicationController {
         });
     }
 
-    changeStatus = async (id_user, id_post, status) => {
+    changeStatus = async (id_user, id_post, status, afterUpdateCallback) => {
         return new Promise((resolve, reject) => {
             try {
-                PostService.updateApplication(id_user, id_post, status)
-                resolve();
+                PostService.updateApplication(id_user, id_post, status).then(() => {
+                    afterUpdateCallback();
+                }).then(() => {
+                    resolve();
+                })
             } catch (error) {
                 console.log(error);
                 resolve(null);

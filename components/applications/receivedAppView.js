@@ -4,7 +4,7 @@ import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
 const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) => {
-    if (user.applications.status !== 'rejected') {
+    if (user.applications.status !== 'rejected' && user.applications.status !== 'complete') {
         return (
             <View style={styles.profileHeader}>
                 <Image source={{ uri: `${SIDEKICK_API}images/${user.img}` }} style={styles.userImage} />
@@ -13,7 +13,7 @@ const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) 
                         onPress={() => handleUserNamePress(user.id_user)}>
                         <Text style={[styles.text, styles.nameText, styles.boldText]}>{user.name}</Text>
                     </TouchableOpacity>
-                    {user.applications.status === 'pending' && post.actualUsers < post.requiredUsers && (
+                    {user.applications.status === 'pending' && post.actualusers < post.requiredusers && (
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
@@ -34,7 +34,7 @@ const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) 
                         </View>
                     )}
 
-                    {user.applications.status === 'pending' && post.actualUsers == post.requiredUsers && (
+                    {user.applications.status === 'pending' && post.actualusers == post.requiredusers && (
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <Button
@@ -51,7 +51,7 @@ const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) 
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
-                                    style={[styles.button, { backgroundColor: '#008CBA' }]}
+                                    style={[styles.button, { backgroundColor: '#17a2b8' }]}
                                     onPress={() => contact(user.id_user)}
                                 >
                                     <Text style={styles.buttonText}>Contactar</Text>
@@ -94,7 +94,7 @@ const ReceivedApp = ({ post, onDeletePost, changeStatus, rate, contact, handleUs
                     </View>
                     <View style={styles.usersContainer}>
                         <Text style={styles.usersText}>
-                            {post.actualUsers} / {post.requiredUsers}
+                            {post.actualusers} / {post.requiredusers}
                         </Text>
                     </View>
                 </View>

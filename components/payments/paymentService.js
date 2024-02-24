@@ -4,7 +4,7 @@ class PaymentService {
 
     static async newPayment(reward) {
         return new Promise((resolve, reject) => {
-            axiosInstance.post(`payment`, reward)
+            axiosInstance.post(`payments/mp`, reward)
                 .then((res) => {
                     resolve(res.data);
                 })

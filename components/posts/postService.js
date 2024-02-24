@@ -27,8 +27,8 @@ class PostService {
       id_game: post.gameSelected,
       id_platform: post.platformSelected,
       id_mode: post.modeSelected,
-      requiredUsers: post.userRequire,
-      actualUsers: 0,
+      requiredusers: post.userRequire,
+      actualusers: 0,
       title: post.title,
       description: (post.description != null) ? post.description : ''
     };

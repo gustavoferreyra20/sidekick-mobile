@@ -10,8 +10,8 @@ class ProfileController {
                 const profile = {
                     name: user.name,
                     description: user.description,
-                    ability: (response[0].abilityScore === undefined) ? 0 : Math.round(response[0].abilityScore),
-                    karma: (response[0].karmaScore === undefined) ? 0 : Math.round(response[0].karmaScore),
+                    ability: (response[0].abilityscore === undefined) ? 0 : Math.round(response[0].abilityscore),
+                    karma: (response[0].karmascore === undefined) ? 0 : Math.round(response[0].karmascore),
                     img: user.img
                 };
                 resolve(profile);

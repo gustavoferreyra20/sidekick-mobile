@@ -16,12 +16,12 @@ const Review = ({ item, handleUserNamePress }) => {
 
                 <View style={styles.textContainer}>
                     <View style={styles.userInfo}>
-                        <TouchableOpacity onPress={() => handleUserNamePress(item.id_writerUser)}>
+                        <TouchableOpacity onPress={() => handleUserNamePress(item.id_writeruser)}>
                             <Text style={[styles.text, styles.nameText, styles.boldText]}>
                                 {item.user.name}
                             </Text>
                         </TouchableOpacity>
-                        <Text style={styles.text}>Habilidad: {item.abilityScore} <View style={styles.dot}></View> Karma: {item.karmaScore} id: {item.id_review}</Text>
+                        <Text style={styles.text}>Habilidad: {item.abilityscore} <View style={styles.dot}></View> Karma: {item.karmascore} id: {item.id_review}</Text>
                     </View>
                 </View>
             </View>

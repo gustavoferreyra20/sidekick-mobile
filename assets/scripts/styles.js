@@ -304,7 +304,7 @@ export default styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     gap: 10,
-    flexDirection: "row"
+    flexDirection: "column"
   },
   rewardPrice: {
     fontSize: 16,

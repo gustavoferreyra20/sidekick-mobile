@@ -22,7 +22,7 @@ const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                         </TouchableOpacity>
                         <Text style={styles.textRight}>
                             <Text style={[styles.text, styles.boldText]}>
-                                {post.actualUsers} / {post.requiredUsers}
+                                {post.actualusers} / {post.requiredusers}
                             </Text>
                         </Text>
                     </View>
@@ -32,9 +32,9 @@ const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                         <Text style={styles.dot}> {'\u2B24'} </Text>
                         {post.platform}
                         <Text style={styles.dot}> {'\u2B24'} </Text>
-                        Habilidad: <Text style={styles.ability}>{post.abilityScore}</Text>
+                        Habilidad: <Text style={styles.ability}>{post.abilityscore}</Text>
                         <Text style={styles.dot}> {'\u2B24'} </Text>
-                        Karma: <Text style={styles.karma}>{post.karmaScore}</Text>
+                        Karma: <Text style={styles.karma}>{post.karmascore}</Text>
                     </Text>
                 </View>
 
@@ -55,7 +55,7 @@ const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                     <Text style={styles.description}>{post.description}</Text>
                 </View>
 
-                {post.actualUsers < post.requiredUsers && (
+                {post.actualusers < post.requiredusers && (
                     <Button
                         title="Unirse"
                         onPress={() => btnSubmitApplication(post.id_post)}
@@ -63,7 +63,7 @@ const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                     />
                 )}
 
-                {post.actualUsers === post.requiredUsers && (
+                {post.actualusers === post.requiredusers && (
                     <Button title="Post completo" disabled style={styles.completeButton} />
                 )}
             </View>

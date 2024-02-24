@@ -98,7 +98,7 @@ class UserService {
 
   static async addReview(review) {
     return new Promise((resolve, reject) => {
-      const url = 'users/' + review.id_user + '/reviews/' + review.id_writerUser;
+      const url = 'users/' + review.id_user + '/reviews/';
 
       axiosInstance.post(url, review)
         .then(response => {

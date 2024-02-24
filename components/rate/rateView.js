@@ -13,10 +13,10 @@ export class RateView extends Component {
             loading: true,
             form: {
                 id_post: this.props.rated_id_post,
-                id_writerUser: this.props.id_profile,
+                id_writeruser: this.props.id_profile,
                 id_user: this.props.rated_id_user,
-                abilityScore: 50,
-                karmaScore: 50,
+                abilityscore: 50,
+                karmascore: 50,
                 comment: '',
                 reward: null
             },
@@ -46,13 +46,13 @@ export class RateView extends Component {
 
     handleAbilityScoreChange = (value) => {
         this.setState(prevState => ({
-            form: { ...prevState.form, abilityScore: value }
+            form: { ...prevState.form, abilityscore: value }
         }));
     };
 
     handleKarmaScoreChange = (value) => {
         this.setState(prevState => ({
-            form: { ...prevState.form, karmaScore: value }
+            form: { ...prevState.form, karmascore: value }
         }));
     };
 
@@ -70,7 +70,8 @@ export class RateView extends Component {
 
     handleSelectReward = (reward) => {
         this.setState(prevState => ({
-            form: { ...prevState.form, reward: reward }
+            form: { ...prevState.form, reward: reward },
+            showRewards: !prevState.showRewards
         }));
     };
 
@@ -103,7 +104,7 @@ export class RateView extends Component {
                         minimumValue={0}
                         maximumValue={100}
                         step={1}
-                        value={this.state.form.abilityScore}
+                        value={this.state.form.abilityscore}
                         onValueChange={this.handleAbilityScoreChange}
                         minimumTrackTintColor="#007bff"
                         maximumTrackTintColor="gray"
@@ -114,7 +115,7 @@ export class RateView extends Component {
                         minimumValue={0}
                         maximumValue={100}
                         step={1}
-                        value={this.state.form.karmaScore}
+                        value={this.state.form.karmascore}
                         onValueChange={this.handleKarmaScoreChange}
                         minimumTrackTintColor="#007bff"
                         maximumTrackTintColor="gray"
@@ -157,6 +158,12 @@ export class RateView extends Component {
                         </ScrollView>
                     )}
 
+                    {this.state.showRewards && this.state.rewards.length == 0 && (
+                        <View style={styles.rewardItem}>
+                            <Text style={styles.text}>No tienes ninguna medalla, quieres comprar alguna?</Text>
+                        </View>
+
+                    )}
 
                     {this.state.showRewards && (
                         <View style={styles.noRewardContainer}>

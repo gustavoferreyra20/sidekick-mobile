@@ -12,7 +12,7 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
           </View>
           <View style={styles.usersContainer}>
             <Text style={styles.usersText}>
-              {item.actualUsers} / {item.requiredUsers}
+              {item.actualusers} / {item.requiredusers}
             </Text>
           </View>
         </View>

@@ -26,7 +26,7 @@ export default class RateController extends Component {
                 }
             })
             .then(() => {
-                return PostService.updateApplication(review.id_post, id_application, 'pending');
+                return PostService.updateApplication(review.id_post, id_application, 'complete');
             })
             .then(() => {
                 this.modalType = "action";
