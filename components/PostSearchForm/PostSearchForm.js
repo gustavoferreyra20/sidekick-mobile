@@ -3,7 +3,7 @@ import { View, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../../assets/scripts/styles';
 import { TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import GameService from '../games/gameService';
+import GameService from '../games/GameService';
 
 class PostSearchForm extends Component {
   constructor(props) {

@@ -1,10 +1,10 @@
 import axiosInstance from '../../middleware/axiosInstance ';
 
-class Contact_infService {
+class ContactInfService {
 
   static async getAll() {
     return new Promise((resolve, reject) => {
-      axiosInstance.get('contact_inf')
+      axiosInstance.get('ContactInf')
         .then((res) => {
           resolve(res.data)
         })
@@ -16,4 +16,4 @@ class Contact_infService {
   }
 }
 
-export default Contact_infService;
+export default ContactInfService;

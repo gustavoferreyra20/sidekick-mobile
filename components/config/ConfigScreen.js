@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, TextInput, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import ConfigController from './configController';
+import ConfigCtrl from './ConfigCtrl';
 import MyModal from '../popups/popupService';
 
 
@@ -9,7 +9,7 @@ export class ConfigScreen extends Component {
     constructor(props) {
         super(props);
         this.sessionId = this.props.route.params.sessionId;
-        this.controller = new ConfigController();
+        this.controller = new ConfigCtrl();
         this.state = {
             password: '',
             newPassword: '',

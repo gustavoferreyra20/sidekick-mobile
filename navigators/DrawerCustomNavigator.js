@@ -5,12 +5,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 // Screens
 import { HomeScreen } from "../components/home/homeView";
 import { NotificationScreen } from "../components/notifications/notificationView";
-import { GamesScreen } from "../components/games/gamesView";
+import { GamesScreen } from "../components/games/GamesScreen";
 import { NewPostScreen } from "../components/newPost/newPostView";
 import { ApplicationsScreen } from "../components/applications/ApplicationsScreen";
 import { ProfileScreen } from "../components/profile/profileView";
 import { StoreScreen } from "../components/store/storeView";
-import { ConfigScreen } from "../components/config/configView";
+import { ConfigScreen } from "../components/config/ConfigScreen";
 import { DrawerContentScreen } from "./DrawerContentView";
 
 const Drawer = createDrawerNavigator();

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 // Import your services
-import GameService from '../games/gameService'; // Update the import paths accordingly
+import GameService from '../games/GameService'; // Update the import paths accordingly
 import PostService from '../posts/postService';
 import ModeService from '../modes/modeService';
 import PlatformService from '../platforms/platformService';

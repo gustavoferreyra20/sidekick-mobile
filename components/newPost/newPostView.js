@@ -4,7 +4,7 @@ import NewPostCtrl from './newPostCtrl';
 import styles from '../../assets/scripts/styles';
 import { Picker } from '@react-native-picker/picker';
 import MyModal from '../popups/popupService';
-import GameService from '../games/gameService';
+import GameService from '../games/GameService';
 
 export class NewPostScreen extends Component {
     constructor(props) {

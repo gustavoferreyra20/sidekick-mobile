@@ -11,7 +11,7 @@ import styles from './assets/scripts/styles.js';
 
 import { LoginScreen } from "./components/login/loginView.js";
 import { RegistrationScreen } from "./components/registration/registrationView.js";
-import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPasswordView.js';
+import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPasswordScreen.js';
 
 const Stack = createStackNavigator();
 

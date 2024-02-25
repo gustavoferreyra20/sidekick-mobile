@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Contact_infService from '../contact_inf/contact_infService';
+import ContactInfService from '../contactInf/ContactInfService';
 import UserService from '../users/userService';
 import AuthService from '../auth/AuthService';
 import * as ImagePicker from 'expo-image-picker';
@@ -24,7 +24,7 @@ export default class RegistrationController extends Component {
 
     handleGetOptions = () => {
         return new Promise((resolve, reject) => {
-            Contact_infService.getAll().then((data) => {
+            ContactInfService.getAll().then((data) => {
                 this.contactOptions = data;
                 this.newUser.contact_inf_list = [{ platform: data[0], account: '' }];
                 resolve();
@@ -40,7 +40,7 @@ export default class RegistrationController extends Component {
 
     handleAddAccount = () => {
         return new Promise((resolve, reject) => {
-            Contact_infService.getAll().then((data) => {
+            ContactInfService.getAll().then((data) => {
                 this.newUser.contact_inf_list.push({ platform: data[0], account: '' });
                 resolve();
             });

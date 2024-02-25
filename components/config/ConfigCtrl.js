@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserService from "../users/userService";
 
-export default class ConfigController extends Component {
+export default class ConfigCtrl extends Component {
     constructor(props) {
         super(props);
         this.msg = "";

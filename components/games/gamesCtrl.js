@@ -1,6 +1,6 @@
-import GameService from './gameService';
+import GameService from './GameService';
 
-class GamesController {
+class GamesCtrl {
 
     handleGetGames = () => {
         return new Promise((resolve, reject) => {
@@ -13,4 +13,4 @@ class GamesController {
 
 }
 
-export default GamesController;
+export default GamesCtrl;

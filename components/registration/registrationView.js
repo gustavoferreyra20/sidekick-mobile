@@ -154,16 +154,16 @@ export class RegistrationScreen extends Component {
                             <Text style={styles.text}>Contacto</Text>
                             <Text style={styles.required}>*</Text>
                         </View>
-                        {this.controller.newUser.contact_inf_list.length > 0 && this.controller.newUser.contact_inf_list.map((contact_inf, index) => (
+                        {this.controller.newUser.contact_inf_list.length > 0 && this.controller.newUser.contact_inf_list.map((ContactInf, index) => (
                             <View style={styles.contactContainer} key={index}>
                                 <View
                                     style={styles.pickerContainer}
                                 >
                                     <Picker
                                         style={styles.picker}
-                                        selectedValue={contact_inf?.platform}
+                                        selectedValue={ContactInf?.platform}
                                         onValueChange={(value) => {
-                                            const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
+                                            const index = this.controller.newUser.contact_inf_list.indexOf(ContactInf);
                                             this.controller.newUser.contact_inf_list[index].platform = value;
                                             this.setState({})
                                         }}
@@ -181,7 +181,7 @@ export class RegistrationScreen extends Component {
                                     placeholder="Ingrese su cuenta o id"
                                     value={this.controller.newUser.contact_inf?.[index]?.account}
                                     onChangeText={(text) => {
-                                        const index = this.controller.newUser.contact_inf_list.indexOf(contact_inf);
+                                        const index = this.controller.newUser.contact_inf_list.indexOf(ContactInf);
                                         this.controller.newUser.contact_inf_list[index].account = text;
                                     }}
                                     placeholderTextColor="#495057"

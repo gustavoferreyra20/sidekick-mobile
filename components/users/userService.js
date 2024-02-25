@@ -149,7 +149,7 @@ class UserService {
 
   static async addContact_inf_list(id_user, id_contact_inf, nickname) {
     return new Promise((resolve, reject) => {
-      const url = 'auth/' + id_user + '/contact_inf/' + id_contact_inf;
+      const url = 'auth/' + id_user + '/ContactInf/' + id_contact_inf;
 
       const data = {
         nickname: nickname
