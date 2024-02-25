@@ -30,32 +30,23 @@ export default class App extends Component {
     try {
       const storedSession = await SecureStore.getItemAsync('isLoggedIn');
 
-      const storeData = async (value) => {
-        try {
-          await AsyncStorage.setItem('my-key', value);
-        } catch (error) {
-          console.log("Error: " + error);
-          this.setState({ isLoading: false });
-        }
-      };
-
-      if (storedSession !== undefined) {
-
+      if (storedSession) {
         const userSession = JSON.parse(storedSession);
-        storeData(storedSession);
+        await AsyncStorage.setItem('my-key', storedSession);
 
         const url = `${SIDEKICK_API}auth/validate`;
+        await axios.post(url, { token: userSession.token })
+          .catch(function (error) {
+            console.log(error);
+            reject("Error al validar");
+          });;
 
-        axios.post(url, { token: userSession.token })
-          .then((res) => {
-            this.setState({ isLoggedIn: true, isLoading: false, sessionId: userSession.id });
-          })
-          .catch((error) => {
-            this.setState({ isLoading: false });
-          });
+        this.setState({ isLoggedIn: true, isLoading: false, sessionId: userSession.id });
+      } else {
+        this.setState({ isLoading: false });
       }
     } catch (error) {
-      console.log("Error: " + error);
+      console.error("Error in componentDidMount:", error);
       this.setState({ isLoading: false });
     }
   };

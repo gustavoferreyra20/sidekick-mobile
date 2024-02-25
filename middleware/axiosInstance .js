@@ -7,8 +7,9 @@ const getData = async () => {
         const jsonValue = await AsyncStorage.getItem('my-key');
         const data = jsonValue != null ? JSON.parse(jsonValue) : null;
         return data;
-    } catch (e) {
-        // error reading value
+    } catch (error) {
+        console.error('Error reading AsyncStorage data:', error);
+        throw error; // Rethrow the error to be caught by the caller
     }
 };
 
@@ -20,11 +21,16 @@ const axiosInstance = axios.create({
 // Add a request interceptor to set the token in the headers
 axiosInstance.interceptors.request.use(
     async (config) => {
-        const data = await getData(); // Get the token from AsyncStorage
-        if (data) {
-            config.headers.Authorization = `Bearer ${data.token}`;
+        try {
+            const data = await getData(); // Get the token from AsyncStorage
+            if (data) {
+                config.headers.Authorization = `Bearer ${data.token}`;
+            }
+            return config;
+        } catch (error) {
+            console.error('Error setting Authorization header:', error);
+            return Promise.reject(error); // Reject the request with the caught error
         }
-        return config;
     },
     (error) => {
         return Promise.reject(error);
