@@ -1,11 +1,11 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class RewardService {
     static async getAll(args = null) {
         return new Promise((resolve, reject) => {
             var url = `rewards`;
 
-            axiosInstance.get(url)
+            AxiosInstance.get(url)
                 .then((res) => {
                     resolve(res.data);
                 })

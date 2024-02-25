@@ -1,5 +1,5 @@
 
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class PlatformService {
     static async getAll(args = null) {
@@ -12,7 +12,7 @@ class PlatformService {
                 url = `${url}/bo?${params}`;
             }
 
-            axiosInstance.get(url)
+            AxiosInstance.get(url)
                 .then((res) => {
                     resolve(res.data);
                 })

@@ -5,8 +5,8 @@ import ApplicationCtrl from './ApplicationCtrl';
 import Loader from '../../assets/scripts/loader';
 import SentApp from './SentApp';
 import ReceivedApp from './ReceivedApp';
-import MyModal from '../popups/popupService';
-import { RateView } from '../rate/rateView';
+import PopupService from '../popups/PopupService';
+import { RateScreen } from '../rate/RateScreen';
 
 export class ApplicationsScreen extends Component {
     constructor(props) {
@@ -97,7 +97,7 @@ export class ApplicationsScreen extends Component {
         return (
             <View style={styles.container}>
                 {rate.show ? (
-                    <RateView id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} id_application={rate.id_application} navigation={this.props.navigation} updateReview={this.updateReview} />
+                    <RateScreen id_profile={this.id_profile} rated_id_user={rate.id_user} rated_id_post={rate.id_post} id_application={rate.id_application} navigation={this.props.navigation} updateReview={this.updateReview} />
                 ) : (
                     <>
                         <View style={styles.headerRows}>
@@ -137,7 +137,7 @@ export class ApplicationsScreen extends Component {
                         )}
                     </>
                 )}
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}

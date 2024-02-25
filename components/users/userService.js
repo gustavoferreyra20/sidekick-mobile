@@ -1,4 +1,4 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 import { SIDEKICK_API } from "@env"
 
 class UserService {
@@ -6,7 +6,7 @@ class UserService {
   static async get(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get('users/' + id_user)
+      AxiosInstance.get('users/' + id_user)
         .then((res) => {
           resolve(res.data);
         })
@@ -19,7 +19,7 @@ class UserService {
   static async getContactInf(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get(`users/${id_user}/contact_inf`)
+      AxiosInstance.get(`users/${id_user}/contact_inf`)
         .then((res) => {
           resolve(res.data);
         })
@@ -33,7 +33,7 @@ class UserService {
   static async getNotifications(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get(`users/${id_user}/notifications`)
+      AxiosInstance.get(`users/${id_user}/notifications`)
         .then((res) => {
           resolve(res.data);
         })
@@ -47,7 +47,7 @@ class UserService {
   static async getApplications(id_user, type) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get('users/' + id_user + '/applications?type=' + type)
+      AxiosInstance.get('users/' + id_user + '/applications?type=' + type)
         .then((res) => {
           resolve(res.data);
         })
@@ -60,7 +60,7 @@ class UserService {
   static async getReviews(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get('users/' + id_user + '/reviews')
+      AxiosInstance.get('users/' + id_user + '/reviews')
         .then((res) => {
           resolve(res.data);
         })
@@ -73,7 +73,7 @@ class UserService {
   static async getStats(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get('users/' + id_user + '/stats')
+      AxiosInstance.get('users/' + id_user + '/stats')
         .then((res) => {
           resolve(res.data);
         })
@@ -86,7 +86,7 @@ class UserService {
   static async getRewards(id_user) {
     return new Promise((resolve, reject) => {
 
-      axiosInstance.get('users/' + id_user + '/rewards')
+      AxiosInstance.get('users/' + id_user + '/rewards')
         .then((res) => {
           resolve(res.data);
         })
@@ -100,7 +100,7 @@ class UserService {
     return new Promise((resolve, reject) => {
       const url = 'users/' + review.id_user + '/reviews/';
 
-      axiosInstance.post(url, review)
+      AxiosInstance.post(url, review)
         .then(response => {
           resolve(response.data);  // Resolve with the response data
         })
@@ -149,13 +149,13 @@ class UserService {
 
   static async addContact_inf_list(id_user, id_contact_inf, nickname) {
     return new Promise((resolve, reject) => {
-      const url = 'auth/' + id_user + '/ContactInf/' + id_contact_inf;
+      const url = 'auth/' + id_user + '/contact_inf/' + id_contact_inf;
 
       const data = {
         nickname: nickname
       };
 
-      axiosInstance.post(url, data)
+      AxiosInstance.post(url, data)
         .then(response => {
           resolve(response.data);
         })
@@ -166,7 +166,7 @@ class UserService {
   }
 
   static async update(id_user, data) {
-    return axiosInstance.put('users/' + id_user, data)
+    return AxiosInstance.put('users/' + id_user, data)
       .catch(function (error) {
         console.log(error);
       });
@@ -174,7 +174,7 @@ class UserService {
 
   static async checkPassword(id_user, originalPassword) {
     return new Promise((resolve, reject) => {
-      axiosInstance.post('users/' + id_user + '/checkPassword', originalPassword)
+      AxiosInstance.post('users/' + id_user + '/checkPassword', originalPassword)
         .then((res) => {
           resolve(res.data.match);
         })

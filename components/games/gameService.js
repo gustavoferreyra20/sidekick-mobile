@@ -1,10 +1,10 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class GameService {
 
   static async getAll() {
     return new Promise((resolve, reject) => {
-      axiosInstance.get(`games`)
+      AxiosInstance.get(`games`)
         .then((res) => {
           resolve(res.data);
         })
@@ -40,7 +40,7 @@ class GameService {
   static async getPlatforms(id_game) {
     try {
       return new Promise((resolve, reject) => {
-        axiosInstance.get('games/' + id_game + '/platforms')
+        AxiosInstance.get('games/' + id_game + '/platforms')
           .then((res) => {
             resolve(res.data);
           })

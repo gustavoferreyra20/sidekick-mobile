@@ -2,7 +2,7 @@ import { View, Text, Image, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env";
 
-const Reward = ({ item, handleBuyReward }) => {
+const RewardScreen = ({ item, handleBuyReward }) => {
 
     return (
         <View style={styles.rewardItemContainer}>
@@ -20,4 +20,4 @@ const Reward = ({ item, handleBuyReward }) => {
     );
 };
 
-export default Reward;
+export default RewardScreen;

@@ -2,9 +2,9 @@ import { Component } from 'react';
 
 // Import your services
 import GameService from '../games/GameService'; // Update the import paths accordingly
-import PostService from '../posts/postService';
-import ModeService from '../modes/modeService';
-import PlatformService from '../platforms/platformService';
+import PostService from '../posts/PostService';
+import ModeService from '../modes/ModeService';
+import PlatformService from '../platforms/PlatformService';
 
 export default class NewPostCtrl extends Component {
 

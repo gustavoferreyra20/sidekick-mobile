@@ -1,11 +1,9 @@
 import { Component } from 'react';
-import RewardService from '../reward/rewardService';
-import ReviewService from '../reviews/reviewService';
-import PostService from '../posts/postService';
-import UserService from '../users/userService';
-//import UserService from '../users/userService';
+import ReviewService from '../reviews/ReviewService';
+import PostService from '../posts/PostService';
+import UserService from '../users/UserService';
 
-export default class RateController extends Component {
+export default class RateCtrl extends Component {
 
     constructor(props) {
         super(props);

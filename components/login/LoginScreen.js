@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
-import LoginController from './loginCtrl';
+import LoginCtrl from './LoginCtrl';
 import styles from '../../assets/scripts/styles';
-import MyModal from '../popups/popupService';
+import PopupService from '../popups/PopupService';
 
 export class LoginScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.controller = new LoginController(props.onLogin);
+        this.controller = new LoginCtrl(props.onLogin);
     }
 
     btnLogin = () => {
@@ -81,7 +81,7 @@ export class LoginScreen extends Component {
 
                 </View>
 
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}

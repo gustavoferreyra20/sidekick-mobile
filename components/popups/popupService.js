@@ -3,7 +3,7 @@ import { Modal, View, Text, TextInput, Button, TouchableWithoutFeedback, Touchab
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
-class MyModal extends Component {
+class PopupService extends Component {
     constructor(props) {
         super(props);
     }
@@ -115,4 +115,4 @@ class MyModal extends Component {
     }
 }
 
-export default MyModal;
+export default PopupService;

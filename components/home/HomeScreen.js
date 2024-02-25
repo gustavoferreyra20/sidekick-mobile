@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Modal } from 'react-native';
-import PostSearchForm from '../PostSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
+import PostSearchForm from '../postSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
 import styles from '../../assets/scripts/styles';
-import HomeCtrl from './homeCtrl';
-import MyModal from '../popups/popupService';
+import HomeCtrl from './HomeCtrl';
+import PopupService from '../popups/PopupService';
 import Loader from '../../assets/scripts/loader';
-import Post from '../posts/postsView';
+import PostSreen from '../posts/PostSreen';
 import { useNavigation } from '@react-navigation/native';
 
 export class HomeScreen extends Component {
@@ -134,12 +134,12 @@ export class HomeScreen extends Component {
                     <View style={styles.postsContainer}>
                         <Loader
                             data={posts}
-                            renderItem={({ item }) => <Post post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
+                            renderItem={({ item }) => <PostSreen post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
                         />
                     </View>
                 )}
 
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}

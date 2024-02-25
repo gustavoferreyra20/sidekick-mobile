@@ -2,10 +2,10 @@ import { Component } from 'react';
 
 // Import your services
 import GameService from '../games/GameService';
-import PostService from '../posts/postService';
-import ModeService from '../modes/modeService';
-import PlatformService from '../platforms/platformService';
-import UserService from '../users/userService';
+import PostService from '../posts/PostService';
+import ModeService from '../modes/ModeService';
+import PlatformService from '../platforms/PlatformService';
+import UserService from '../users/UserService';
 
 export default class HomeCtrl extends Component {
     constructor(props) {

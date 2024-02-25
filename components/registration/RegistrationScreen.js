@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import RegistrationController from './registrationCtrl';
+import RegistrationCtrl from './RegistrationCtrl';
 import styles from '../../assets/scripts/styles';
-import MyModal from '../popups/popupService';
+import PopupService from '../popups/PopupService';
 
 export class RegistrationScreen extends Component {
 
@@ -13,7 +13,7 @@ export class RegistrationScreen extends Component {
             loading: true,
             profilePicture: false,
         };
-        this.controller = new RegistrationController(props);
+        this.controller = new RegistrationCtrl(props);
     }
 
     toggleSwitch = () => {
@@ -236,7 +236,7 @@ export class RegistrationScreen extends Component {
                     </View>
                 </ScrollView>
 
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}

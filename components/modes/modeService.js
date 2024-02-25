@@ -1,9 +1,9 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class ModeService {
     static async getAll() {
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`modes`)
+            AxiosInstance.get(`modes`)
                 .then((res) => {
                     resolve(res.data);
                 })

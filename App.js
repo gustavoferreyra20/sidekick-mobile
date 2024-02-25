@@ -9,8 +9,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/scripts/styles.js';
 
-import { LoginScreen } from "./components/login/loginView.js";
-import { RegistrationScreen } from "./components/registration/registrationView.js";
+import { LoginScreen } from "./components/login/LoginScreen.js";
+import { RegistrationScreen } from "./components/registration/RegistrationScreen.js";
 import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPasswordScreen.js';
 
 const Stack = createStackNavigator();

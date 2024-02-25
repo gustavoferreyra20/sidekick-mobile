@@ -13,13 +13,13 @@ const getData = async () => {
     }
 };
 
-const axiosInstance = axios.create({
+const AxiosInstance = axios.create({
     baseURL: SIDEKICK_API, // Replace with your API base URL
     timeout: 5000, // Set your desired timeout
 });
 
 // Add a request interceptor to set the token in the headers
-axiosInstance.interceptors.request.use(
+AxiosInstance.interceptors.request.use(
     async (config) => {
         try {
             const data = await getData(); // Get the token from AsyncStorage
@@ -37,4 +37,4 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-export default axiosInstance;
+export default AxiosInstance;

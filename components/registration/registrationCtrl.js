@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import ContactInfService from '../contactInf/ContactInfService';
-import UserService from '../users/userService';
+import UserService from '../users/UserService';
 import AuthService from '../auth/AuthService';
 import * as ImagePicker from 'expo-image-picker';
 
-export default class RegistrationController extends Component {
+export default class RegistrationCtrl extends Component {
     constructor(props) {
         super(props);
         this.newUser = {

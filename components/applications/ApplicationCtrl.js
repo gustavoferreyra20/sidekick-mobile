@@ -1,5 +1,5 @@
-import PostService from "../posts/postService";
-import UserService from "../users/userService";
+import PostService from "../posts/PostService";
+import UserService from "../users/UserService";
 
 export default class ApplicationCtrl {
     constructor() {

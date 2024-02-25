@@ -1,10 +1,10 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class PaymentService {
 
     static async newPayment(reward) {
         return new Promise((resolve, reject) => {
-            axiosInstance.post(`payments/mp`, reward)
+            AxiosInstance.post(`payments/mp`, reward)
                 .then((res) => {
                     resolve(res.data);
                 })

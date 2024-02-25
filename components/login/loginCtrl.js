@@ -1,6 +1,6 @@
 import AuthService from '../auth/AuthService';
 
-export default class LoginController {
+export default class LoginCtrl {
   constructor(onLogin) {
     this.email = '';
     this.password = '';

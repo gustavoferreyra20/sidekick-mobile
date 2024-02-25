@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import StoreController from './storeCtrl';
-import Reward from '../reward/rewardView';
+import StoreCtrl from './StoreCtrl';
+import RewardScreen from '../reward/RewardScreen';
 
 export class StoreScreen extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ export class StoreScreen extends Component {
             rewards: [],
             loading: true,
         };
-        this.controller = new StoreController();
+        this.controller = new StoreCtrl();
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ export class StoreScreen extends Component {
                     ) : (
                         <FlatList
                             data={rewards}
-                            renderItem={({ item }) => <Reward item={item} handleBuyReward={(item) => this.controller.btnBuy(item)}
+                            renderItem={({ item }) => <RewardScreen item={item} handleBuyReward={(item) => this.controller.btnBuy(item)}
                             />}
                             keyExtractor={(item, index) => index.toString()}
                             numColumns={2}

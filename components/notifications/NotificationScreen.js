@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import NotificationController from './notificationController';
-import NotificationItem from './notificationItem';
+import NotificationCtrl from './NotificationCtrl';
+import NotificationItem from './NotificationItem';
 import Loader from '../../assets/scripts/loader';
 
 export class NotificationScreen extends React.Component {
@@ -12,7 +12,7 @@ export class NotificationScreen extends React.Component {
             notifications: [],
             loading: true,
         };
-        this.controller = new NotificationController();
+        this.controller = new NotificationCtrl();
     };
 
     componentDidMount() {

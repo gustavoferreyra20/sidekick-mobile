@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import ForgotPasswordController from './ForgotPasswordController';
-import MyModal from '../popups/popupService';
+import PopupService from '../popups/PopupService';
 
 
 export class ForgotPasswordScreen extends Component {
@@ -51,7 +51,7 @@ export class ForgotPasswordScreen extends Component {
                     </View>
                     <Text style={styles.text}>Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mímimo.</Text>
 
-                    <MyModal
+                    <PopupService
                         modalVisible={this.controller.modalVisible}
                         setModalVisible={this.setModalVisible}
                         modalType={this.controller.modalType}

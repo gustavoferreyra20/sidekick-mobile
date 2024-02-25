@@ -1,4 +1,4 @@
-import axiosInstance from '../../middleware/axiosInstance ';
+import AxiosInstance from '../../middleware/AxiosInstance';
 
 class PostService {
   static async getAll(args = null) {
@@ -10,7 +10,7 @@ class PostService {
         url = `${url}?${params}`;
       }
 
-      axiosInstance.get(url)
+      AxiosInstance.get(url)
         .then((res) => {
           resolve(res.data);
         })
@@ -33,14 +33,14 @@ class PostService {
       description: (post.description != null) ? post.description : ''
     };
 
-    await axiosInstance.post(url, data)
+    await AxiosInstance.post(url, data)
       .catch(function (error) {
         console.log(error);
       });
   }
 
   static async remove(id_post) {
-    await axiosInstance.delete('posts/' + id_post)
+    await AxiosInstance.delete('posts/' + id_post)
       .catch(function (error) {
         console.log(error);
       });
@@ -48,7 +48,7 @@ class PostService {
 
   static async removeApplication(id_post, id_application) {
     const url = 'posts/' + id_post + '/applications/' + id_application;
-    await axiosInstance.delete(url)
+    await AxiosInstance.delete(url)
       .catch(function (error) {
         console.log(error);
       });
@@ -57,7 +57,7 @@ class PostService {
   static async addApplication(id_post) {
     const url = 'posts/' + id_post + '/applications';
 
-    await axiosInstance.post(url)
+    await AxiosInstance.post(url)
       .catch(function (error) {
         console.log(error);
       });
@@ -66,7 +66,7 @@ class PostService {
   static async updateApplication(id_post, id_application, status) {
     const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
 
-    await axiosInstance.put(url)
+    await AxiosInstance.put(url)
       .catch(function (error) {
         console.log(error);
       });

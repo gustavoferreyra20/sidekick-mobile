@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
-const Review = ({ item, handleUserNamePress }) => {
+const ReviewScreen = ({ item, handleUserNamePress }) => {
 
     return (
         <View style={styles.reviewContainer}>
@@ -21,7 +21,7 @@ const Review = ({ item, handleUserNamePress }) => {
                                 {item.user.name}
                             </Text>
                         </TouchableOpacity>
-                        <Text style={styles.text}>Habilidad: {item.abilityscore} <View style={styles.dot}></View> Karma: {item.karmascore} id: {item.id_review}</Text>
+                        <Text style={styles.text}>Habilidad: {item.abilityscore} <View style={styles.dot}></View> Karma: {item.karmascore}</Text>
                     </View>
                 </View>
             </View>
@@ -36,4 +36,4 @@ const Review = ({ item, handleUserNamePress }) => {
     );
 };
 
-export default Review;
+export default ReviewScreen;

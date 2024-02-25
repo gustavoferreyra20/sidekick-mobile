@@ -1,6 +1,6 @@
-import UserService from '../users/userService';
+import UserService from '../users/UserService';
 
-class ProfileController {
+class ProfileCtrl {
     getProfile = (id_profile) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -62,4 +62,4 @@ class ProfileController {
       };
 }
 
-export default ProfileController;
+export default ProfileCtrl;

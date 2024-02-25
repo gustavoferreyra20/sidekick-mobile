@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { Linking } from 'react-native';
 
-import RewardService from '../reward/rewardService';
-import PaymentService from '../payments/paymentService';
+import RewardService from '../reward/RewardService';
+import PaymentService from '../payments/PaymentService';
 
-export default class StoreController extends Component {
+export default class StoreCtrl extends Component {
 
     handleGetRewards = () => {
         return new Promise((resolve, reject) => {

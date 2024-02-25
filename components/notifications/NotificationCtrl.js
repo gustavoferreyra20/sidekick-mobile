@@ -1,7 +1,7 @@
-import UserService from '../users/userService';
-import NotificationService from '../notifications/notificationService'
+import UserService from '../users/UserService';
+import NotificationService from './NotificationService'
 
-class NotificationController {
+class NotificationCtrl {
 
   getNotifications = async (id_user) => {
     return new Promise((resolve, reject) => {
@@ -20,4 +20,4 @@ class NotificationController {
   };
 }
 
-export default NotificationController;
+export default NotificationCtrl;

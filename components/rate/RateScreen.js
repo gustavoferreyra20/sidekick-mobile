@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env";
-import RateController from './rateCtrl';
+import RateCtrl from './RateCtrl';
 import Slider from '@react-native-community/slider';
-import MyModal from '../popups/popupService';
+import PopupService from '../popups/PopupService';
 
-export class RateView extends Component {
+export class RateScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ export class RateView extends Component {
             rewards: null,
             showRewards: false
         };
-        this.controller = new RateController();
+        this.controller = new RateCtrl();
     }
 
     async componentDidMount() {
@@ -210,7 +210,7 @@ export class RateView extends Component {
                     />
                 </View>
 
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}

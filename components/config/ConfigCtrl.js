@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserService from "../users/userService";
+import UserService from "../users/UserService";
 
 export default class ConfigCtrl extends Component {
     constructor(props) {

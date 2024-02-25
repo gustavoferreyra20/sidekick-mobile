@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Image, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
-import ProfileController from './profileController';
-import Review from '../reviews/reviewView'
+import ProfileCtrl from './ProfileCtrl';
+import ReviewScreen from '../reviews/ReviewScreen'
 import Loader from '../../assets/scripts/loader';
 
 export class ProfileScreen extends React.Component {
@@ -18,7 +18,7 @@ export class ProfileScreen extends React.Component {
       isCurrentUser: this.props.route.params.isCurrentUser,
       profile: null,
     };
-    this.controller = new ProfileController();
+    this.controller = new ProfileCtrl();
   }
 
 
@@ -96,7 +96,7 @@ export class ProfileScreen extends React.Component {
         <View style={styles.line}></View>
         <Loader
           data={reviews}
-          renderItem={({ item }) => <Review item={item} handleUserNamePress={this.handleUserNamePress} />}
+          renderItem={({ item }) => <ReviewScreen item={item} handleUserNamePress={this.handleUserNamePress} />}
           style={styles.FlatList}
         />
       </View>

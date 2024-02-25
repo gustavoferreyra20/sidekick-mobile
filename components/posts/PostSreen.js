@@ -3,7 +3,7 @@ import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import { SIDEKICK_API } from "@env"
 
-const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
+const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
         <View>
             <View style={styles.profileHeader}>
@@ -73,4 +73,4 @@ const Post = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     );
 };
 
-export default Post;
+export default PostSreen;

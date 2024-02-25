@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
-import NewPostCtrl from './newPostCtrl';
+import NewPostCtrl from './NewPostCtrl';
 import styles from '../../assets/scripts/styles';
 import { Picker } from '@react-native-picker/picker';
-import MyModal from '../popups/popupService';
+import PopupService from '../popups/PopupService';
 import GameService from '../games/GameService';
 
 export class NewPostScreen extends Component {
@@ -281,7 +281,7 @@ export class NewPostScreen extends Component {
                     <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#28a745" />
                 </View>
 
-                <MyModal
+                <PopupService
                     modalVisible={this.controller.modalVisible}
                     setModalVisible={this.setModalVisible}
                     modalType={this.controller.modalType}
