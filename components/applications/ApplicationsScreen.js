@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import ApplicationController from './applicationController';
+import ApplicationCtrl from './ApplicationCtrl';
 import Loader from '../../assets/scripts/loader';
-import SentApp from './sentAppView';
-import ReceivedApp from './receivedAppView';
+import SentApp from './SentApp';
+import ReceivedApp from './ReceivedApp';
 import MyModal from '../popups/popupService';
 import { RateView } from '../rate/rateView';
 
@@ -18,7 +18,7 @@ export class ApplicationsScreen extends Component {
             receivedApps: [],
             rate: { id_user: 0, id_post: 0, id_application: 0, show: false }
         };
-        this.controller = new ApplicationController();
+        this.controller = new ApplicationCtrl();
         this.id_profile = this.props.route.params.sessionId;
     }
 

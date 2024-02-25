@@ -1,4 +1,4 @@
-import AuthService from '../auth/authService';
+import AuthService from '../auth/AuthService';
 
 export default class LoginController {
   constructor(onLogin) {

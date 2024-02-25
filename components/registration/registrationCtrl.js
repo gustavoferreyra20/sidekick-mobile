@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Contact_infService from '../contact_inf/contact_infService';
 import UserService from '../users/userService';
-import AuthService from '../auth/authService';
+import AuthService from '../auth/AuthService';
 import * as ImagePicker from 'expo-image-picker';
 
 export default class RegistrationController extends Component {

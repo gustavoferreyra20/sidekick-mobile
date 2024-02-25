@@ -7,7 +7,7 @@ import { HomeScreen } from "../components/home/homeView";
 import { NotificationScreen } from "../components/notifications/notificationView";
 import { GamesScreen } from "../components/games/gamesView";
 import { NewPostScreen } from "../components/newPost/newPostView";
-import { ApplicationsScreen } from "../components/applications/applicationsView";
+import { ApplicationsScreen } from "../components/applications/ApplicationsScreen";
 import { ProfileScreen } from "../components/profile/profileView";
 import { StoreScreen } from "../components/store/storeView";
 import { ConfigScreen } from "../components/config/configView";

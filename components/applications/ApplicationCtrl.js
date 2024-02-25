@@ -1,7 +1,7 @@
 import PostService from "../posts/postService";
 import UserService from "../users/userService";
 
-export default class ApplicationController {
+export default class ApplicationCtrl {
     constructor() {
         this.msg = "";
         this.modalType = "alert";

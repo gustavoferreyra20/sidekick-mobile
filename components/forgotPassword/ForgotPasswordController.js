@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import AuthService from '../auth/authService';
+import AuthService from '../auth/AuthService';
 
 export default class ForgotPasswordController extends Component {
     constructor(props) {
