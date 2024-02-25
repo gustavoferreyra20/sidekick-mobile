@@ -56,8 +56,13 @@ export default class HomeCtrl extends Component {
         return new Promise((resolve, reject) => {
             UserService.getApplications(id_user, 'sent').then((res) => {
 
-                if (res.some((item) => item.id_post === id_post)) {
-                    this.msg = "Ya existe una solicitud pendiente";
+                if (res.some((item) => item.id_user === id_user)) {
+                    this.msg = "No puedes unirte a tus posts";
+                    this.modalVisible = true;
+                    resolve();
+                    return;
+                } else if (res.some((item) => item.id_post === id_post)) {
+                    this.msg = "Ya existe una solicitud";
                     this.modalVisible = true;
                     resolve();
                     return;

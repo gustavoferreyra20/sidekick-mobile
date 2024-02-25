@@ -17,6 +17,9 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
           </View>
         </View>
 
+        {item.applications.status === 'complete' ? (
+          <Text style={styles.text}>Partida finalizada</Text>
+        ) : null}
 
         {item.applications.status === 'rejected' ? (
           <Text style={styles.text}>Solicitud rechazada</Text>
