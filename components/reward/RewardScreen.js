@@ -1,6 +1,6 @@
 import { View, Text, Image, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env";
+;
 
 const RewardScreen = ({ item, handleBuyReward }) => {
 
@@ -8,7 +8,7 @@ const RewardScreen = ({ item, handleBuyReward }) => {
         <View style={styles.rewardItemContainer}>
             <View style={styles.rewardItem}>
                 <Image
-                    source={{ uri: `${SIDEKICK_API}images/${item.img}` }}
+                    source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${item.img}` }}
                     style={styles.rewardImage}
                     resizeMode="cover"
                 />

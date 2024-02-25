@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SIDEKICK_API } from "@env";
+;
 
 const getData = async () => {
     try {
@@ -14,7 +14,7 @@ const getData = async () => {
 };
 
 const AxiosInstance = axios.create({
-    baseURL: SIDEKICK_API, // Replace with your API base URL
+    baseURL: 'https://sidekick-server-nine.vercel.app/api/', // Replace with your API base URL
     timeout: 5000, // Set your desired timeout
 });
 

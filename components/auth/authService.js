@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { SIDEKICK_API } from "@env";
+;
 
 class AuthService {
   static async login(obj) {
-    const url = `${SIDEKICK_API}auth/login`;
+    const url = `https://sidekick-server-nine.vercel.app/api/auth/login`;
     const data = {
       email: obj.email,
       password: obj.password,
@@ -27,7 +27,7 @@ class AuthService {
   }
 
   static async resetPassword(obj) {
-    const url = `${SIDEKICK_API}auth/resetPassword`;
+    const url = `https://sidekick-server-nine.vercel.app/api/auth/resetPassword`;
 
     return new Promise((resolve, reject) => {
       axios.post(url, obj)
@@ -42,7 +42,7 @@ class AuthService {
   }
 
   static async register(obj) {
-    const url = `${SIDEKICK_API}auth/register`;
+    const url = `https://sidekick-server-nine.vercel.app/api/auth/register`;
 
     return new Promise((resolve, reject) => {
       axios.post(url, obj)

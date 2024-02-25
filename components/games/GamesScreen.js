@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import GamesCtrl from './GamesCtrl';
-import { SIDEKICK_API } from "@env";
+;
 import styles from '../../assets/scripts/styles';
 
 export class GamesScreen extends Component {
@@ -26,7 +26,7 @@ export class GamesScreen extends Component {
   renderGame = (game, index) => {
     return (
       <View key={index} style={styles.gameContainer}>
-        <Image source={{ uri: `${SIDEKICK_API}images/${game.img}` }} style={styles.gameImage} />
+        <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${game.img}` }} style={styles.gameImage} />
         <Text style={styles.gameName}>{game.name}</Text>
       </View>
     );

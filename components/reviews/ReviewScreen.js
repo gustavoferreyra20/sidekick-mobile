@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env"
+
 
 const ReviewScreen = ({ item, handleUserNamePress }) => {
 
@@ -9,7 +9,7 @@ const ReviewScreen = ({ item, handleUserNamePress }) => {
             <View style={styles.reviewHeader}>
                 <View style={styles.imageContainer}>
                     <Image
-                        source={{ uri: `${SIDEKICK_API}images/${item.user.img}` }}
+                        source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${item.user.img}` }}
                         style={styles.userImage}
                     />
                 </View>

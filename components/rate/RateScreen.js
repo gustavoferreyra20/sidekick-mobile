@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env";
+;
 import RateCtrl from './RateCtrl';
 import Slider from '@react-native-community/slider';
 import PopupService from '../popups/PopupService';
@@ -143,7 +143,7 @@ export class RateScreen extends Component {
                                 <View key={index} style={{ marginRight: 10 }}>
                                     <View style={styles.rewardItem}>
                                         <Image
-                                            source={{ uri: `${SIDEKICK_API}images/${reward.img}` }}
+                                            source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${reward.img}` }}
                                             style={styles.rewardImage}
                                         />
                                         <Text style={styles.rewardDescription} >{reward.description}</Text>
@@ -178,7 +178,7 @@ export class RateScreen extends Component {
                     {this.state.form.reward && (
                         <View style={styles.rewardItem}>
                             <Image
-                                source={{ uri: `${SIDEKICK_API}images/${this.state.form.reward.img}` }}
+                                source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${this.state.form.reward.img}` }}
                                 style={styles.rewardImage}
                             />
                             <Text style={styles.rewardDescription}>{this.state.form.reward.description}</Text>

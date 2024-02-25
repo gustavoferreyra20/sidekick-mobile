@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, Image, Button, FlatList, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env"
+
 
 const Item = ({ user, post, changeStatus, rate, contact, handleUserNamePress }) => {
     if (user.applications.status !== 'rejected' && user.applications.status !== 'complete') {
         return (
             <View style={styles.profileHeader}>
-                <Image source={{ uri: `${SIDEKICK_API}images/${user.img}` }} style={styles.userImage} />
+                <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${user.img}` }} style={styles.userImage} />
                 <View style={styles.profileHeaderData}>
                     <TouchableOpacity
                         onPress={() => handleUserNamePress(user.id_user)}>

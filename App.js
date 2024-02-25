@@ -4,7 +4,7 @@ import { DrawerCustomNavigator } from './navigators/DrawerCustomNavigator.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
-import { SIDEKICK_API } from "@env"
+
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/scripts/styles.js';
@@ -34,7 +34,7 @@ export default class App extends Component {
         const userSession = JSON.parse(storedSession);
         await AsyncStorage.setItem('my-key', storedSession);
 
-        const url = `${SIDEKICK_API}auth/validate`;
+        const url = `https://sidekick-server-nine.vercel.app/api/auth/validate`;
         await axios.post(url, { token: userSession.token })
           .catch(function (error) {
             console.log(error);

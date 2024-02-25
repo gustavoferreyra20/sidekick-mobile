@@ -64,7 +64,7 @@ class PostService {
   }
 
   static async updateApplication(id_post, id_application, status) {
-    const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
+    const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications/' + id_application + '?status=' + status;
 
     await AxiosInstance.put(url)
       .catch(function (error) {

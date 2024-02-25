@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, View, Text, TextInput, Button, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env"
+
 
 class PopupService extends Component {
     constructor(props) {
@@ -94,7 +94,7 @@ class PopupService extends Component {
                                     {this.props.contactInf.map((contact, index) => (
                                         <View key={index} style={styles.contactItem}>
                                             {/* Assuming contact.img is the image URL */}
-                                            <Image source={{ uri: `${SIDEKICK_API}images/${contact.img}` }} style={styles.contactInfImg} />
+                                            <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${contact.img}` }} style={styles.contactInfImg} />
                                             <Text style={styles.contactNickname}>{contact.users_contact_inf.nickname || "No nickname"}</Text>
                                         </View>
                                     ))}

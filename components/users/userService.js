@@ -1,5 +1,5 @@
 import AxiosInstance from '../../middleware/AxiosInstance';
-import { SIDEKICK_API } from "@env"
+
 
 class UserService {
 
@@ -112,7 +112,7 @@ class UserService {
 
   static async saveImage(file, id_user) {
     return new Promise((resolve, reject) => {
-      const url = `${SIDEKICK_API}images/${id_user}`;
+      const url = `https://sidekick-server-nine.vercel.app/api/images/${id_user}`;
 
       // ImagePicker saves the taken photo to disk and returns a local URI to it
       let localUri = file;

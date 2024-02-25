@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Image, Button } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env"
+
 import ProfileCtrl from './ProfileCtrl';
 import ReviewScreen from '../reviews/ReviewScreen'
 import Loader from '../../assets/scripts/loader';
@@ -76,7 +76,7 @@ export class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.profileHeader}>
-          <Image source={{ uri: `${SIDEKICK_API}images/${profile.img}` }} style={styles.userImage} />
+          <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${profile.img}` }} style={styles.userImage} />
           <View style={styles.profileHeaderData}>
             <Text style={[styles.text, styles.nameText, styles.boldText]}>{profile.name}</Text>
             <Text style={styles.text}>
@@ -87,7 +87,7 @@ export class ProfileScreen extends React.Component {
           <View style={styles.rewardContainer}>
             {rewards.map((reward, index) => (
               <View key={index} style={styles.rewardItem}>
-                <Image source={{ uri: `${SIDEKICK_API}images/${reward.img}` }} style={styles.rewardImageProfile} />
+                <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${reward.img}` }} style={styles.rewardImageProfile} />
                 <Text style={styles.rewardAmount}>{reward.amount}</Text>
               </View>
             ))}

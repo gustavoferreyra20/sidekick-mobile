@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
-import { SIDEKICK_API } from "@env"
+
 
 const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
@@ -9,7 +9,7 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
             <View style={styles.profileHeader}>
                 <Image
                     style={styles.userImage}
-                    source={{ uri: `${SIDEKICK_API}images/${post.userImg}` }}
+                    source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${post.userImg}` }}
                 />
 
                 <View style={styles.userInfo}>
@@ -48,7 +48,7 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                 <View style={styles.postContent}>
                     <Image
                         style={styles.gameImage}
-                        source={{ uri: `${SIDEKICK_API}images/${post.gameImg}` }}
+                        source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${post.gameImg}` }}
                         alt={post.gameName}
                     />
 
