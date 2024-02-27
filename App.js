@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { DrawerCustomNavigator } from './navigators/DrawerCustomNavigator.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
+
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+
 
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,7 +20,32 @@ import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPassword
 
 const Stack = createStackNavigator();
 
-export default class App extends Component {
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = await Notifications.getExpoPushTokenAsync({
+      projectId: Constants.expoConfig.extra.eas.projectId,
+    });
+
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  return token.data;
+}
+
+export default class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -41,6 +71,9 @@ export default class App extends Component {
             reject("Error al validar");
           });;
 
+        const token = await registerForPushNotificationsAsync();
+        this.sendTokenAndSessionId(token, userSession.id);
+
         this.setState({ isLoggedIn: true, isLoading: false, sessionId: userSession.id });
       } else {
         this.setState({ isLoading: false });
@@ -51,9 +84,28 @@ export default class App extends Component {
     }
   };
 
+  sendTokenAndSessionId = async (token, sessionId) => {
+    try {
+      const url = `https://sidekick-server-nine.vercel.app/api/auth/token`;
+
+      // Make HTTP request to send token and session id to endpoint
+      const response = await axios.post(url, {
+        token: token,
+        sessionId: sessionId,
+      });
+
+    } catch (error) {
+      console.error('Error sending token and session id:', error);
+    }
+  };
+
   setLogin = async (userSession) => {
     await SecureStore.setItemAsync('isLoggedIn', JSON.stringify(userSession));
     this.setState({ isLoggedIn: true, sessionId: userSession.id });
+
+    const token = await registerForPushNotificationsAsync();
+    this.sendTokenAndSessionId(token, userSession.id);
+
   };
 
   setLogout = async () => {

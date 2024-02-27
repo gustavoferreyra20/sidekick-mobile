@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/img/icons/adaptative-icon.png",
         "backgroundColor": "#020202"
       },
-      "package": "com.gustavof24.sidekickmobile"
+      "package": "com.gustavof24.sidekickmobile",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
