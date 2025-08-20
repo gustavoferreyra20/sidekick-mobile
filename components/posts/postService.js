@@ -32,7 +32,7 @@ class PostService {
       title: post.title,
       description: (post.description != null) ? post.description : ''
     };
-
+    console.log(data);
     await AxiosInstance.post(url, data)
       .catch(function (error) {
         console.log(error);
