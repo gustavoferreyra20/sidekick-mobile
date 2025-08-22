@@ -121,4 +121,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 >>>>>>> origin/main
