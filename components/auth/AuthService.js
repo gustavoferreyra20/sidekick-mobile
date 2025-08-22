@@ -1,5 +1,4 @@
 import axios from 'axios';
-;
 
 class AuthService {
   static async login(obj) {

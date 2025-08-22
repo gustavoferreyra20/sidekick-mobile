@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import GamesCtrl from './GamesCtrl';
-;
+
 import styles from '../../assets/scripts/styles';
 
 export class GamesScreen extends Component {

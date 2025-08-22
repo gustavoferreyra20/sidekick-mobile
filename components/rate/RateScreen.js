@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
 import styles from '../../assets/scripts/styles';
-;
+
 import RateCtrl from './RateCtrl';
 import Slider from '@react-native-community/slider';
 import PopupService from '../popups/PopupService';
