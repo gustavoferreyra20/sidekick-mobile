@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import LoginCtrl from './LoginCtrl';
 import styles from '../../assets/scripts/styles';
 import PopupService from '../popups/PopupService';
@@ -9,30 +10,33 @@ export class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.controller = new LoginCtrl(props.onLogin);
+        this.state = {
+            passwordVisible: false
+        };
     }
 
     btnLogin = () => {
         this.controller.handleLogin().then(() => {
-            this.forceUpdate()
-        })
-    }
+            this.forceUpdate();
+        });
+    };
 
     handleRegistrationPress = () => {
         this.props.navigation.navigate('Registrarse');
-    }
+    };
 
     handleForgotPassword = () => {
         this.props.navigation.navigate('Recuperar contraseña');
-    }
+    };
 
     setModalVisible = (visible) => {
-        if (typeof this.controller.function === "function") {
+        if (typeof this.controller.function === 'function') {
             this.controller.function();
         }
 
         this.controller.modalVisible = visible;
         this.forceUpdate();
-    }
+    };
 
     render() {
         return (
@@ -48,14 +52,32 @@ export class LoginScreen extends Component {
                     />
 
                     <Text style={styles.text}>Password</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        onChangeText={text => this.controller.password = text}
-                        placeholder="**********"
-                        placeholderTextColor="#495057"
-                        required
-                    />
+                    <View style={{ position: 'relative', width: '100%' }}>
+                        <TextInput
+                            style={[styles.textInput, { paddingRight: 40 }]} // deja espacio para el icono
+                            secureTextEntry={!this.state.passwordVisible}
+                            onChangeText={text => this.controller.password = text}
+                            placeholder="**********"
+                            placeholderTextColor="#495057"
+                            required
+                        />
+                        <TouchableOpacity
+                            onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+                            style={{
+                                position: 'absolute',
+                                right: 10,
+                                top: 0,
+                                bottom: 15,
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Ionicons
+                                name={this.state.passwordVisible ? 'eye-off' : 'eye'}
+                                size={24}
+                                color="#495057"
+                            />
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={styles.button}>
                         <Button title="Iniciar sesión" onPress={this.btnLogin} color="#28a745" />
@@ -64,17 +86,17 @@ export class LoginScreen extends Component {
                     <View style={styles.button}>
                         <Button
                             title="Olvidaste tu contraseña?"
-                            onPress={() => this.handleForgotPassword()}
+                            onPress={this.handleForgotPassword}
                             color="#28a745"
                         />
                     </View>
 
-                    <Text style={styles.h1}>Todavia no te registraste?</Text>
+                    <Text style={styles.h1}>Todavía no te registraste?</Text>
 
                     <View style={styles.button}>
                         <Button
                             title="Registrarse"
-                            onPress={() => this.handleRegistrationPress()}
+                            onPress={this.handleRegistrationPress}
                             color="#28a745"
                         />
                     </View>

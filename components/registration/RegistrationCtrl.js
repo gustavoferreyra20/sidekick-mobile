@@ -103,8 +103,7 @@ export default class RegistrationCtrl extends Component {
                                 resolve();
                             })
                             .catch((error) => {
-                                console.error("Error saving image:", error);
-                                reject(error);
+                                resolve({ error });
                             });
                     } else {
                         // Register user without saving image
@@ -119,31 +118,24 @@ export default class RegistrationCtrl extends Component {
                                 resolve();
                             })
                             .catch((error) => {
-                                console.error("Error registering user:", error);
-                                reject(error);
+                                resolve({ error });
                             });
                     }
                 });
             };
 
             registerUser()
-                .then(() => {
-                    this.msg = "Usuario registrado con éxito";
-                    this.modalVisible = true;
-                    this.function = () => {
-                        this.props.navigation.navigate('Iniciar sesión');
-                    };
-                    resolve();
-                })
-                .catch((error) => {
-                    if (error == "Usuario existente") {
+                .then((result) => {
+                    if (result?.error && result.error === "Usuario existente") {
                         this.msg = "Usuario existente";
-                        this.modalVisible = true;
+                    } else if (result?.error) {
+                        this.msg = "Ocurrió un error";
+                        console.error("Error registering user:", result.error);
                     } else {
-                        console.log("Error registering user:", error);
-                        this.msg = "Ocurrio un error";
-                        this.modalVisible = true;
+                        this.msg = "Usuario registrado con éxito";
+                        this.function = () => this.props.navigation.navigate('Iniciar sesión');
                     }
+                    this.modalVisible = true;
                     resolve();
                 });
         });
@@ -160,6 +152,12 @@ export default class RegistrationCtrl extends Component {
 
         if (!this.newUser.name || !this.newUser.email || !this.newUser.password || !this.newUser.contact_inf_list[0].account) {
             this.msg = "Por favor complete todos los campos requeridos";
+            this.modalVisible = true;
+            return false;
+        }
+
+        if (this.newUser.password !== this.newUser.repeatPassword) {
+            this.msg = "Las contraseñas no coinciden";
             this.modalVisible = true;
             return false;
         }

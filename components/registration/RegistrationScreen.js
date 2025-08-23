@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import RegistrationCtrl from './RegistrationCtrl';
 import styles from '../../assets/scripts/styles';
 import PopupService from '../popups/PopupService';
+import {Ionicons} from "@expo/vector-icons";
 
 export class RegistrationScreen extends Component {
 
@@ -203,14 +204,67 @@ export class RegistrationScreen extends Component {
                             <Text style={styles.required}>*</Text>
                         </View>
 
-                        <TextInput
-                            style={styles.textInput}
-                            secureTextEntry={true}
-                            onChangeText={text => this.controller.newUser.password = text}
-                            placeholder="**********"
-                            placeholderTextColor="#495057"
-                        />
-                        <Text style={styles.text}>Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mímimo.</Text>
+                        <View style={{ position: 'relative', width: '100%' }}>
+                            <TextInput
+                                style={[styles.textInput, { paddingRight: 40 }]}
+                                secureTextEntry={!this.state.passwordVisible}
+                                onChangeText={text => this.controller.newUser.password = text}
+                                placeholder="**********"
+                                placeholderTextColor="#495057"
+                            />
+                            <TouchableOpacity
+                                onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+                                style={{
+                                    position: 'absolute',
+                                    right: 10,
+                                    top: 0,
+                                    bottom: 15,
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Ionicons
+                                    name={this.state.passwordVisible ? 'eye-off' : 'eye'}
+                                    size={24}
+                                    color="#495057"
+                                />
+                            </TouchableOpacity>
+                        </View>
+
+                        <Text style={styles.text}>
+                            Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mínimo.
+                        </Text>
+
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.text}>Repetir Password</Text>
+                            <Text style={styles.required}>*</Text>
+                        </View>
+
+                        <View style={{ position: 'relative', width: '100%' }}>
+                            <TextInput
+                                style={[styles.textInput, { paddingRight: 40 }]}
+                                secureTextEntry={!this.state.passwordVisible}
+                                onChangeText={text => this.controller.newUser.repeatPassword = text}
+                                placeholder="**********"
+                                placeholderTextColor="#495057"
+                            />
+
+                            <TouchableOpacity
+                                onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+                                style={{
+                                    position: 'absolute',
+                                    right: 10,
+                                    top: 0,
+                                    bottom: 15,
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Ionicons
+                                    name={this.state.passwordVisible ? 'eye-off' : 'eye'}
+                                    size={24}
+                                    color="#495057"
+                                />
+                            </TouchableOpacity>
+                        </View>
 
 
                         <View style={styles.button}>
