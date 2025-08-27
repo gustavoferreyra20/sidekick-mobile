@@ -57,7 +57,7 @@ class PostService {
   static async addApplication(id_post) {
     const url = 'posts/' + id_post + '/applications';
 
-    await AxiosInstance.post(url)
+    await AxiosInstance.post(url, null)
       .catch(function (error) {
         console.log(error);
       });

@@ -58,7 +58,7 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                 {post.actualusers < post.requiredusers && (
                     <Button
                         title="Unirse"
-                        onPress={() => btnSubmitApplication(post.id_post)}
+                        onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
                         color={'#28a745'}
                     />
                 )}

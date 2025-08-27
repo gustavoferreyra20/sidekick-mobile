@@ -89,8 +89,8 @@ export class HomeScreen extends Component {
         }
     };
 
-    btnSubmitApplication = (id_post) => {
-        this.controller.submitApplication(id_post, this.id_user).then(() => {
+    btnSubmitApplication = (id_post, id_owner) => {
+        this.controller.submitApplication(id_post, id_owner, this.id_user).then(() => {
             this.forceUpdate()
         })
     };

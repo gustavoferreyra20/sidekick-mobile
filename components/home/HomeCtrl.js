@@ -52,31 +52,31 @@ export default class HomeCtrl extends Component {
         return await PostService.getAll(params);
     };
 
-    submitApplication = (id_post, id_user) => {
-        return new Promise((resolve, reject) => {
-            UserService.getApplications(id_user, 'sent').then((res) => {
+    submitApplication = async (id_post, id_owner, id_user) => {
+        try {
+            if (id_owner === id_user) {
+                this.msg = "No puedes unirte a tus posts";
+                this.modalVisible = true;
+                return;
+            }
 
-                if (res.some((item) => item.id_user === id_user)) {
-                    this.msg = "No puedes unirte a tus posts";
-                    this.modalVisible = true;
-                    resolve();
-                    return;
-                } else if (res.some((item) => item.id_post === id_post)) {
-                    this.msg = "Ya existe una solicitud";
-                    this.modalVisible = true;
-                    resolve();
-                    return;
-                } else {
-                    PostService.addApplication(id_post, id_user)
-                        .then(() => {
-                            this.msg = "Solicitud enviada";
-                            this.modalVisible = true;
-                            resolve();
-                            return;
-                        });
-                }
-            });
-        });
-    }
+            const res = await UserService.getApplications(id_user, 'sent');
+
+            if (res.some((item) => item.id_post === id_post)) {
+                this.msg = "Ya existe una solicitud";
+                this.modalVisible = true;
+                return;
+            }
+
+            await PostService.addApplication(id_post);
+            this.msg = "Solicitud enviada";
+            this.modalVisible = true;
+
+        } catch (error) {
+            console.error("Error en submitApplication:", error);
+            this.msg = "Ocurrió un error, intenta nuevamente";
+            this.modalVisible = true;
+        }
+    };
 
 }
