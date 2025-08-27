@@ -21,22 +21,27 @@ class PostService {
   }
 
   static async save(post) {
-    const url = `posts`;
-    let data = {
-      id_user: post.id_user,
-      id_game: post.gameSelected,
-      id_platform: post.platformSelected,
-      id_mode: post.modeSelected,
-      requiredusers: post.userRequire,
-      actualusers: 0,
-      title: post.title,
-      description: (post.description != null) ? post.description : ''
-    };
-    console.log(data);
-    await AxiosInstance.post(url, data)
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const url = `posts`;
+
+      const data = {
+        id_user: post.id_user,
+        id_game: post.gameSelected,
+        id_platform: post.platformSelected,
+        id_mode: post.modeSelected,
+        requiredusers: post.userRequire,
+        actualusers: 0,
+        title: post.title,
+        description: post.description ?? ''
+      };
+
+      console.log("Saving post:", data);
+
+      const response = await AxiosInstance.post(url, data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async remove(id_post) {

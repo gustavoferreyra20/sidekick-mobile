@@ -40,14 +40,16 @@ export default class NewPostCtrl extends Component {
 
     try {
       await PostService.save(postData);
-      this.modalType = "action";
-      this.msg = "Anuncio creado con exito";
-      this.modalVisible = true;
+      this.showModal("Anuncio creado con éxito");
       reloadForm();
     } catch (error) {
-      console.error("Error saving post:", error);
-      // Handle error as needed
+      this.showModal("Error al guardar el anuncio. Por favor, intente de nuevo");
     }
-
   }
+
+  showModal = (msg, type = "action") => {
+    this.msg = msg;
+    this.modalType = type;
+    this.modalVisible = true;
+  };
 }
