@@ -24,6 +24,15 @@ export class ApplicationsScreen extends Component {
 
     componentDidMount() {
         this.fetchApplications();
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.fetchApplications();
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
+        }
     }
 
     handleUserNamePress = (id_user) => {

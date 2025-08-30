@@ -22,6 +22,7 @@ export class HomeScreen extends Component {
         this.controller = new HomeCtrl();
         this.id_user = this.props.route.params.sessionId;
         this.fetchData = this.fetchData.bind(this);
+        this.focusListener = null;
     }
 
     async componentDidMount() {
@@ -32,6 +33,17 @@ export class HomeScreen extends Component {
             this.setState({
                 loading: false,
             });
+        }
+        // Suscribirse al evento de foco
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.fetchData();
+        });
+    }
+
+    componentWillUnmount() {
+        // Limpiar la suscripción al evento de foco
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
         }
     }
 

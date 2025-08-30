@@ -6,6 +6,17 @@ import PopupService from '../popups/PopupService';
 
 
 export class ConfigScreen extends Component {
+    componentDidMount() {
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.forceUpdate();
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
+        }
+    }
     constructor(props) {
         super(props);
         this.sessionId = this.props.route.params.sessionId;

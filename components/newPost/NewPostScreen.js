@@ -7,6 +7,18 @@ import PopupService from '../popups/PopupService';
 import GameService from '../games/GameService';
 
 export class NewPostScreen extends Component {
+    async componentDidMount() {
+        await this.reloadForm();
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.reloadForm();
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
+        }
+    }
     constructor(props) {
         super(props);
         this.state = {

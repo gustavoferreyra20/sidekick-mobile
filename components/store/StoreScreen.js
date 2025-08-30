@@ -5,6 +5,28 @@ import StoreCtrl from './StoreCtrl';
 import RewardScreen from '../reward/RewardScreen';
 
 export class StoreScreen extends Component {
+    componentDidMount() {
+        this.controller.handleGetRewards().then((data) => {
+            this.setState({
+                rewards: data,
+                loading: false,
+            });
+        });
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.controller.handleGetRewards().then((data) => {
+                this.setState({
+                    rewards: data,
+                    loading: false,
+                });
+            });
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
+        }
+    }
     constructor(props) {
         super(props);
         this.state = {

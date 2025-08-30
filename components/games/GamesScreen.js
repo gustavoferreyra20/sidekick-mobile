@@ -21,6 +21,20 @@ export class GamesScreen extends Component {
         loading: false,
       });
     });
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      this.controller.handleGetGames().then((data) => {
+        this.setState({
+          games: data,
+          loading: false,
+        });
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.focusListener && typeof this.focusListener === 'function') {
+      this.focusListener();
+    }
   }
 
   renderGame = (game, index) => {

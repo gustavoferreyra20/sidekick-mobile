@@ -7,6 +7,24 @@ import ReviewScreen from '../reviews/ReviewScreen'
 import Loader from '../../assets/scripts/loader';
 
 export class ProfileScreen extends React.Component {
+  async componentDidMount() {
+    const initialIdUser = this.props.route.params.sessionId;
+    this.setState({ id_user: initialIdUser }, () => {
+      this.loadProfileData(initialIdUser);
+    });
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      const idUser = this.props.route.params.sessionId;
+      this.setState({ id_user: idUser, loading: true }, () => {
+        this.loadProfileData(idUser);
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.focusListener && typeof this.focusListener === 'function') {
+      this.focusListener();
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -29,12 +47,7 @@ export class ProfileScreen extends React.Component {
     });
   };
 
-  componentDidMount() {
-    const initialIdUser = this.props.route.params.sessionId;
-    this.setState({ id_user: initialIdUser }, () => {
-      this.loadProfileData(initialIdUser);
-    });
-  }
+  // Eliminado: componentDidMount duplicado
 
   componentDidUpdate(prevProps) {
     // Check if route params have changed

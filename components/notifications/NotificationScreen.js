@@ -16,8 +16,17 @@ export class NotificationScreen extends React.Component {
     };
 
     componentDidMount() {
-        this.loadNotifications()
-    };
+        this.loadNotifications();
+        this.focusListener = this.props.navigation.addListener('focus', () => {
+            this.loadNotifications();
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.focusListener && typeof this.focusListener === 'function') {
+            this.focusListener();
+        }
+    }
 
     loadNotifications = async () => {
         const notifications = await this.controller.getNotifications(this.props.route.params.sessionId);
