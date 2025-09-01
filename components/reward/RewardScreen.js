@@ -1,6 +1,5 @@
-import { View, Text, Image, Button } from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from '../../assets/scripts/styles';
-;
 
 const RewardScreen = ({ item, handleBuyReward }) => {
 
@@ -14,7 +13,15 @@ const RewardScreen = ({ item, handleBuyReward }) => {
                 />
                 <Text style={styles.rewardPrice}>${item.price}</Text>
                 <Text style={styles.rewardDescription}>{item.description}</Text>
-                <Button title="Comprar" onPress={() => handleBuyReward(item)} color="#28a745" />
+
+                <TouchableOpacity
+                    style={styles.modernButton}
+                    onPress={() => handleBuyReward(item)}
+                    activeOpacity={0.8}
+                >
+                    <Text style={styles.buttonText}>Comprar</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     );

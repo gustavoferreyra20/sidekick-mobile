@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, ScrollView, Image } from 'react-native';
+import {Text, View, TextInput, Button, ScrollView, Image, TouchableOpacity} from 'react-native';
 import styles from '../../assets/scripts/styles';
 
 import RateCtrl from './RateCtrl';
@@ -123,17 +123,24 @@ export class RateScreen extends Component {
                     />
                     <Text style={styles.text}>Comentario:</Text>
                     <TextInput
-                        style={styles.textInput}
+                        style={styles.textAreaInput}
                         onChangeText={this.handleCommentChange}
                         placeholder="Escriba que te parecio el jugador"
                         value={this.state.form.comment}
                         multiline={true}
-                        numberOfLines={4}
+                        numberOfLines={3}
+                        maxLength={100}
                         placeholderTextColor="#495057"
                     />
 
-                    <View style={styles.button}>
-                        <Button title="Premiar" onPress={this.handleShowRewards} color="#28a745" />
+                    <View style={{ marginTop: 8 }}>
+                        <TouchableOpacity
+                            style={styles.modernButton}
+                            onPress={this.handleShowRewards}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Premiar</Text>
+                        </TouchableOpacity>
                     </View>
 
                     {/* Rewards section */}
@@ -167,11 +174,13 @@ export class RateScreen extends Component {
 
                     {this.state.showRewards && (
                         <View style={styles.noRewardContainer}>
-                            <Button
-                                title="Comprar medallas"
+                            <TouchableOpacity
+                                style={styles.modernButton}
                                 onPress={() => this.handleGoToStore()}
-                                color="#28a745"
-                            />
+                                activeOpacity={0.8}
+                            >
+                                <Text style={styles.buttonText}>Comprar medallas</Text>
+                            </TouchableOpacity>
                         </View>
                     )}
 
@@ -193,22 +202,30 @@ export class RateScreen extends Component {
 
                 {/* Calificar button */}
                 <View style={styles.buttonContainer}>
-                    <Button
-                        title="Calificar"
+                    <TouchableOpacity
+                        style={styles.modernButton}
                         onPress={() => {
-                            this.controller.newReview(this.state.form, () => {
-                                this.setState({});
-                            }, this.props.updateReview, this.props.id_application);
+                            this.controller.newReview(
+                                this.state.form,
+                                () => this.setState({}),
+                                this.props.updateReview,
+                                this.props.id_application
+                            );
                         }}
-                        color="#28a745"
-                    />
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Calificar</Text>
+                    </TouchableOpacity>
 
-                    <Button
-                        title="Volver"
+                    <TouchableOpacity
+                        style={[styles.modernButton, { backgroundColor: '#FF0000' }]}
                         onPress={() => { this.props.updateReview() }}
-                        color="#FF0000"
-                    />
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Volver</Text>
+                    </TouchableOpacity>
                 </View>
+
 
                 <PopupService
                     modalVisible={this.controller.modalVisible}

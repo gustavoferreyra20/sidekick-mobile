@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
 
 const SentApp = ({ item, onCancelApplication, contact }) => {
@@ -26,23 +26,30 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
         ) : null}
 
         {item.applications.status === 'accepted' ? (
-          <View>
-            <Text style={styles.text}>Solicitud aceptada</Text>
-            <View style={styles.buttonContainerColumns}>
-              <TouchableOpacity
-                style={[styles.button, { backgroundColor: '#008CBA' }]}
-                onPress={() => contact(item.id_user)}
-              >
-                <Text style={styles.buttonText}>Contactar</Text>
-              </TouchableOpacity>
+            <View>
+              <Text style={styles.text}>Solicitud aceptada</Text>
+              <View style={{ marginTop: 8 }}>
+                <TouchableOpacity
+                    style={[styles.modernButton, { backgroundColor: '#008CBA', width: '100%' }]}
+                    onPress={() => contact(item.id_user)}
+                    activeOpacity={0.8}
+                >
+                  <Text style={styles.buttonText}>Contactar</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-
         ) : null}
 
-        <View style={styles.cancelButton} >
-          <Button title="Cancelar" color={"#dc3545"} onPress={() => onCancelApplication(item.id_post, item.applications.id_application)} />
+        <View>
+          <TouchableOpacity
+              style={[styles.modernButton, { backgroundColor: '#dc3545', width: '100%' }]}
+              onPress={() => onCancelApplication(item.id_post, item.applications.id_application)}
+              activeOpacity={0.8}
+          >
+            <Text style={styles.buttonText}>Cancelar</Text>
+          </TouchableOpacity>
         </View>
+
       </View>
       <View style={styles.line} />
     </View>

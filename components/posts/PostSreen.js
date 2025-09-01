@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../assets/scripts/styles';
-
 
 const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
@@ -56,15 +55,27 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                 </View>
 
                 {post.actualusers < post.requiredusers && (
-                    <Button
-                        title="Unirse"
-                        onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
-                        color={'#28a745'}
-                    />
+                    <View style={{ width: '100%' }}>
+                        <TouchableOpacity
+                            style={[styles.modernButton, { width: '100%' }]}
+                            onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Unirse</Text>
+                        </TouchableOpacity>
+                    </View>
                 )}
 
                 {post.actualusers === post.requiredusers && (
-                    <Button title="Post completo" disabled style={styles.completeButton} />
+                    <View style={{ width: '100%' }}>
+                        <TouchableOpacity
+                            style={[styles.modernButton, {  width: '100%', backgroundColor: '#F57C00' }]}
+                            activeOpacity={0.8}
+                            onPress={() => {}}
+                        >
+                            <Text style={styles.buttonText}>Post completo</Text>
+                        </TouchableOpacity>
+                    </View>
                 )}
             </View>
 

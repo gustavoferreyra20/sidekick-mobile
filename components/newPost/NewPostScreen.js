@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import NewPostCtrl from './NewPostCtrl';
 import styles from '../../assets/scripts/styles';
 import { Picker } from '@react-native-picker/picker';
@@ -281,16 +281,24 @@ export class NewPostScreen extends Component {
                     </View>
 
                     <TextInput
-                        style={styles.textInput}
-                        placeholder="Description"
+                        style={styles.textAreaInput}
+                        placeholder="Descripción del anuncio"
                         value={this.state.form.description}
                         multiline={true}
                         numberOfLines={4}
+                        maxLength={280}
                         onChangeText={this.handleDescriptionChange}
                         placeholderTextColor="#495057"
                     />
 
-                    <Button title="Crear anuncio" onPress={this.handleCreatePost} color="#28a745" />
+                    <TouchableOpacity
+                        style={styles.modernButton}
+                        onPress={this.handleCreatePost}
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Crear anuncio</Text>
+                    </TouchableOpacity>
+
                 </View>
 
                 <PopupService

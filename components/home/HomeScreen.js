@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Modal } from 'react-native';
+import {View, Text, Modal, TouchableOpacity} from 'react-native';
 import PostSearchForm from '../postSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
 import styles from '../../assets/scripts/styles';
 import HomeCtrl from './HomeCtrl';
 import PopupService from '../popups/PopupService';
 import Loader from '../../assets/scripts/loader';
 import PostSreen from '../posts/PostSreen';
-import { useNavigation } from '@react-navigation/native';
 
 export class HomeScreen extends Component {
     constructor(props) {
@@ -121,24 +120,27 @@ export class HomeScreen extends Component {
                 <Text style={styles.heading}>Posts más recientes</Text>
                 <View style={styles.hr_main} />
 
-                <View style={styles.headerRows}>
-                    <View style={styles.buttonContainerColumns}>
-                        <Button
-                            title="Buscar"
+                <View style={[styles.headerRows, { flexDirection: 'row', alignItems: 'center' }]}>
+                    <View style={[styles.buttonContainerColumns, { flex: 1 }]}>
+                        <TouchableOpacity
+                            style={[styles.modernButton, { width: '85%' }]}
                             onPress={this.togglePostSearchFormModal}
-                            color="#28a745"
-                        />
-
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Buscar</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.buttonContainerColumns}>
-                        <Button
-                            title="Actualizar"
+
+                    <View style={[styles.buttonContainerColumns, { flex: 1 }]}>
+                        <TouchableOpacity
+                            style={[styles.modernButton, { width: '85%' }]}
                             onPress={this.fetchData}
-                            color="#28a745"
-                        />
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Actualizar</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-
 
                 {loading ? (
                     <Text style={styles.text}>Loading...</Text>

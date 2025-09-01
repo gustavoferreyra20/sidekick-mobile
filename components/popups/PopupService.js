@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Modal, View, Text, TextInput, Button, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native';
+import React, {Component} from 'react';
+import {Modal, View, Text, TouchableWithoutFeedback, TouchableOpacity, Image} from 'react-native';
 import styles from '../../assets/scripts/styles';
-
 
 class PopupService extends Component {
     constructor(props) {
@@ -16,20 +15,28 @@ class PopupService extends Component {
                 visible={this.props.modalVisible}
             >
                 {this.props.modalType === "action" && (
-                    <TouchableOpacity onPress={() => { this.props.actionConfirm(); this.props.setModalVisible(false) }} style={styles.popupContainer}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.props.actionConfirm();
+                            this.props.setModalVisible(false);
+                        }}
+                        style={styles.popupContainer}
+                    >
                         <TouchableWithoutFeedback>
                             <View style={styles.popupContent}>
-                                <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                <View style={styles.button}>
-                                    <Button
-                                        title="Aceptar"
-                                        onPress={() => {
-                                            this.props.actionConfirm();
-                                            this.props.setModalVisible(false);
-                                        }}
-                                        color="#28a745"
-                                    />
-                                </View>
+                                <Text style={[styles.text, {textAlign: "center"}]}>{this.props.msg}</Text>
+
+                                <TouchableOpacity
+                                    style={styles.modernButton}
+                                    onPress={() => {
+                                        this.props.actionConfirm();
+                                        this.props.setModalVisible(false);
+                                    }}
+                                    activeOpacity={0.8}
+                                >
+                                    <Text style={styles.buttonText}>Aceptar</Text>
+                                </TouchableOpacity>
+
                             </View>
                         </TouchableWithoutFeedback>
                     </TouchableOpacity>
@@ -39,51 +46,63 @@ class PopupService extends Component {
                     <TouchableOpacity onPress={() => this.props.setModalVisible(false)} style={styles.popupContainer}>
                         <TouchableWithoutFeedback>
                             <View style={styles.popupContent}>
-                                <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                <View style={styles.button}>
-                                    <Button
-                                        title="Aceptar"
-                                        onPress={() => this.props.setModalVisible(false)}
-                                        color="#28a745"
-                                    />
-                                </View>
+                                <Text style={[styles.text, {textAlign: "center"}]}>{this.props.msg}</Text>
+
+                                <TouchableOpacity
+                                    style={styles.modernButton}
+                                    onPress={() => this.props.setModalVisible(false)}
+                                    activeOpacity={0.8}
+                                >
+                                    <Text style={styles.buttonText}>Aceptar</Text>
+                                </TouchableOpacity>
+
                             </View>
                         </TouchableWithoutFeedback>
                     </TouchableOpacity>
                 )}
 
                 {this.props.modalType === "confirm" && (
-                    <>
-                        <TouchableOpacity onPress={() => this.props.setModalVisible(false)} style={styles.popupContainer}>
-                            <TouchableWithoutFeedback>
-                                <View style={styles.popupContent}>
-                                    <Text style={[styles.text, { textAlign: "center" }]}>{this.props.msg}</Text>
-                                    <View style={styles.button}>
-                                        <View style={{ marginBottom: 8 }}>
-                                            <Button
-                                                title=" Si "
-                                                onPress={() => {
-                                                    this.props.actionConfirm();
-                                                    this.props.setModalVisible(false);
-                                                }}
-                                                color="#28a745"
-                                            />
-                                        </View>
-                                        <View style={styles.button}>
-                                            <View style={{ marginBottom: 8 }}>
-                                                <Button
-                                                    title="No"
-                                                    onPress={() => this.props.setModalVisible(false)}
-                                                    color="#dc3545"
-                                                />
-                                            </View>
-                                        </View>
-                                    </View>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.props.setModalVisible(false)}
+                        style={styles.popupContainer}
+                    >
+                        <TouchableWithoutFeedback>
+                            <View style={styles.popupContent}>
+                                <Text style={[styles.text, {textAlign: "center"}]}>
+                                    {this.props.msg}
+                                </Text>
 
-                    </>
+                                <View style={[{flexDirection: 'row', justifyContent: 'space-between'}]}>
+                                    <TouchableOpacity
+                                        style={[styles.modernButton, {
+                                            backgroundColor: '#28a745',
+                                            flex: 1,
+                                            marginRight: 8
+                                        }]}
+                                        onPress={() => {
+                                            this.props.actionConfirm();
+                                            this.props.setModalVisible(false);
+                                        }}
+                                        activeOpacity={0.8}
+                                    >
+                                        <Text style={styles.buttonText}>Si</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        style={[styles.modernButton, {
+                                            backgroundColor: '#dc3545',
+                                            flex: 1,
+                                            marginLeft: 8
+                                        }]}
+                                        onPress={() => this.props.setModalVisible(false)}
+                                        activeOpacity={0.8}
+                                    >
+                                        <Text style={styles.buttonText}>No</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </TouchableOpacity>
                 )}
 
                 {this.props.modalType === "contactInf" && (
@@ -94,18 +113,22 @@ class PopupService extends Component {
                                     {this.props.contactInf.map((contact, index) => (
                                         <View key={index} style={styles.contactItem}>
                                             {/* Assuming contact.img is the image URL */}
-                                            <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${contact.img}` }} style={styles.contactInfImg} />
-                                            <Text style={styles.contactNickname}>{contact.users_contact_inf.nickname || "No nickname"}</Text>
+                                            <Image
+                                                source={{uri: `https://sidekick-server-nine.vercel.app/api/images/${contact.img}`}}
+                                                style={styles.contactInfImg}/>
+                                            <Text
+                                                style={styles.contactNickname}>{contact.users_contact_inf.nickname || "No nickname"}</Text>
                                         </View>
                                     ))}
                                 </View>
-                                <View style={styles.button}>
-                                    <Button
-                                        title="Aceptar"
-                                        onPress={() => this.props.setModalVisible(false)}
-                                        color="#28a745"
-                                    />
-                                </View>
+                                <TouchableOpacity
+                                    style={styles.modernButton}
+                                    onPress={() => this.props.setModalVisible(false)}
+                                    activeOpacity={0.8}
+                                >
+                                    <Text style={styles.buttonText}>Aceptar</Text>
+                                </TouchableOpacity>
+
                             </View>
                         </TouchableWithoutFeedback>
                     </TouchableOpacity>

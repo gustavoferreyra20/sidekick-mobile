@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import ApplicationCtrl from './ApplicationCtrl';
 import Loader from '../../assets/scripts/loader';
@@ -111,18 +111,31 @@ export class ApplicationsScreen extends Component {
                     <>
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
-                                <Button
-                                    color={selectedButton === 'Enviadas' ? '#047734' : '#28a745'}
-                                    title="Enviadas"
+                                <TouchableOpacity
+                                    style={[styles.modernButton,
+                                        {
+                                            backgroundColor: selectedButton === 'Enviadas' ? '#047734' : '#28a745',
+                                            width: '90%'
+                                        }]}
                                     onPress={this.showSentApps}
-                                />
+                                    activeOpacity={0.8}
+                                >
+                                    <Text style={styles.buttonText}>Enviadas</Text>
+                                </TouchableOpacity>
                             </View>
+
                             <View style={styles.buttonContainerColumns}>
-                                <Button
-                                    color={selectedButton === 'Recibidas' ? '#047734' : '#28a745'}
-                                    title="Recibidas"
+                                <TouchableOpacity
+                                    style={[styles.modernButton,
+                                        {
+                                            backgroundColor: selectedButton === 'Recibidas' ? '#047734' : '#28a745',
+                                            width: '90%'
+                                        }]}
                                     onPress={this.showReceivedApp}
-                                />
+                                    activeOpacity={0.8}
+                                >
+                                    <Text style={styles.buttonText}>Recibidas</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
 

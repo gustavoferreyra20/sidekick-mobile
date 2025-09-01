@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LoginCtrl from './LoginCtrl';
 import styles from '../../assets/scripts/styles';
@@ -79,27 +79,23 @@ export class LoginScreen extends Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.button}>
-                        <Button title="Iniciar sesión" onPress={this.btnLogin} color="#28a745" />
-                    </View>
+                    <TouchableOpacity style={styles.modernButton} onPress={this.btnLogin} activeOpacity={0.8}>
+                        <Text style={styles.buttonText}>Iniciar sesión</Text>
+                    </TouchableOpacity>
 
-                    <View style={styles.button}>
-                        <Button
-                            title="Olvidaste tu contraseña?"
-                            onPress={this.handleForgotPassword}
-                            color="#28a745"
-                        />
-                    </View>
+                    <TouchableOpacity onPress={this.handleForgotPassword} activeOpacity={0.6}>
+                        <Text style={styles.linkText}>Olvidaste tu contraseña?</Text>
+                    </TouchableOpacity>
 
                     <Text style={styles.h1}>Todavía no te registraste?</Text>
 
-                    <View style={styles.button}>
-                        <Button
-                            title="Registrarse"
-                            onPress={this.handleRegistrationPress}
-                            color="#28a745"
-                        />
-                    </View>
+                    <TouchableOpacity
+                        style={styles.modernButton}
+                        onPress={this.handleRegistrationPress}
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Registrarse</Text>
+                    </TouchableOpacity>
 
                 </View>
 

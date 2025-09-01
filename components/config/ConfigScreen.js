@@ -1,8 +1,41 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, TextInput, Button } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput } from 'react-native';
 import styles from '../../assets/scripts/styles';
 import ConfigCtrl from './ConfigCtrl';
 import PopupService from '../popups/PopupService';
+import {Ionicons} from "@expo/vector-icons";
+
+const PasswordInput = ({ label, value, onChangeText, visible, setVisible, placeholder="**********" }) => (
+    <View style={{ marginBottom: 16, width: '100%' }}>
+        <Text style={styles.text}>{label}</Text>
+        <View style={{ position: 'relative', width: '100%' }}>
+            <TextInput
+                style={[styles.textInput, { paddingRight: 40 }]}
+                secureTextEntry={!visible}
+                value={value}
+                onChangeText={onChangeText}
+                placeholder={placeholder}
+                placeholderTextColor="#495057"
+            />
+            <TouchableOpacity
+                onPress={() => setVisible(!visible)}
+                style={{
+                    position: 'absolute',
+                    right: 10,
+                    top: 0,
+                    bottom: 12,
+                    justifyContent: 'center'
+                }}
+            >
+                <Ionicons
+                    name={visible ? 'eye-off' : 'eye'}
+                    size={24}
+                    color="#495057"
+                />
+            </TouchableOpacity>
+        </View>
+    </View>
+);
 
 
 export class ConfigScreen extends Component {
@@ -24,6 +57,7 @@ export class ConfigScreen extends Component {
         this.state = {
             password: '',
             newPassword: '',
+            passwordVisible: false,
         };
     }
 
@@ -52,37 +86,37 @@ export class ConfigScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <Text style={styles.text}>Ingrese su contraseña original</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
+                    <PasswordInput
+                        label="Ingrese su contraseña original"
+                        value={this.state.password}
                         onChangeText={text => this.setState({ password: text })}
-                        placeholder="**********"
-                        placeholderTextColor="#495057"
+                        visible={this.state.passwordVisible}
+                        setVisible={(val) => this.setState({ passwordVisible: val })}
                     />
-                    <Text style={styles.text}>Nueva contraseña</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        onChangeText={text => this.setState({ newPassword: text })}
-                        placeholder="**********"
-                        placeholderTextColor="#495057"
-                    />
-                    <View style={styles.button}>
-                        <Button
-                            title="Cambiar contraseña"
-                            onPress={() => this.handlerResetPassword()}
-                            color="#28a745"
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Cerrar sesión"
-                            onPress={() => this.handlerLogout()}
-                            color="#28a745"
-                        />
-                    </View>
 
+                    <PasswordInput
+                        label="Nueva contraseña"
+                        value={this.state.newPassword}
+                        onChangeText={text => this.setState({ newPassword: text })}
+                        visible={this.state.passwordVisible}
+                        setVisible={(val) => this.setState({ passwordVisible: val })}
+                    />
+
+                    <TouchableOpacity
+                        style={styles.modernButton}
+                        onPress={() => this.handlerResetPassword()}
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Cambiar contraseña</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.modernButton}
+                        onPress={() => this.handlerLogout()}
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Cerrar sesión</Text>
+                    </TouchableOpacity>
 
                     <PopupService
                         modalVisible={this.controller.modalVisible}

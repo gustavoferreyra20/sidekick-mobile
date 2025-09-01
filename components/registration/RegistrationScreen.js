@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TextInput, Switch, TouchableOpacity, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationCtrl from './RegistrationCtrl';
 import styles from '../../assets/scripts/styles';
@@ -103,52 +103,58 @@ export class RegistrationScreen extends Component {
                         />
 
                         {this.state.profilePicture && (
-                            <View style={styles.button}>
-                                <Button
-                                    title="Eliminar foto"
-                                    onPress={() => {
-                                        this.controller.newUser.profilePicture = "";
-                                        this.setState({ profilePicture: false });
-                                    }}
-                                    color="#D4403A"
-                                />
-                            </View>
-                        )
-                        }
-
-                        <View style={styles.button}>
-                            <Button
-                                title="Seleccionar foto"
-                                disabled={this.state.profilePicture}
+                            <TouchableOpacity
+                                style={[styles.modernButton, { backgroundColor: '#D4403A' }]}
                                 onPress={() => {
-                                    this.controller.pickProfilePicture().then((res) => {
-                                        this.setState({ profilePicture: res });
-                                    })
+                                    this.controller.newUser.profilePicture = "";
+                                    this.setState({ profilePicture: false });
                                 }}
-                                color="#28a745"
-                            />
-                        </View>
-                        <View style={styles.button}>
-                            <Button
-                                title="Tomar foto"
-                                disabled={this.state.profilePicture}
-                                onPress={() => {
-                                    this.controller.takeProfilePicture().then((res) => {
-                                        this.setState({ profilePicture: res });
-                                    })
-                                }}
-                                color="#28a745"
-                            />
-                        </View>
+                                activeOpacity={0.8}
+                            >
+                                <Text style={styles.buttonText}>Eliminar foto</Text>
+                            </TouchableOpacity>
+                        )}
 
-                        <Text style={styles.text}>Contanos un poco sobre vos</Text>
+                        <TouchableOpacity
+                            style={[
+                                styles.modernButton,
+                                this.state.profilePicture && { opacity: 0.5 }
+                            ]}
+                            onPress={() => {
+                                this.controller.pickProfilePicture().then((res) => {
+                                    this.setState({ profilePicture: res });
+                                });
+                            }}
+                            activeOpacity={0.8}
+                            disabled={this.state.profilePicture}
+                        >
+                            <Text style={styles.buttonText}>Seleccionar foto</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[
+                                styles.modernButton,
+                                this.state.profilePicture && { opacity: 0.5 }
+                            ]}
+                            onPress={() => {
+                                this.controller.takeProfilePicture().then((res) => {
+                                    this.setState({ profilePicture: res });
+                                });
+                            }}
+                            activeOpacity={0.8}
+                            disabled={this.state.profilePicture}
+                        >
+                            <Text style={styles.buttonText}>Tomar foto</Text>
+                        </TouchableOpacity>
+
                         <TextInput
-                            style={styles.textInput}
+                            style={styles.textAreaInput}
                             multiline={true}
                             numberOfLines={3}
                             maxLength={280}
                             onChangeText={text => this.controller.newUser.description = text}
                             placeholderTextColor="#495057"
+                            placeholder="Contanos un poco sobre vos..."
                         />
 
                         <View style={styles.labelContainer}>
@@ -190,13 +196,22 @@ export class RegistrationScreen extends Component {
                             </View>
                         ))}
 
-                        <View style={styles.button}>
-                            <Button title="Agregar otra cuenta" onPress={this.btnAddAccount} color="#28a745" />
-                        </View>
+                        <TouchableOpacity
+                            style={styles.modernButton}
+                            onPress={this.btnAddAccount}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Agregar otra cuenta</Text>
+                        </TouchableOpacity>
+
                         {this.controller.newUser.contact_inf_list.length > 1 && (
-                            <View style={styles.button}>
-                                <Button title="Eliminar último" onPress={this.btnRemoveAccount} color="#D4403A" />
-                            </View>
+                            <TouchableOpacity
+                                style={[styles.modernButton, { backgroundColor: '#D4403A' }]}
+                                onPress={this.btnRemoveAccount}
+                                activeOpacity={0.8}
+                            >
+                                <Text style={styles.buttonText}>Eliminar último</Text>
+                            </TouchableOpacity>
                         )}
 
                         <View style={styles.labelContainer}>
@@ -266,27 +281,37 @@ export class RegistrationScreen extends Component {
                             </TouchableOpacity>
                         </View>
 
+                        <TouchableOpacity
+                            style={styles.modernButton}
+                            onPress={this.btnTerms}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Ver terminos y condiciones</Text>
+                        </TouchableOpacity>
 
-                        <View style={styles.button}>
-                            <Button title="Ver terminos y condiciones" onPress={this.btnTerms} color="#28a745" />
-                        </View>
                         <TouchableOpacity style={styles.switchContainer} onPress={this.toggleSwitch}>
                             <Text style={styles.switchText}>Aceptar términos y condiciones</Text>
                             <Switch value={this.controller.toggleValue} onValueChange={this.toggleSwitch} />
                         </TouchableOpacity>
 
-                        <View style={styles.button}>
-                            <Button title="Registrarse" onPress={this.btnRegistration} color="#28a745" />
-                        </View>
+                        <TouchableOpacity
+                            style={styles.modernButton}
+                            onPress={this.btnRegistration}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Registrarse</Text>
+                        </TouchableOpacity>
 
                         <Text style={styles.h1}>Ya tienes una cuenta?</Text>
 
-                        <View style={styles.button}>
-                            <Button
-                                title="Iniciar sesión"
-                                onPress={this.handleLoginPress}
-                                color="#28a745" />
-                        </View>
+                        <TouchableOpacity
+                            style={styles.modernButton}
+                            onPress={this.handleLoginPress}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.buttonText}>Iniciar sesión</Text>
+                        </TouchableOpacity>
+
                     </View>
                 </ScrollView>
 

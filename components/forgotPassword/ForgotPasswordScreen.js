@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import ForgotPasswordController from './ForgotPasswordController';
 import PopupService from '../popups/PopupService';
-
 
 export class ForgotPasswordScreen extends Component {
     constructor(props) {
@@ -42,14 +41,14 @@ export class ForgotPasswordScreen extends Component {
                         placeholderTextColor="#495057"
                         required
                     />
-                    <View style={styles.button}>
-                        <Button
-                            title="Reiniciar contraseña"
-                            onPress={() => this.handlerResetPassword()}
-                            color="#28a745"
-                        />
-                    </View>
-                    <Text style={styles.text}>Su contraseña debe contener <Text style={{ color: "red" }}>8</Text> caracteres como mímimo.</Text>
+
+                    <TouchableOpacity
+                        style={styles.modernButton}
+                        onPress={() => this.handlerResetPassword()}
+                        activeOpacity={0.8}
+                    >
+                        <Text style={styles.buttonText}>Reiniciar contraseña</Text>
+                    </TouchableOpacity>
 
                     <PopupService
                         modalVisible={this.controller.modalVisible}

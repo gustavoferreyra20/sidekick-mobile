@@ -52,21 +52,21 @@ export default styles = StyleSheet.create({
     marginVertical: 4,
   },
   textInput: {
-    backgroundColor: '#020202',
+    backgroundColor: '#1C1C1E',
     color: '#E7E9EA',
     height: 40,
-    borderWidth: 1,
-    borderColor: '#ced4da',
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderRadius: 12,
+    paddingHorizontal: 15,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#2C2C2E',
   },
   pickerContainer: {
     backgroundColor: '#020202',
     borderWidth: 1,
-    borderColor: '#ced4da',
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderColor: '#2C2C2E',
+    borderRadius: 12,
+    paddingHorizontal: 12,
     marginBottom: 16,
     overflow: 'hidden',
   },
@@ -85,13 +85,6 @@ export default styles = StyleSheet.create({
     gap: 8,
     alignItems: 'stretch',
     marginVertical: 8,
-  },
-  button: {
-    borderRadius: 2,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   h1: {
     marginVertical: 12,
@@ -136,7 +129,8 @@ export default styles = StyleSheet.create({
     color: "#E7E9EA",
   },
   contactContainer: {
-    marginBottom: 8
+    marginBottom: 8,
+    gap: 10
   },
   popupContainer: {
     backgroundColor: "#000000aa",
@@ -167,7 +161,6 @@ export default styles = StyleSheet.create({
     boxShadow: "0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)",
     marginBottom: 20,
   },
-
   userImage: {
     borderRadius: 50,
     height: 65,
@@ -204,9 +197,9 @@ export default styles = StyleSheet.create({
     width: 7,
     marginLeft: 6,
     marginRight: 6,
-    backgroundColor: '#28a745',
     borderRadius: 3.5,
     marginBottom: 10,
+    color: '#28a745',
   },
   FlatList: {
     width: '100%'
@@ -231,8 +224,9 @@ export default styles = StyleSheet.create({
     margin: 5,
   },
   buttonText: {
-    fontSize: 12,
-    color: '#E7E9EA',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
   titleContainer: {
     flex: 8,
@@ -258,10 +252,6 @@ export default styles = StyleSheet.create({
   usersText: {
     fontSize: 16,
     color: '#E7E9EA',
-  },
-  cancelButton: {
-    marginTop: 10,
-    textAlign: 'center',
   },
   sendedAppContainer: {
     margin: 10,
@@ -322,11 +312,7 @@ export default styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: '90%',
     marginBottom: 10,
-    borderBottomWidth: 1,
     borderBottomColor: '#28a745',
-  },
-  dot: {
-    color: '#28a745',
   },
   postBody: {
     margin: 10,
@@ -406,7 +392,32 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  contactContainer: {
-    gap: 10
+  linkText: {
+    color: '#2196F3',
+    fontSize: 16,
+    fontWeight: '500',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    marginTop: 16,
+  },
+  modernButton: {
+    backgroundColor: '#28a745',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  textAreaInput: {
+    backgroundColor: '#1C1C1E',
+    color: '#E7E9EA',
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#2C2C2E',
+    textAlignVertical: 'top',
+    marginTop: 16,
   }
 });
