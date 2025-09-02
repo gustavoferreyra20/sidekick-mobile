@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import {Text, View, TextInput, Button, ScrollView, Image, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {Button, Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
-
 import RateCtrl from './RateCtrl';
 import Slider from '@react-native-community/slider';
 import PopupService from '../popups/PopupService';
+import {Ionicons} from "@expo/vector-icons";
 
 export class RateScreen extends Component {
     constructor(props) {
@@ -135,10 +135,11 @@ export class RateScreen extends Component {
 
                     <View style={{ marginTop: 8 }}>
                         <TouchableOpacity
-                            style={styles.modernButton}
-                            onPress={this.handleShowRewards}
-                            activeOpacity={0.8}
+                          style={[styles.modernButton, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }]}
+                          onPress={this.handleShowRewards}
+                          activeOpacity={0.8}
                         >
+                            <Ionicons name="gift" size={16} color="#fff" style={{ marginRight: 6 }} />
                             <Text style={styles.buttonText}>Premiar</Text>
                         </TouchableOpacity>
                     </View>
@@ -165,7 +166,7 @@ export class RateScreen extends Component {
                         </ScrollView>
                     )}
 
-                    {this.state.showRewards && this.state.rewards.length == 0 && (
+                    {this.state.showRewards && this.state.rewards.length === 0 && (
                         <View style={styles.rewardItem}>
                             <Text style={styles.text}>No tienes ninguna medalla, quieres comprar alguna?</Text>
                         </View>
@@ -175,10 +176,11 @@ export class RateScreen extends Component {
                     {this.state.showRewards && (
                         <View style={styles.noRewardContainer}>
                             <TouchableOpacity
-                                style={styles.modernButton}
-                                onPress={() => this.handleGoToStore()}
-                                activeOpacity={0.8}
+                              style={[styles.modernButton, styles.buttonWithIcon]}
+                              onPress={() => this.handleGoToStore()}
+                              activeOpacity={0.8}
                             >
+                                <Ionicons name="cart" size={16} color="#fff" style={{ marginRight: 6 }} />
                                 <Text style={styles.buttonText}>Comprar medallas</Text>
                             </TouchableOpacity>
                         </View>
@@ -198,42 +200,43 @@ export class RateScreen extends Component {
                             />
                         </View>
                     )}
-                </View>
 
-                {/* Calificar button */}
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        style={styles.modernButton}
-                        onPress={() => {
-                            this.controller.newReview(
+                    {/* Calificar button */}
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#28a745' }]}
+                          onPress={() => {
+                              this.controller.newReview(
                                 this.state.form,
                                 () => this.setState({}),
                                 this.props.updateReview,
                                 this.props.id_application
-                            );
-                        }}
-                        activeOpacity={0.8}
-                    >
-                        <Text style={styles.buttonText}>Calificar</Text>
-                    </TouchableOpacity>
+                              );
+                          }}
+                          activeOpacity={0.8}
+                        >
+                            <Ionicons name="save" size={16} color="#fff" style={{ marginRight: 6 }} />
+                            <Text style={styles.buttonText}>Guardar Calificación</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity
-                        style={[styles.modernButton, { backgroundColor: '#FF0000' }]}
-                        onPress={() => { this.props.updateReview() }}
-                        activeOpacity={0.8}
-                    >
-                        <Text style={styles.buttonText}>Volver</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#FF0000' }]}
+                          onPress={() => { this.props.updateReview() }}
+                          activeOpacity={0.8}
+                        >
+                            <Ionicons name="arrow-back" size={16} color="#fff" style={{ marginRight: 6 }} />
+                            <Text style={styles.buttonText}>Volver</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <PopupService
+                      modalVisible={this.controller.modalVisible}
+                      setModalVisible={this.setModalVisible}
+                      modalType={this.controller.modalType}
+                      msg={this.controller.msg}
+                      actionConfirm={this.controller.modalFunction}
+                    />
                 </View>
-
-
-                <PopupService
-                    modalVisible={this.controller.modalVisible}
-                    setModalVisible={this.setModalVisible}
-                    modalType={this.controller.modalType}
-                    msg={this.controller.msg}
-                    actionConfirm={this.controller.modalFunction}
-                />
             </View>
         );
     }

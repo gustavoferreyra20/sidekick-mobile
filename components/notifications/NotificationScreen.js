@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import NotificationCtrl from './NotificationCtrl';
 import NotificationItem from './NotificationItem';
@@ -44,14 +44,15 @@ export class NotificationScreen extends React.Component {
         if (loading) {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.text}>Loading...</Text>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#28a745" />
+                    </View>
                 </View>
             );
         }
 
         return (
             <View style={styles.container}>
-                <View style={styles.line}></View>
                 <Loader
                     data={notifications}
                     renderItem={({ item }) => <NotificationItem notification={item} onDelete={this.btnDelete} />}

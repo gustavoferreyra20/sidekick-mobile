@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { View, Button } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import React, {Component} from 'react';
+import {Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import styles from '../../assets/scripts/styles';
-import { TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import GameService from '../games/GameService';
+import {Ionicons} from "@expo/vector-icons";
 
 class PostSearchForm extends Component {
   constructor(props) {
@@ -112,7 +112,15 @@ class PostSearchForm extends Component {
               </Picker>
             </View>
 
-            <Button title="Buscar" onPress={this.handleSubmit} color={"#28a745"} />
+            <TouchableOpacity
+              style={[styles.modernButton, styles.buttonWithIcon, { width: '50%' }]}
+              onPress={this.handleSubmit}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="search" size={16} color="#fff" style={{ marginRight: 6 }} />
+              <Text style={styles.buttonText}>Buscar</Text>
+            </TouchableOpacity>
+
           </View>
         </TouchableWithoutFeedback>
       </TouchableOpacity>

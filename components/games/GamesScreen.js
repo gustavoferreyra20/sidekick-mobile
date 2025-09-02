@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import React, {Component} from 'react';
+import {ActivityIndicator, Image, Text, View} from 'react-native';
 import GamesCtrl from './GamesCtrl';
 
 import styles from '../../assets/scripts/styles';
@@ -51,7 +51,9 @@ export class GamesScreen extends Component {
     if (loading) {
       return (
         <View style={styles.container}>
-           <Text style={styles.text}>Loading...</Text>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#28a745" />
+          </View>
         </View>
       );
     }

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import {View, Text, Modal, TouchableOpacity} from 'react-native';
-import PostSearchForm from '../postSearchForm/PostSearchForm'; // Update the path to your PostSearchForm component
+import React, {Component} from 'react';
+import {ActivityIndicator, Modal, Text, TouchableOpacity, View} from 'react-native';
+import PostSearchForm from '../postSearchForm/PostSearchForm';
 import styles from '../../assets/scripts/styles';
 import HomeCtrl from './HomeCtrl';
 import PopupService from '../popups/PopupService';
 import Loader from '../../assets/scripts/loader';
 import PostSreen from '../posts/PostSreen';
+import {Ionicons} from "@expo/vector-icons";
 
 export class HomeScreen extends Component {
     constructor(props) {
@@ -123,27 +124,33 @@ export class HomeScreen extends Component {
                 <View style={[styles.headerRows, { flexDirection: 'row', alignItems: 'center' }]}>
                     <View style={[styles.buttonContainerColumns, { flex: 1 }]}>
                         <TouchableOpacity
-                            style={[styles.modernButton, { width: '85%' }]}
-                            onPress={this.togglePostSearchFormModal}
-                            activeOpacity={0.8}
+                          style={[styles.modernButton, styles.buttonWithIcon, { width: '85%' }]}
+                          onPress={this.togglePostSearchFormModal}
+                          activeOpacity={0.8}
                         >
-                            <Text style={styles.buttonText}>Buscar</Text>
+                            <Ionicons name="filter" size={20} color="#fff" style={{ marginRight: 8 }} />
+                            <Text style={styles.buttonText}>Filtrar</Text>
                         </TouchableOpacity>
+
                     </View>
 
                     <View style={[styles.buttonContainerColumns, { flex: 1 }]}>
                         <TouchableOpacity
-                            style={[styles.modernButton, { width: '85%' }]}
-                            onPress={this.fetchData}
-                            activeOpacity={0.8}
+                          style={[styles.modernButton, styles.buttonWithIcon, { width: '85%' }]}
+                          onPress={this.fetchData}
+                          activeOpacity={0.8}
                         >
-                            <Text style={styles.buttonText}>Actualizar</Text>
+                            <Ionicons name="refresh" size={20} color="#fff" style={{ marginRight: 8 }} />
+                            <Text style={styles.buttonText}>Restablecer</Text>
                         </TouchableOpacity>
                     </View>
+
                 </View>
 
                 {loading ? (
-                    <Text style={styles.text}>Loading...</Text>
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color="#28a745" />
+                    </View>
                 ) : (
                     <View style={styles.postsContainer}>
                         <Loader

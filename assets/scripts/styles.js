@@ -38,7 +38,9 @@ export default styles = StyleSheet.create({
     height: '80%',
   },
   scrollContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 50,
+    flexGrow: 1,
   },
   boldText: {
     fontWeight: 'bold',
@@ -114,6 +116,7 @@ export default styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
+    padding: 10,
   },
   gameContainer: {
     alignItems: "center",
@@ -124,9 +127,12 @@ export default styles = StyleSheet.create({
     height: 192,
     resizeMode: 'contain',
     alignSelf: 'flex-start',
+    borderRadius: 8,
   },
   gameName: {
     color: "#E7E9EA",
+    fontSize: 14,
+    fontWeight: '500',
   },
   contactContainer: {
     marginBottom: 8,
@@ -202,6 +208,7 @@ export default styles = StyleSheet.create({
     color: '#28a745',
   },
   FlatList: {
+    paddingTop: 10,
     width: '100%'
   },
   headerRows: {
@@ -259,9 +266,14 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
   },
   notificationContainer: {
-    margin: 10,
-    padding: 10,
-    borderRadius: 5,
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: '#1C1C1E',
+    marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   row: {
     flexDirection: 'row',
@@ -274,6 +286,8 @@ export default styles = StyleSheet.create({
   rewardsContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 20,
+    paddingTop: 10,
   },
   heading: {
     fontSize: 20,
@@ -320,6 +334,7 @@ export default styles = StyleSheet.create({
   postsContainer: {
     width: "100%",
     marginTop: 8,
+    paddingBottom: 70,
   },
   userInfo: {
     flexDirection: 'column',
@@ -419,5 +434,15 @@ export default styles = StyleSheet.create({
     borderColor: '#2C2C2E',
     textAlignVertical: 'top',
     marginTop: 16,
+  },
+  loadingContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+  },
+  buttonWithIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });

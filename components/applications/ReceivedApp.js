@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
+import {Ionicons} from "@expo/vector-icons";
 
 const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) => {
     if (user.applications.status !== 'rejected' && user.applications.status !== 'complete') {
@@ -16,20 +17,24 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                     {user.applications.status === 'pending' && post.actualusers < post.requiredusers && (
                         <View style={styles.headerRows}>
                             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 8}}>
+                                {/* Aceptar */}
                                 <TouchableOpacity
-                                    style={[styles.modernButton, {backgroundColor: '#28a745', flex: 1, marginRight: 8}]}
-                                    onPress={() => changeStatus(post.id_post, user.applications.id_application, 'accepted')}
-                                    activeOpacity={0.8}
+                                  style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#28a745', flex: 1, marginRight: 8 }]}
+                                  onPress={() => changeStatus(post.id_post, user.applications.id_application, 'accepted')}
+                                  activeOpacity={0.8}
                                 >
-                                    <Text style={styles.buttonText}>Aceptar</Text>
+                                    <Ionicons name="checkmark" size={16} color="#fff" style={{ marginRight: 4 }} />
+                                    <Text style={[styles.buttonText, { fontSize: 14 }]}>Aceptar</Text>
                                 </TouchableOpacity>
 
+                                {/* Rechazar */}
                                 <TouchableOpacity
-                                    style={[styles.modernButton, {backgroundColor: '#dc3545', flex: 1, marginLeft: 8}]}
-                                    onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
-                                    activeOpacity={0.8}
+                                  style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', flex: 1, marginLeft: 8 }]}
+                                  onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
+                                  activeOpacity={0.8}
                                 >
-                                    <Text style={styles.buttonText}>Rechazar</Text>
+                                    <Ionicons name="close" size={16} color="#fff" style={{ marginRight: 4 }} />
+                                    <Text style={[styles.buttonText, { fontSize: 14 }]}>Rechazar</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -48,35 +53,38 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                     )}
 
                     {user.applications.status === 'accepted' && (
-                        <View style={[styles.headerRows, {justifyContent: 'space-between', marginTop: 8}]}>
-                            <TouchableOpacity
-                                style={[styles.modernButton, {backgroundColor: '#17a2b8', flex: 1, marginRight: 8}]}
-                                onPress={() => contact(user.id_user)}
-                                activeOpacity={0.8}
-                            >
-                                <Text style={styles.buttonText}>Contactar</Text>
-                            </TouchableOpacity>
+                      <View style={[styles.headerRows, { justifyContent: 'space-between', marginTop: 8 }]}>
 
-                            <TouchableOpacity
-                                style={[styles.modernButton, {
-                                    backgroundColor: '#28a745',
-                                    flex: 1,
-                                    marginHorizontal: 4
-                                }]}
-                                onPress={() => rate(user.id_user, post.id_post, user.applications.id_application)}
-                                activeOpacity={0.8}
-                            >
-                                <Text style={styles.buttonText}>Calificar</Text>
-                            </TouchableOpacity>
+                          {/* Contactar */}
+                          <TouchableOpacity
+                            style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#17a2b8', flex: 1.2, marginRight: 8 }]}
+                            onPress={() => contact(user.id_user)}
+                            activeOpacity={0.8}
+                          >
+                              <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 4 }} />
+                              <Text style={[styles.buttonText, { fontSize: 14 }]}>Contacto</Text>
+                          </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={[styles.modernButton, {backgroundColor: '#dc3545', flex: 1, marginLeft: 8}]}
-                                onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
-                                activeOpacity={0.8}
-                            >
-                                <Text style={styles.buttonText}>Eliminar</Text>
-                            </TouchableOpacity>
-                        </View>
+                          {/* Calificar */}
+                          <TouchableOpacity
+                            style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#28a745', flex: 1, marginHorizontal: 4 }]}
+                            onPress={() => rate(user.id_user, post.id_post, user.applications.id_application)}
+                            activeOpacity={0.8}
+                          >
+                              <Ionicons name="star" size={16} color="#fff" style={{ marginRight: 4 }} />
+                              <Text style={[styles.buttonText, { fontSize: 14 }]}>Calificar</Text>
+                          </TouchableOpacity>
+
+                          {/* Eliminar */}
+                          <TouchableOpacity
+                            style={[styles.modernButton, { backgroundColor: '#dc3545', flex: 0.3, marginLeft: 8, justifyContent: 'center', alignItems: 'center' }]}
+                            onPress={() => changeStatus(post.id_post, user.applications.id_application, 'rejected')}
+                            activeOpacity={0.8}
+                          >
+                              <Ionicons name="trash" size={18} color="#fff" />
+                          </TouchableOpacity>
+
+                      </View>
                     )}
                 </View>
             </View>
@@ -112,10 +120,11 @@ const ReceivedApp = ({post, onDeletePost, changeStatus, rate, contact, handleUse
 
 
                 <TouchableOpacity
-                    style={[styles.modernButton, {backgroundColor: '#dc3545', width: '100%'}]}
-                    onPress={() => onDeletePost(post.id_post)}
-                    activeOpacity={0.8}
+                  style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', width: '100%' }]}
+                  onPress={() => onDeletePost(post.id_post)}
+                  activeOpacity={0.8}
                 >
+                    <Ionicons name="trash" size={16} color="#fff" style={{ marginRight: 6 }} />
                     <Text style={styles.buttonText}>Eliminar post</Text>
                 </TouchableOpacity>
 

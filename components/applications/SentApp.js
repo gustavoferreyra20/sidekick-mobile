@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
+import {Ionicons} from "@expo/vector-icons";
 
 const SentApp = ({ item, onCancelApplication, contact }) => {
   return (
@@ -25,27 +26,29 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
           <Text style={styles.text}>Solicitud rechazada</Text>
         ) : null}
 
-        {item.applications.status === 'accepted' ? (
-            <View>
-              <Text style={styles.text}>Solicitud aceptada</Text>
-              <View style={{ marginTop: 8 }}>
-                <TouchableOpacity
-                    style={[styles.modernButton, { backgroundColor: '#008CBA', width: '100%' }]}
-                    onPress={() => contact(item.id_user)}
-                    activeOpacity={0.8}
-                >
-                  <Text style={styles.buttonText}>Contactar</Text>
-                </TouchableOpacity>
-              </View>
+        {item.applications.status === 'accepted' && (
+          <View>
+            <Text style={styles.text}>Solicitud aceptada</Text>
+            <View style={{ marginTop: 8 }}>
+              <TouchableOpacity
+                style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#008CBA', width: '100%' }]}
+                onPress={() => contact(item.id_user)}
+                activeOpacity={0.8}
+              >
+                <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 6 }} />
+                <Text style={styles.buttonText}>Contactar</Text>
+              </TouchableOpacity>
             </View>
-        ) : null}
+          </View>
+        )}
 
-        <View>
+        <View style={{ marginTop: 8 }}>
           <TouchableOpacity
-              style={[styles.modernButton, { backgroundColor: '#dc3545', width: '100%' }]}
-              onPress={() => onCancelApplication(item.id_post, item.applications.id_application)}
-              activeOpacity={0.8}
+            style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', width: '100%' }]}
+            onPress={() => onCancelApplication(item.id_post, item.applications.id_application)}
+            activeOpacity={0.8}
           >
+            <Ionicons name="close" size={16} color="#fff" style={{ marginRight: 6 }} />
             <Text style={styles.buttonText}>Cancelar</Text>
           </TouchableOpacity>
         </View>

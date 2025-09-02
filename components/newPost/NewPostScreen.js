@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import NewPostCtrl from './NewPostCtrl';
 import styles from '../../assets/scripts/styles';
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import PopupService from '../popups/PopupService';
 import GameService from '../games/GameService';
+import {Ionicons} from "@expo/vector-icons";
 
 export class NewPostScreen extends Component {
     async componentDidMount() {
@@ -276,10 +277,6 @@ export class NewPostScreen extends Component {
                         </Picker>
                     </View>
 
-                    <View style={styles.labelContainer}>
-                        <Text style={styles.text}>Descripcion del anuncio</Text>
-                    </View>
-
                     <TextInput
                         style={styles.textAreaInput}
                         placeholder="Descripción del anuncio"
@@ -292,10 +289,11 @@ export class NewPostScreen extends Component {
                     />
 
                     <TouchableOpacity
-                        style={styles.modernButton}
-                        onPress={this.handleCreatePost}
-                        activeOpacity={0.8}
+                      style={[styles.modernButton, styles.buttonWithIcon]}
+                      onPress={this.handleCreatePost}
+                      activeOpacity={0.8}
                     >
+                        <Ionicons name="add" size={16} color="#fff" style={{ marginRight: 6 }} />
                         <Text style={styles.buttonText}>Crear anuncio</Text>
                     </TouchableOpacity>
 

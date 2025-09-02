@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import {ActivityIndicator, Image, Text, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 
 import ProfileCtrl from './ProfileCtrl';
@@ -81,7 +81,9 @@ export class ProfileScreen extends React.Component {
     if (loading) {
       return (
         <View style={styles.container}>
-          <Text style={styles.text}>Loading...</Text>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#28a745" />
+          </View>
         </View>
       );
     }

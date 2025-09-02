@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
+import {Ionicons} from "@expo/vector-icons";
 
 const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
@@ -55,27 +56,29 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                 </View>
 
                 {post.actualusers < post.requiredusers && (
-                    <View style={{ width: '100%' }}>
-                        <TouchableOpacity
-                            style={[styles.modernButton, { width: '100%' }]}
-                            onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
-                            activeOpacity={0.8}
-                        >
-                            <Text style={styles.buttonText}>Unirse</Text>
-                        </TouchableOpacity>
-                    </View>
+                  <View style={{ width: '100%' }}>
+                      <TouchableOpacity
+                        style={[styles.modernButton, styles.buttonWithIcon, { width: '100%' }]}
+                        onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
+                        activeOpacity={0.8}
+                      >
+                          <Ionicons name="person-add" size={16} color="#fff" style={{ marginRight: 6 }} />
+                          <Text style={styles.buttonText}>Unirse</Text>
+                      </TouchableOpacity>
+                  </View>
                 )}
 
                 {post.actualusers === post.requiredusers && (
-                    <View style={{ width: '100%' }}>
-                        <TouchableOpacity
-                            style={[styles.modernButton, {  width: '100%', backgroundColor: '#F57C00' }]}
-                            activeOpacity={0.8}
-                            onPress={() => {}}
-                        >
-                            <Text style={styles.buttonText}>Post completo</Text>
-                        </TouchableOpacity>
-                    </View>
+                  <View style={{ width: '100%' }}>
+                      <TouchableOpacity
+                        style={[styles.modernButton, styles.buttonWithIcon, { width: '100%', backgroundColor: '#F57C00' }]}
+                        activeOpacity={0.8}
+                        onPress={() => {}}
+                      >
+                          <Ionicons name="lock-closed" size={16} color="#fff" style={{ marginRight: 6 }} />
+                          <Text style={styles.buttonText}>Post completo</Text>
+                      </TouchableOpacity>
+                  </View>
                 )}
             </View>
 

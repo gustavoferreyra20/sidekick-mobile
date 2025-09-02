@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {ActivityIndicator, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import ApplicationCtrl from './ApplicationCtrl';
 import Loader from '../../assets/scripts/loader';
 import SentApp from './SentApp';
 import ReceivedApp from './ReceivedApp';
 import PopupService from '../popups/PopupService';
-import { RateScreen } from '../rate/RateScreen';
+import {RateScreen} from '../rate/RateScreen';
+import {Ionicons} from "@expo/vector-icons";
 
 export class ApplicationsScreen extends Component {
     constructor(props) {
@@ -112,35 +113,49 @@ export class ApplicationsScreen extends Component {
                         <View style={styles.headerRows}>
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
-                                    style={[styles.modernButton,
-                                        {
-                                            backgroundColor: selectedButton === 'Enviadas' ? '#047734' : '#28a745',
-                                            width: '90%'
-                                        }]}
-                                    onPress={this.showSentApps}
-                                    activeOpacity={0.8}
+                                  style={[
+                                      styles.modernButton,
+                                      {
+                                          backgroundColor: selectedButton === 'Enviadas' ? '#047734' : '#28a745',
+                                          width: '90%',
+                                          flexDirection: 'row',
+                                          alignItems: 'center',
+                                          justifyContent: 'center',
+                                      },
+                                  ]}
+                                  onPress={this.showSentApps}
+                                  activeOpacity={0.8}
                                 >
+                                    <Ionicons name="arrow-up-circle-outline" size={20} color="#fff" style={{ marginRight: 6 }} />
                                     <Text style={styles.buttonText}>Enviadas</Text>
                                 </TouchableOpacity>
                             </View>
 
                             <View style={styles.buttonContainerColumns}>
                                 <TouchableOpacity
-                                    style={[styles.modernButton,
-                                        {
-                                            backgroundColor: selectedButton === 'Recibidas' ? '#047734' : '#28a745',
-                                            width: '90%'
-                                        }]}
-                                    onPress={this.showReceivedApp}
-                                    activeOpacity={0.8}
+                                  style={[
+                                      styles.modernButton,
+                                      {
+                                          backgroundColor: selectedButton === 'Recibidas' ? '#047734' : '#28a745',
+                                          width: '90%',
+                                          flexDirection: 'row',
+                                          alignItems: 'center',
+                                          justifyContent: 'center',
+                                      },
+                                  ]}
+                                  onPress={this.showReceivedApp}
+                                  activeOpacity={0.8}
                                 >
+                                    <Ionicons name="arrow-down-circle-outline" size={20} color="#fff" style={{ marginRight: 6 }} />
                                     <Text style={styles.buttonText}>Recibidas</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
 
                         {loading ? (
-                            <Text style={styles.text}>Loading...</Text>
+                          <View style={styles.loadingContainer}>
+                              <ActivityIndicator size="large" color="#28a745" />
+                          </View>
                         ) : (
                             <View style={styles.applicationsContainer}>
                                 {this.state.selectedButton === 'Enviadas' && (
