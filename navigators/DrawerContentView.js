@@ -139,8 +139,8 @@ export class DrawerContentScreen extends Component {
                 <View style={styles.bottomDrawer}>
                     <DrawerItem
                         icon={() => <Image source={require('../assets/img/icons/settings.png')} style={styles.icon} />}
-                        label="Configuracion"
-                        onPress={() => this.props.navigation.navigate("Configuracion")}
+                        label="Configuración"
+                        onPress={() => this.props.navigation.navigate("Configuración")}
                         labelStyle={{ color: "#E7E9EA" }}
                     />
                 </View>
