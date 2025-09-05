@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280742033935",
+    "project_id": "sidekick-346523",
+    "storage_bucket": "sidekick-346523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280742033935:android:f33cf4a2f2e2242f71017a",
+        "android_client_info": {
+          "package_name": "com.gustavof24.sidekickmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280742033935-jo9q5fn3a19a4dpcori7g97ll1cd3goo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-UG37PKjTs6XnoQ5U4qjn6CXXSyqiFK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280742033935-jo9q5fn3a19a4dpcori7g97ll1cd3goo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
