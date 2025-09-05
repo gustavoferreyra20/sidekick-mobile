@@ -67,7 +67,7 @@ export class DrawerCustomNavigator extends Component {
                 <Drawer.Screen
                     name="Tienda"
                     component={StoreScreen} />
-                <Drawer.Screen name="Configuracion"
+                <Drawer.Screen name="Configuración"
                     initialParams={{
                         sessionId: this.props.sessionId
                     }}>

@@ -47,7 +47,7 @@ export class ForgotPasswordScreen extends Component {
                         onPress={() => this.handlerResetPassword()}
                         activeOpacity={0.8}
                     >
-                        <Text style={styles.buttonText}>Reiniciar contraseña</Text>
+                        <Text style={styles.buttonText}>Restablecer contraseña</Text>
                     </TouchableOpacity>
 
                     <PopupService

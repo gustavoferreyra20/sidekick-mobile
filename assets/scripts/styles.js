@@ -419,7 +419,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#28a745',
     paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 8,
+    borderRadius: 12,
     alignItems: 'center',
     alignSelf: 'center',
     marginVertical: 10,

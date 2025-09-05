@@ -87,7 +87,7 @@ export class ConfigScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <PasswordInput
-                        label="Ingrese su contraseña original"
+                        label="Ingrese su contraseña actual"
                         value={this.state.password}
                         onChangeText={text => this.setState({ password: text })}
                         visible={this.state.passwordVisible}
@@ -111,10 +111,11 @@ export class ConfigScreen extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.modernButton}
-                        onPress={() => this.handlerLogout()}
-                        activeOpacity={0.8}
+                      style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545' }]}
+                      onPress={() => this.handlerLogout()}
+                      activeOpacity={0.8}
                     >
+                        <Ionicons name="log-out-outline" size={16} color="#fff" style={{ marginRight: 6 }} />
                         <Text style={styles.buttonText}>Cerrar sesión</Text>
                     </TouchableOpacity>
 

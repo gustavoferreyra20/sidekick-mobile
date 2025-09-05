@@ -62,7 +62,7 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                             activeOpacity={0.8}
                           >
                               <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 4 }} />
-                              <Text style={[styles.buttonText, { fontSize: 14 }]}>Contacto</Text>
+                              <Text style={[styles.buttonText, { fontSize: 14 }]}>Contactar</Text>
                           </TouchableOpacity>
 
                           {/* Calificar */}
