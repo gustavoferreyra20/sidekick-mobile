@@ -12,7 +12,8 @@ export default class RegistrationCtrl extends Component {
             email: '',
             description: '',
             password: '',
-            contact_inf_list: []
+            contact_inf_list: [],
+            profilePicture: null
         }
         this.msg = "";
         this.modalType = "alert";
@@ -59,21 +60,26 @@ export default class RegistrationCtrl extends Component {
         const result = await ImagePicker.launchImageLibraryAsync();
         if (!result.canceled) {
             // Aquí puedes guardar la imagen seleccionada en el estado de tu componente
-            this.newUser.profilePicture = result.assets[0].uri;
-            return true;
+            const uri = result.assets[0].uri;
+            this.newUser.profilePicture = uri;
+            return uri;
         } else {
-            return false;
+            return null;
         }
     };
 
     takeProfilePicture = async () => {
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+            return null;
+        }
         const result = await ImagePicker.launchCameraAsync();
         if (!result.canceled) {
-            // Aquí puedes guardar la imagen tomada en el estado de tu componente
-            this.newUser.profilePicture = result.assets[0].uri;
-            return true;
+            const uri = result.assets[0].uri;
+            this.newUser.profilePicture = uri;
+            return uri;
         } else {
-            return false;
+            return null;
         }
     };
 

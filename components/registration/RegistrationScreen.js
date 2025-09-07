@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, TextInput, Switch, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TextInput, Switch, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RegistrationCtrl from './RegistrationCtrl';
 import styles from '../../assets/scripts/styles';
@@ -12,7 +12,7 @@ export class RegistrationScreen extends Component {
         super(props);
         this.state = {
             loading: true,
-            profilePicture: false,
+            profilePicture: null,
         };
         this.controller = new RegistrationCtrl(props);
     }
@@ -43,13 +43,6 @@ export class RegistrationScreen extends Component {
         this.controller.showTerms().then(() => {
             this.forceUpdate();
         });
-    }
-
-    componentDidMount = () => {
-        this.controller.handleGetOptions().then(() => {
-            this.setState({ loading: false });
-            this.forceUpdate()
-        })
     }
 
     componentDidMount = () => {
@@ -102,50 +95,65 @@ export class RegistrationScreen extends Component {
                             placeholderTextColor="#495057"
                         />
 
-                        {this.state.profilePicture && (
-                            <TouchableOpacity
-                                style={[styles.modernButton, { backgroundColor: '#D4403A' }]}
+                        {this.state.profilePicture ? (
+                          <View style={{ alignItems: 'center' }}>
+                              {/* Vista previa circular */}
+                              <Image
+                                source={{ uri: this.state.profilePicture }}
+                                style={{
+                                    width: 150,
+                                    height: 150,
+                                    borderRadius: 75,
+                                    marginBottom: 15,
+                                    borderWidth: 2,
+                                    borderColor: '#28a745'
+                                }}
+                              />
+
+                              {/* Botón eliminar */}
+                              <TouchableOpacity
+                                style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545' }]}
                                 onPress={() => {
                                     this.controller.newUser.profilePicture = "";
-                                    this.setState({ profilePicture: false });
+                                    this.setState({ profilePicture: null });
                                 }}
                                 activeOpacity={0.8}
-                            >
-                                <Text style={styles.buttonText}>Eliminar foto</Text>
-                            </TouchableOpacity>
+                              >
+                                  <Ionicons name="trash" size={20} color="#fff" style={{ marginRight: 8 }} />
+                                  <Text style={styles.buttonText}>Eliminar foto</Text>
+                              </TouchableOpacity>
+                          </View>
+                        ) : (
+                          <>
+                              {/* Botón seleccionar */}
+                              <TouchableOpacity
+                                style={[styles.modernButton, styles.buttonWithIcon]}
+                                onPress={() => {
+                                    this.controller.pickProfilePicture().then((res) => {
+                                        if (res) this.setState({ profilePicture: res });
+                                    });
+                                }}
+                                activeOpacity={0.8}
+                              >
+                                  <Ionicons name="image" size={20} color="#fff" style={{ marginRight: 8 }} />
+                                  <Text style={styles.buttonText}>Seleccionar foto</Text>
+                              </TouchableOpacity>
+
+                              {/* Botón tomar */}
+                              <TouchableOpacity
+                                style={[styles.modernButton, styles.buttonWithIcon]}
+                                onPress={() => {
+                                    this.controller.takeProfilePicture().then((res) => {
+                                        if (res) this.setState({ profilePicture: res });
+                                    });
+                                }}
+                                activeOpacity={0.8}
+                              >
+                                  <Ionicons name="camera" size={20} color="#fff" style={{ marginRight: 8 }} />
+                                  <Text style={styles.buttonText}>Tomar foto</Text>
+                              </TouchableOpacity>
+                          </>
                         )}
-
-                        <TouchableOpacity
-                            style={[
-                                styles.modernButton,
-                                this.state.profilePicture && { opacity: 0.5 }
-                            ]}
-                            onPress={() => {
-                                this.controller.pickProfilePicture().then((res) => {
-                                    this.setState({ profilePicture: res });
-                                });
-                            }}
-                            activeOpacity={0.8}
-                            disabled={this.state.profilePicture}
-                        >
-                            <Text style={styles.buttonText}>Seleccionar foto</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={[
-                                styles.modernButton,
-                                this.state.profilePicture && { opacity: 0.5 }
-                            ]}
-                            onPress={() => {
-                                this.controller.takeProfilePicture().then((res) => {
-                                    this.setState({ profilePicture: res });
-                                });
-                            }}
-                            activeOpacity={0.8}
-                            disabled={this.state.profilePicture}
-                        >
-                            <Text style={styles.buttonText}>Tomar foto</Text>
-                        </TouchableOpacity>
 
                         <TextInput
                             style={styles.textAreaInput}

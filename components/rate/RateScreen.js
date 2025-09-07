@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import RateCtrl from './RateCtrl';
 import Slider from '@react-native-community/slider';
@@ -139,7 +139,7 @@ export class RateScreen extends Component {
                           onPress={this.handleShowRewards}
                           activeOpacity={0.8}
                         >
-                            <Ionicons name="gift" size={16} color="#fff" style={{ marginRight: 6 }} />
+                            <Ionicons name="trophy" size={16} color="#fff" style={{ marginRight: 6 }} />
                             <Text style={styles.buttonText}>Premiar</Text>
                         </TouchableOpacity>
                     </View>
@@ -155,11 +155,14 @@ export class RateScreen extends Component {
                                             style={styles.rewardImage}
                                         />
                                         <Text style={styles.rewardDescription} >{reward.description}</Text>
-                                        <Button
-                                            title="Seleccionar"
-                                            onPress={() => this.handleSelectReward(reward)}
-                                            color="#28a745"
-                                        />
+                                        <TouchableOpacity
+                                          style={[styles.modernButton, styles.buttonWithIcon]}
+                                          onPress={() => this.handleSelectReward(reward)}
+                                          activeOpacity={0.8}
+                                        >
+                                            <Ionicons name="checkmark" size={16} color="#fff" style={{ marginRight: 6 }} />
+                                            <Text style={styles.buttonText}>Seleccionar</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             ))}
@@ -193,18 +196,21 @@ export class RateScreen extends Component {
                                 style={styles.rewardImage}
                             />
                             <Text style={styles.rewardDescription}>{this.state.form.reward.description}</Text>
-                            <Button
-                                title="Eliminar"
-                                onPress={() => this.handleDeleteReward()}
-                                color="#FF0000"
-                            />
+                            <TouchableOpacity
+                              style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545' }]}
+                              onPress={() => this.handleDeleteReward()}
+                              activeOpacity={0.8}
+                            >
+                                <Ionicons name="trash" size={16} color="#fff" style={{ marginRight: 6 }} />
+                                <Text style={styles.buttonText}>Eliminar</Text>
+                            </TouchableOpacity>
                         </View>
                     )}
 
                     {/* Calificar button */}
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
-                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#28a745' }]}
+                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#17a2b8' }]}
                           onPress={() => {
                               this.controller.newReview(
                                 this.state.form,
@@ -215,12 +221,12 @@ export class RateScreen extends Component {
                           }}
                           activeOpacity={0.8}
                         >
-                            <Ionicons name="save" size={16} color="#fff" style={{ marginRight: 6 }} />
-                            <Text style={styles.buttonText}>Guardar Calificación</Text>
+                            <Ionicons name="send" size={16} color="#fff" style={{ marginRight: 6 }} />
+                            <Text style={styles.buttonText}>Enviar Calificación</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#FF0000' }]}
+                          style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545' }]}
                           onPress={() => { this.props.updateReview() }}
                           activeOpacity={0.8}
                         >
