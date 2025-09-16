@@ -11,7 +11,7 @@ VERDE			::	#11d077
 VERDE CLARO		::	#28a745
 */
 
-export default styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#020202',
@@ -434,6 +434,7 @@ export default styles = StyleSheet.create({
     borderColor: '#2C2C2E',
     textAlignVertical: 'top',
     marginTop: 16,
+    minHeight: 80, // fix for iOS
   },
   loadingContainer: {
       alignItems: 'center',

@@ -45,7 +45,6 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                             <TouchableOpacity
                                 style={[styles.modernButton, {backgroundColor: '#F57C00', width: '100%'}]}
                                 activeOpacity={0.8}
-                                onPress={this.showReceivedApp}
                             >
                                 <Text style={styles.buttonText}>Post completo</Text>
                             </TouchableOpacity>
