@@ -9,7 +9,7 @@ const ReviewScreen = ({ item, handleUserNamePress }) => {
             <View style={styles.reviewHeader}>
                 <View style={styles.imageContainer}>
                     <Image
-                        source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${item.user.img}` }}
+                        source={{ uri: `${item.user.img}` }}
                         style={styles.userImage}
                     />
                 </View>

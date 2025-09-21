@@ -7,7 +7,7 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
     if (user.applications.status !== 'rejected' && user.applications.status !== 'complete') {
         return (
             <View style={styles.profileHeader}>
-                <Image source={{uri: `https://sidekick-server-nine.vercel.app/api/images/${user.img}`}}
+                <Image source={{uri: `${user.img}`}}
                        style={styles.userImage}/>
                 <View style={styles.profileHeaderData}>
                     <TouchableOpacity

@@ -9,7 +9,7 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
             <View style={styles.profileHeader}>
                 <Image
                     style={styles.userImage}
-                    source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${post.userImg}` }}
+                    source={{ uri: `${post.userImg}` }}
                 />
 
                 <View style={styles.userInfo}>

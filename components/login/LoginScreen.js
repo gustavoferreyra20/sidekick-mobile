@@ -48,6 +48,7 @@ export class LoginScreen extends Component {
                         onChangeText={text => this.controller.email = text}
                         placeholder="Ingrese su email"
                         placeholderTextColor="#495057"
+                        autoCapitalize="none"
                         required
                     />
 
@@ -60,6 +61,7 @@ export class LoginScreen extends Component {
                             placeholder="**********"
                             placeholderTextColor="#495057"
                             required
+                            autoCapitalize="none"
                         />
                         <TouchableOpacity
                             onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}

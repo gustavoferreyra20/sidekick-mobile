@@ -91,7 +91,7 @@ export class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.profileHeader}>
-          <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${profile.img}` }} style={styles.userImage} />
+          <Image source={{ uri: `${profile.img}` }} style={styles.userImage} />
           <View style={styles.profileHeaderData}>
             <Text style={[styles.text, styles.nameText, styles.boldText]}>{profile.name}</Text>
             <Text style={styles.text}>

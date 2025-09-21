@@ -93,6 +93,7 @@ export class RegistrationScreen extends Component {
                             onChangeText={text => this.controller.newUser.email = text}
                             placeholder="Ingrese su email"
                             placeholderTextColor="#495057"
+                            autoCapitalize="none"
                         />
 
                         {this.state.profilePicture ? (
@@ -200,6 +201,7 @@ export class RegistrationScreen extends Component {
                                         this.controller.newUser.contact_inf_list[index].account = text;
                                     }}
                                     placeholderTextColor="#495057"
+                                    autoCapitalize="none"
                                 />
                             </View>
                         ))}
@@ -234,6 +236,7 @@ export class RegistrationScreen extends Component {
                                 onChangeText={text => this.controller.newUser.password = text}
                                 placeholder="**********"
                                 placeholderTextColor="#495057"
+                                autoCapitalize="none"
                             />
                             <TouchableOpacity
                                 onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
@@ -269,6 +272,7 @@ export class RegistrationScreen extends Component {
                                 onChangeText={text => this.controller.newUser.repeatPassword = text}
                                 placeholder="**********"
                                 placeholderTextColor="#495057"
+                                autoCapitalize="none"
                             />
 
                             <TouchableOpacity
