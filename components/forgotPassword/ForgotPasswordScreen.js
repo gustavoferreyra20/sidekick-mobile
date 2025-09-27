@@ -33,7 +33,10 @@ export class ForgotPasswordScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <Text style={styles.text}>Email</Text>
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.text}>Email</Text>
+                        <Text style={styles.required}>*</Text>
+                    </View>
                     <TextInput
                         style={styles.textInput}
                         onChangeText={text => this.controller.email = text}

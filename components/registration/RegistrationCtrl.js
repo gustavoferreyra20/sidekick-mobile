@@ -138,7 +138,7 @@ export default class RegistrationCtrl extends Component {
                         this.msg = "Ocurrió un error";
                         console.error("Error registering user:", result.error);
                     } else {
-                        this.msg = "Usuario registrado con éxito";
+                        this.msg = "¡Usuario registrado con éxito! Revisa tu correo electrónico para activar tu cuenta";
                         this.function = () => this.props.navigation.navigate('Iniciar sesión');
                     }
                     this.modalVisible = true;

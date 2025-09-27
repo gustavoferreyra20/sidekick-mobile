@@ -8,21 +8,13 @@ class AuthService {
       password: obj.password,
     };
 
-    return new Promise((resolve, reject) => {
-      axios.post(url, data)
-        .then((res) => {
-          if (res.data) {
-            let userSession = res.data;
-            resolve(userSession);
-          } else {
-            reject("Usuario y/o contraseña incorrectas");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-          reject("Usuario y/o contraseña incorrectas");
-        });
-    });
+    try {
+      const res = await axios.post(url, data);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   static async resetPassword(obj) {

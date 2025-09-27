@@ -73,7 +73,7 @@ export class RegistrationScreen extends Component {
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer} >
                     <View style={styles.formContainer}>
                         <View style={styles.labelContainer}>
-                            <Text style={styles.text}>Name</Text>
+                            <Text style={styles.text}>Nombre</Text>
                             <Text style={styles.required}>*</Text>
                         </View>
 

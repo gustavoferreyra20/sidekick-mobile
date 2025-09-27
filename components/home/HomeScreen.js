@@ -5,7 +5,7 @@ import styles from '../../assets/scripts/styles';
 import HomeCtrl from './HomeCtrl';
 import PopupService from '../popups/PopupService';
 import Loader from '../../assets/scripts/loader';
-import PostSreen from '../posts/PostSreen';
+import PostScreen from '../posts/PostScreen';
 import {Ionicons} from "@expo/vector-icons";
 
 export class HomeScreen extends Component {
@@ -155,7 +155,7 @@ export class HomeScreen extends Component {
                     <View style={styles.postsContainer}>
                         <Loader
                             data={posts}
-                            renderItem={({ item }) => <PostSreen post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
+                            renderItem={({ item }) => <PostScreen post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
                         />
                     </View>
                 )}

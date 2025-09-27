@@ -3,7 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import {Ionicons} from "@expo/vector-icons";
 
-const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
+const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     return (
         <View>
             <View style={styles.profileHeader}>
@@ -87,4 +87,4 @@ const PostSreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
     );
 };
 
-export default PostSreen;
+export default PostScreen;

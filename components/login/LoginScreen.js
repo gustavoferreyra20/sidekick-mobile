@@ -42,7 +42,10 @@ export class LoginScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <Text style={styles.text}>Email</Text>
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.text}>Email</Text>
+                        <Text style={styles.required}>*</Text>
+                    </View>
                     <TextInput
                         style={styles.textInput}
                         onChangeText={text => this.controller.email = text}
@@ -52,7 +55,10 @@ export class LoginScreen extends Component {
                         required
                     />
 
-                    <Text style={styles.text}>Password</Text>
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.text}>Password</Text>
+                        <Text style={styles.required}>*</Text>
+                    </View>
                     <View style={{ position: 'relative', width: '100%' }}>
                         <TextInput
                             style={[styles.textInput, { paddingRight: 40 }]} // deja espacio para el icono

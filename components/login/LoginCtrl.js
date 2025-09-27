@@ -31,10 +31,15 @@ export default class LoginCtrl {
       AuthService.login({ email: this.email, password: this.password })
         .then((response) => {
           this.onLogin(response);
+          resolve();
         })
-        .catch(() => {
-          this.msg = "Usuario y/o contraseña incorrectas"
-          this.modalVisible = true
+        .catch((error) => {
+          if (error.response?.status === 403) {
+            this.msg = "¡Casi listo! Revisa tu correo para activar tu cuenta y comenzar a usar la aplicación";
+          } else {
+            this.msg = "Usuario y/o contraseña incorrectas";
+          }
+          this.modalVisible = true;
           resolve();
         });
     });

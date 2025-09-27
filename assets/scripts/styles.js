@@ -39,7 +39,7 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     alignItems: 'center',
-    paddingBottom: 50,
+    paddingBottom: 20,
     flexGrow: 1,
   },
   boldText: {
