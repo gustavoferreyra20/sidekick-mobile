@@ -4,7 +4,11 @@ class PaymentService {
 
     static async newPayment(reward) {
         return new Promise((resolve, reject) => {
-            AxiosInstance.post(`payments/mp`, reward)
+            const paymentData = {
+                id_reward: reward.id_reward
+            };
+            
+            AxiosInstance.post(`payments/mp`, paymentData)
                 .then((res) => {
                     resolve(res.data);
                 })
