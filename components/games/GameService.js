@@ -2,14 +2,14 @@ import AxiosInstance from '../../middleware/AxiosInstance';
 
 class GameService {
 
-  static async getAll() {
+  static async getAll(limit = 10, offset = 0, sortBy = 'name', sortOrder = 'asc') {
     return new Promise((resolve, reject) => {
-      AxiosInstance.get(`games`)
+      AxiosInstance.get(`/games/igdb?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`)
         .then((res) => {
           resolve(res.data);
         })
         .catch(function (error) {
-          console.log(error);
+          console.log("errorservice: ", error);
           reject(error);
         });
     });

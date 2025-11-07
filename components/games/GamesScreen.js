@@ -17,14 +17,14 @@ export class GamesScreen extends Component {
   componentDidMount() {
     this.controller.handleGetGames().then((data) => {
       this.setState({
-        games: data,
+        games: data.games,
         loading: false,
       });
     });
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.controller.handleGetGames().then((data) => {
         this.setState({
-          games: data,
+          games: data.games,
           loading: false,
         });
       });
@@ -40,7 +40,7 @@ export class GamesScreen extends Component {
   renderGame = (game, index) => {
     return (
       <View key={index} style={styles.gameContainer}>
-        <Image source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${game.img}` }} style={styles.gameImage} />
+        <Image source={{ uri: `https://images.igdb.com/igdb/image/upload/t_720p/${game.cover.image_id}.jpg` }} style={styles.gameImage} />
         <Text style={styles.gameName}>{game.name}</Text>
       </View>
     );

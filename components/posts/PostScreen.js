@@ -28,9 +28,9 @@ const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                     </View>
 
                     <Text style={styles.usersText}>
-                        {post.mode}
+                        {post.modeName}
                         <Text style={styles.dot}> {'\u2B24'} </Text>
-                        {post.platform}
+                        {post.platformName}
                         <Text style={styles.dot}> {'\u2B24'} </Text>
                         Habilidad: <Text style={styles.ability}>{post.abilityscore}</Text>
                         <Text style={styles.dot}> {'\u2B24'} </Text>
@@ -48,7 +48,7 @@ const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                 <View style={styles.postContent}>
                     <Image
                         style={styles.gameImage}
-                        source={{ uri: `https://sidekick-server-nine.vercel.app/api/images/${post.gameImg}` }}
+                        source={{ uri: `https://images.igdb.com/igdb/image/upload/t_720p/${post.coverImage}.jpg` }}
                         alt={post.gameName}
                     />
 
