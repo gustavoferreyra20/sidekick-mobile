@@ -2,7 +2,7 @@ import AxiosInstance from '../../middleware/AxiosInstance';
 
 class GameService {
 
-  static async getAll(limit = 10, offset = 0, sortBy = 'name', sortOrder = 'asc') {
+  static async getAll(limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc') {
     return new Promise((resolve, reject) => {
       AxiosInstance.get(`/games/igdb?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`)
         .then((res) => {
@@ -17,7 +17,8 @@ class GameService {
 
   static async getOptions(any = false) {
     try {
-      const games = await this.getAll();
+      const res = await this.getAll();
+      const games = res.games;
       const options = [];
 
       if (any) {
@@ -26,7 +27,11 @@ class GameService {
 
       for (let i = 0; i < games.length; i++) {
         if (games[i]) {
-          options.push({ value: games[i].id_game, name: games[i].name });
+          options.push({
+            value: games[i].id,
+            name: games[i].name,
+            full: games[i]
+          });
         }
       }
 

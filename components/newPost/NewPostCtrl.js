@@ -1,10 +1,8 @@
-import { Component } from 'react';
+import {Component} from 'react';
 
 // Import your services
 import GameService from '../games/GameService'; // Update the import paths accordingly
 import PostService from '../posts/PostService';
-import ModeService from '../modes/ModeService';
-import PlatformService from '../platforms/PlatformService';
 
 export default class NewPostCtrl extends Component {
 
@@ -20,15 +18,24 @@ export default class NewPostCtrl extends Component {
     return await GameService.getOptions(false);
   }
 
-  fetchModeOptions = async () => {
-    return await ModeService.getOptions(false);
-  }
+  setPlatforms = async (game) => {
+    if (!game || !game.full) return [];
+    return game.full.platforms.map(p => ({
+      value: p.id,
+      name: p.name
+    }));
+  };
 
-  setPlatforms = async (arg = null) => {
-    const game = (arg != null) ? arg : null;
+  setModes = async (game) => {
+    if (!game || !game.full) return [];
 
-    return await PlatformService.getOptions(game, false);
-  }
+    return game.full.game_modes
+      .filter(m => m.name.toLowerCase() !== "single player")
+      .map(m => ({
+        value: m.id,
+        name: m.name
+      }));
+  };
 
   createPost = async (postData, reloadForm) => {
     if (!postData.title.length) {
