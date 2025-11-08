@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, Image, Text, View} from 'react-native';
+import {ActivityIndicator, Image, ScrollView, Text, View} from 'react-native';
 import GamesCtrl from './GamesCtrl';
 
 import styles from '../../assets/scripts/styles';
@@ -59,9 +59,16 @@ export class GamesScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.gamesContainer}>{games.map(this.renderGame)}</View>
-      </View>
+      <ScrollView
+        style={{ flex: 1, backgroundColor: '#020202' }}
+        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: 10 }}
+      >
+        {games.map((game, index) => (
+          <View key={index} style={{ width: '48%', marginBottom: 10 }}>
+            {this.renderGame(game, index)}
+          </View>
+        ))}
+      </ScrollView>
     );
   }
 
