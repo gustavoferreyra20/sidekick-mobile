@@ -3,7 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../assets/scripts/styles';
 import {Ionicons} from "@expo/vector-icons";
 
-const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
+const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress, currentUserId }) => {
     return (
         <View>
             <View style={styles.profileHeader}>
@@ -55,8 +55,23 @@ const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                     <Text style={styles.description}>{post.description}</Text>
                 </View>
 
-                {post.actualusers < post.requiredusers && (
-                  <View style={{ width: '100%' }}>
+                {/* BOTÓN CREADOR */}
+                {post.id_user === currentUserId && (
+                  <View style={{ width: '100%', marginTop: 8 }}>
+                      <TouchableOpacity
+                        style={[styles.modernButton, styles.buttonWithIcon, { width: '100%', backgroundColor: '#2196F3' }]}
+                        activeOpacity={0.8}
+                        disabled
+                      >
+                          <Ionicons name="ribbon" size={16} color="#fff" style={{ marginRight: 6 }} />
+                          <Text style={styles.buttonText}>Creador</Text>
+                      </TouchableOpacity>
+                  </View>
+                )}
+
+                {/* BOTÓN UNIRSE */}
+                {post.id_user !== currentUserId && post.actualusers < post.requiredusers && (
+                  <View style={{ width: '100%', marginTop: 8 }}>
                       <TouchableOpacity
                         style={[styles.modernButton, styles.buttonWithIcon, { width: '100%' }]}
                         onPress={() => btnSubmitApplication(post.id_post, post.id_user)}
@@ -68,12 +83,13 @@ const PostScreen = ({ post, btnSubmitApplication, handleUserNamePress }) => {
                   </View>
                 )}
 
-                {post.actualusers === post.requiredusers && (
-                  <View style={{ width: '100%' }}>
+                {/* BOTÓN POST COMPLETO */}
+                {post.id_user !== currentUserId && post.actualusers >= post.requiredusers && (
+                  <View style={{ width: '100%', marginTop: 8 }}>
                       <TouchableOpacity
                         style={[styles.modernButton, styles.buttonWithIcon, { width: '100%', backgroundColor: '#F57C00' }]}
                         activeOpacity={0.8}
-                        onPress={() => {}}
+                        disabled
                       >
                           <Ionicons name="lock-closed" size={16} color="#fff" style={{ marginRight: 6 }} />
                           <Text style={styles.buttonText}>Post completo</Text>

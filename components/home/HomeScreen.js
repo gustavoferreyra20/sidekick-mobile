@@ -155,7 +155,7 @@ export class HomeScreen extends Component {
                     <View style={styles.postsContainer}>
                         <Loader
                             data={posts}
-                            renderItem={({ item }) => <PostScreen post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} />}
+                            renderItem={({ item }) => <PostScreen post={item} btnSubmitApplication={this.btnSubmitApplication} handleUserNamePress={this.handleUserNamePress} currentUserId={this.id_user} />}
                         />
                     </View>
                 )}
