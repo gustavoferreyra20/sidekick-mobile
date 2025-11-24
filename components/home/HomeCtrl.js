@@ -1,10 +1,6 @@
 import { Component } from 'react';
-
-// Import your services
 import GameService from '../games/GameService';
 import PostService from '../posts/PostService';
-import ModeService from '../modes/ModeService';
-import PlatformService from '../platforms/PlatformService';
 import UserService from '../users/UserService';
 
 export default class HomeCtrl extends Component {
@@ -12,42 +8,42 @@ export default class HomeCtrl extends Component {
         super(props);
         this.msg = "";
         this.modalType = "alert";
-        this.modalFunction = () => { };
+        this.modalFunction = () => {};
         this.modalVisible = false;
     }
 
     fetchGameOptions = async () => {
         return await GameService.getOptions(true);
-    }
+    };
 
-    fetchModeOptions = async () => {
-        return await ModeService.getOptions(true);
-    }
+    setPlatforms = async (game) => {
+        if (!game || !game.full || !Array.isArray(game.full.platforms)) return [];
+        return game.full.platforms.map(p => ({
+            value: p.id,
+            name: p.name
+        }));
+    };
 
-    setPlatforms = async (arg = null) => {
-        const game = (arg != null) ? arg : null;
-
-        return await PlatformService.getOptions(game, true);
-    }
+    fetchModeOptions = async (game) => {
+        if (!game || !game.full || !Array.isArray(game.full.game_modes)) return [];
+        return game.full.game_modes
+          .filter(m => m.name.toLowerCase() !== "single player")
+          .map(m => ({
+              value: m.id,
+              name: m.name
+          }));
+    };
 
     getPosts = async () => {
         return await PostService.getAll();
-    }
+    };
 
-    btnSearchPost = async (game, platform, mode) => {
+    btnSearchPost = async (gameValue, platformValue, modeValue) => {
         const params = {};
 
-        if (game !== 'any') {
-            params.id_game = game;
-        }
-
-        if (platform !== 'any') {
-            params.id_platform = platform;
-        }
-
-        if (mode !== 'any') {
-            params.id_mode = mode;
-        }
+        if (gameValue && gameValue !== "any") params.id_game = gameValue;
+        if (platformValue && platformValue !== "any") params.id_platform = platformValue;
+        if (modeValue && modeValue !== "any") params.id_mode = modeValue;
 
         return await PostService.getAll(params);
     };
@@ -62,7 +58,7 @@ export default class HomeCtrl extends Component {
 
             const res = await UserService.getApplications(id_user, 'sent');
 
-            if (res.some((item) => item.id_post === id_post)) {
+            if (res.some(item => item.id_post === id_post)) {
                 this.msg = "Ya existe una solicitud";
                 this.modalVisible = true;
                 return;
@@ -73,10 +69,8 @@ export default class HomeCtrl extends Component {
             this.modalVisible = true;
 
         } catch (error) {
-            console.error("Error en submitApplication:", error);
-            this.msg = "Ocurrió un error, intenta nuevamente";
+            this.msg = "Error inesperado. Intente nuevamente.";
             this.modalVisible = true;
         }
     };
-
 }
