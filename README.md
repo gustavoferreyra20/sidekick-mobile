@@ -29,36 +29,71 @@ Aplicación móvil en React Native diseñada para conectar jugadores, facilitar 
 ## 💻 Estructura del Proyecto
 
 ```
-├── android/ # Archivos específicos de Android
-├── ios/ # Archivos específicos de iOS
-├── App.js # Punto de entrada principal de la aplicación
-├── assets/ # Recursos estáticos (imágenes, fuentes, etc.)
-│ └── scripts/ # Estilos y scripts
-├── components/ # Componentes de React
-│ ├── applications/ # Componentes de la pantalla de solicitudes
-│ ├── auth/ # Servicio de autenticación
-│ ├── config/ # Componentes de configuración
-│ ├── forgotPassword/ # Componentes de recuperación de contraseña
-│ ├── games/ # Componentes de la pantalla de juegos
-│ ├── home/ # Componentes de la pantalla principal
-│ ├── login/ # Componentes de inicio de sesión
-│ ├── newPost/ # Componentes para crear nuevas publicaciones
-│ ├── notifications/ # Componentes de notificaciones
-│ ├── popups/ # Servicio de pop-ups
-│ ├── postSearchForm/ # Componentes del formulario de búsqueda de posts
-│ ├── posts/ # Componentes de publicaciones
-│ ├── profile/ # Componentes de perfil
-│ ├── rate/ # Componentes de calificación
-│ ├── registration/ # Componentes de registro
-│ ├── reward/ # Componentes de recompensas
-│ ├── reviews/ # Componentes de reseñas
-│ └── store/ # Componentes de la tienda
-├── middleware/ # Configuración de la instancia de Axios
-├── navigators/ # Componentes de navegación
-├── .gitignore # Archivos ignorados por Git
-├── app.json # Archivo de configuración de Expo
-├── package.json # Dependencias y scripts del proyecto
-└── README.md # Documentación del proyecto
+├── android/                        # Archivos nativos de Android
+├── ios/                            # Archivos nativos de iOS
+├── App.js                          # Punto de entrada principal de la app
+│
+├── assets/                         # Recursos estáticos
+│   ├── img/                        # Iconos e imágenes
+│   └── scripts/                    # Estilos globales y utilidades
+│
+├── components/                     # Componentes UI reutilizables
+│   ├── applications/               # Componentes visuales usados en Solicitudes
+│   ├── notifications/              # Componentes UI de notificaciones
+│   ├── popups/                     # Popups y modales reutilizables
+│   ├── posts/                      # Componentes UI para posts
+│   ├── reviews/                    # Componentes UI de reseñas
+│   └── reward/                     # Componentes UI de recompensas
+│
+├── controllers/                    # Lógica de negocio por feature
+│   ├── applications/
+│   ├── auth/
+│   ├── config/
+│   ├── games/
+│   ├── home/
+│   ├── notifications/
+│   ├── posts/
+│   ├── profile/
+│   ├── rate/
+│   └── store/
+│
+├── middleware/                     # Configuración de Axios / interceptores
+│
+├── navigators/                     # Navegadores personalizados
+│   ├── DrawerContentView.js
+│   └── DrawerCustomNavigator.js
+│
+├── screens/                        # Pantallas del sistema
+│   ├── applications/
+│   ├── auth/
+│   ├── config/
+│   ├── games/
+│   ├── home/
+│   ├── notifications/
+│   ├── posts/
+│   ├── profile/
+│   ├── rate/
+│   └── store/
+│
+├── services/                       # Servicios (API calls)
+│   ├── AuthService.js
+│   ├── ContactInfService.js
+│   ├── GameService.js
+│   ├── ModeService.js
+│   ├── NotificationService.js
+│   ├── NotificationStateService.js
+│   ├── PaymentService.js
+│   ├── PlatformService.js
+│   ├── PopupService.js
+│   ├── PostService.js
+│   ├── ReviewService.js
+│   ├── RewardService.js
+│   └── UserService.js
+│
+├── .gitignore
+├── app.json
+├── package.json
+└── README.md
 ```
 
 ## 📌 Requisitos Previos

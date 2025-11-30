@@ -14,9 +14,9 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './assets/scripts/styles.js';
 
-import { LoginScreen } from "./components/login/LoginScreen.js";
-import { RegistrationScreen } from "./components/registration/RegistrationScreen.js";
-import { ForgotPasswordScreen } from './components/forgotPassword/ForgotPasswordScreen.js';
+import { LoginScreen } from "./screens/auth/LoginScreen.js";
+import { RegistrationScreen } from "./screens/auth/RegistrationScreen.js";
+import { ForgotPasswordScreen } from './screens/auth/ForgotPasswordScreen.js';
 import {SafeAreaView} from "react-native-safe-area-context";
 
 const Stack = createStackNavigator();
