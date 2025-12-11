@@ -3,53 +3,72 @@ import { TouchableOpacity, TouchableWithoutFeedback, View, Text } from 'react-na
 import { Picker } from '@react-native-picker/picker';
 import styles from '../../assets/scripts/styles';
 import { Ionicons } from "@expo/vector-icons";
+import SearchableDropdown from '../SearchableDropdown';
 
 export default class PostSearchForm extends Component {
   constructor(props) {
     super(props);
 
+    // Find the currently selected game option or default to first game
+    const currentGameOption = props.gameOptions?.find(g => g.value === props.gameSelected) || props.gameOptions?.[0] || null;
+
     this.state = {
-      gameSelected: props.gameSelected || 'any',
+      gameSelected: props.gameSelected || (props.gameOptions?.[0]?.value || ''),
+      selectedGameOption: currentGameOption,
       platformSelected: props.platformSelected || 'any',
       modeSelected: props.modeSelected || 'any',
 
-      platformOptions:
-        props.platformOptions?.length
-          ? props.platformOptions
-          : [{ name: "Cualquier plataforma", value: "any" }],
-
-      modeOptions:
-        props.modeOptions?.length
-          ? props.modeOptions
-          : [{ name: "Cualquier modo", value: "any" }],
+      platformOptions: props.platformOptions || [],
+      modeOptions: props.modeOptions || [],
     };
   }
 
-  handleGameSelect = async (value) => {
-    if (value === "any") {
-      this.setState({
-        gameSelected: "any",
-        platformOptions: [{ name: "Cualquier plataforma", value: "any" }],
-        modeOptions: [{ name: "Cualquier modo", value: "any" }],
-        platformSelected: "any",
-        modeSelected: "any",
-      });
-      return;
+  componentDidUpdate(prevProps) {
+    // If gameOptions changed and we don't have a selected game, select the first one
+    if (prevProps.gameOptions !== this.props.gameOptions && this.props.gameOptions?.length > 0) {
+      if (!this.state.gameSelected || this.state.gameSelected === 'any') {
+        const firstGame = this.props.gameOptions[0];
+        if (firstGame) {
+          this.setState({
+            gameSelected: firstGame.value,
+            selectedGameOption: firstGame,
+          });
+        }
+      }
     }
+    
+    // Update platform and mode options when props change
+    if (prevProps.platformOptions !== this.props.platformOptions) {
+      this.setState({ 
+        platformOptions: this.props.platformOptions || [],
+        platformSelected: this.props.platformSelected || this.props.platformOptions?.[0]?.value || ""
+      });
+    }
+    
+    if (prevProps.modeOptions !== this.props.modeOptions) {
+      this.setState({ 
+        modeOptions: this.props.modeOptions || [],
+        modeSelected: this.props.modeSelected || this.props.modeOptions?.[0]?.value || ""
+      });
+    }
+  }
 
-    const selectedGame = this.props.gameOptions.find(g => g.value === value);
-    if (!selectedGame) return;
-
+  handleGameSelect = async (selectedGame) => {
     const platformOptions = await this.props.controller.setPlatforms(selectedGame);
     const modeOptions = await this.props.controller.fetchModeOptions(selectedGame);
 
     this.setState({
-      gameSelected: value,
+      gameSelected: selectedGame.value,
+      selectedGameOption: selectedGame,
       platformOptions,
       modeOptions,
       platformSelected: platformOptions[0]?.value || "",
       modeSelected: modeOptions[0]?.value || "",
     });
+  };
+
+  handleGameSearch = async (searchTerm) => {
+    return await this.props.controller.searchGames(searchTerm);
   };
 
   handleSubmit = () => {
@@ -74,7 +93,7 @@ export default class PostSearchForm extends Component {
     } = this.state;
 
     const { gameOptions } = this.props;
-    const disableSubFilters = gameSelected === "any";
+    const disableSubFilters = !gameSelected || !this.state.selectedGameOption;
 
     return (
       <TouchableOpacity
@@ -84,34 +103,13 @@ export default class PostSearchForm extends Component {
         <TouchableWithoutFeedback>
           <View style={styles.popupContent}>
 
-            <View style={styles.pickerContainer}>
-              <Picker
-                style={styles.picker}
-                selectedValue={gameSelected}
-                onValueChange={this.handleGameSelect}
-                dropdownIconColor="#495057"
-                mode="dropdown"
-              >
-                <Picker.Item
-                  label="Cualquier juego"
-                  value="any"
-                  style={styles.pickerItem}
-                  color="#E7E9EA"
-                />
-
-                {gameOptions
-                  .filter(g => g.value !== "any")
-                  .map((gameOption) => (
-                    <Picker.Item
-                      key={gameOption.value}
-                      label={gameOption.name}
-                      value={gameOption.value}
-                      style={styles.pickerItem}
-                      color="#E7E9EA"
-                    />
-                  ))}
-              </Picker>
-            </View>
+            <SearchableDropdown
+              options={gameOptions}
+              selectedOption={this.state.selectedGameOption}
+              onSelect={this.handleGameSelect}
+              onSearch={this.handleGameSearch}
+              placeholder="Seleccionar juego"
+            />
 
             <View style={styles.pickerContainer}>
               <Picker

@@ -445,5 +445,93 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  // SearchableDropdown styles
+  searchableDropdownContainer: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  dropdownButton: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 16,
+    borderWidth: 1,
+    borderColor: '#2C2C2E',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    minHeight: 50,
+  },
+  dropdownButtonText: {
+    color: '#E7E9EA',
+    fontSize: 16,
+    flex: 1,
+  },
+  dropdownOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropdownModal: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: 12,
+    width: '90%',
+    maxHeight: '70%',
+    borderWidth: 1,
+    borderColor: '#2C2C2E',
+  },
+  dropdownHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2C2C2E',
+  },
+  dropdownSearchInput: {
+    flex: 1,
+    backgroundColor: '#2C2C2E',
+    color: '#E7E9EA',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 16,
+  },
+  dropdownCloseButton: {
+    marginLeft: 12,
+    padding: 4,
+  },
+  dropdownDivider: {
+    height: 1,
+    backgroundColor: '#2C2C2E',
+  },
+  dropdownContent: {
+    maxHeight: 300,
+  },
+  dropdownList: {
+    flexGrow: 0,
+  },
+  dropdownItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2C2C2E',
+  },
+  dropdownItemText: {
+    color: '#E7E9EA',
+    fontSize: 16,
+  },
+  dropdownMessage: {
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dropdownMessageText: {
+    color: '#6c757d',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 8,
+  },
 });

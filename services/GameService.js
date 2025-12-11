@@ -60,6 +60,19 @@ class GameService {
     }
   }
 
+  static async search(limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc', name = '') {
+    return new Promise((resolve, reject) => {
+      AxiosInstance.get(`/games/igdb/search?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}&name=${name}`)
+        .then((res) => {
+          resolve(res.data.games);
+        })
+        .catch(function (error) {
+          console.log("errorservice: ", error);
+          reject(error);
+        });
+    });
+  }
+
 }
 
 export default GameService;

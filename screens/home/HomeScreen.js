@@ -43,24 +43,32 @@ export class HomeScreen extends Component {
     fetchData = async () => {
         this.setState({ loading: true });
 
-        const rawGames = await this.controller.fetchGameOptions();
-
-        const gameOptions = [
-            { name: "Cualquier juego", value: "any" },
-            ...rawGames
-        ];
-
+        const gameOptions = await this.controller.fetchGameOptions();
         const posts = await this.controller.getPosts();
+        
+        let platformOptions = [];
+        let modeOptions = [];
+        let platformSelected = "";
+        let modeSelected = "";
+        
+        // If we have games, get platforms and modes for the first game
+        if (gameOptions && gameOptions.length > 0) {
+            const firstGame = gameOptions[0];
+            platformOptions = await this.controller.setPlatforms(firstGame);
+            modeOptions = await this.controller.fetchModeOptions(firstGame);
+            platformSelected = platformOptions[0]?.value || "";
+            modeSelected = modeOptions[0]?.value || "";
+        }
 
         this.setState({
             loading: false,
             gameOptions,
             posts,
-            gameSelected: "any",
-            platformOptions: [{ name: "Cualquier plataforma", value: "any" }],
-            modeOptions: [{ name: "Cualquier modo", value: "any" }],
-            platformSelected: "any",
-            modeSelected: "any",
+            gameSelected: gameOptions[0]?.value || "",
+            platformOptions,
+            modeOptions,
+            platformSelected,
+            modeSelected,
         });
     };
 

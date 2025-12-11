@@ -37,6 +37,20 @@ export default class NewPostCtrl extends Component {
       }));
   };
 
+  searchGames = async (searchTerm) => {
+    try {
+      const games = await GameService.search(10, 0, 'updated_at', 'desc', searchTerm);
+      return games.map(game => ({
+        value: game.id,
+        name: game.name,
+        full: game
+      }));
+    } catch (error) {
+      console.log("Error searching games:", error);
+      throw error;
+    }
+  };
+
   createPost = async (postData, reloadForm) => {
     if (!postData.title.length) {
       this.modalType = "alert";

@@ -5,6 +5,7 @@ import styles from '../../assets/scripts/styles';
 import {Picker} from '@react-native-picker/picker';
 import Popup from '../../components/popups/Popup';
 import {Ionicons} from "@expo/vector-icons";
+import SearchableDropdown from '../../components/SearchableDropdown';
 
 export class NewPostScreen extends Component {
 
@@ -29,6 +30,7 @@ export class NewPostScreen extends Component {
       gameOptions: [],
       platformOptions: [],
       modeOptions: [],
+      selectedGameOption: null,
       loading: true,
     };
     this.controller = new NewPostCtrl();
@@ -51,6 +53,7 @@ export class NewPostScreen extends Component {
         gameOptions,
         platformOptions,
         modeOptions,
+        selectedGameOption: firstGame,
         loading: false,
         form: {
           ...this.state.form,
@@ -82,22 +85,25 @@ export class NewPostScreen extends Component {
     }));
   };
 
-  handleGameSelect = async (gameId) => {
-    const selectedGame = this.state.gameOptions.find(g => g.value === gameId);
-
+  handleGameSelect = async (selectedGame) => {
     const platformOptions = await this.controller.setPlatforms(selectedGame);
     const modeOptions = await this.controller.setModes(selectedGame);
 
     this.setState(prev => ({
       form: {
         ...prev.form,
-        gameSelected: gameId,
+        gameSelected: selectedGame.value,
         platformSelected: platformOptions[0]?.value || '',
         modeSelected: modeOptions[0]?.value || '',
       },
+      selectedGameOption: selectedGame,
       platformOptions,
       modeOptions,
     }));
+  };
+
+  handleGameSearch = async (searchTerm) => {
+    return await this.controller.searchGames(searchTerm);
   };
 
   handlePlatformSelect = (value) => {
@@ -146,6 +152,7 @@ export class NewPostScreen extends Component {
       gameOptions,
       platformOptions,
       modeOptions,
+      selectedGameOption: firstGame,
       form: {
         id_user: this.props.route.params.sessionId,
         title: '',
@@ -189,25 +196,13 @@ export class NewPostScreen extends Component {
 
           {/* Game Picker */}
           <Text style={styles.text}>Juego:</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              style={styles.picker}
-              selectedValue={this.state.form.gameSelected}
-              onValueChange={this.handleGameSelect}
-              dropdownIconColor="#495057"
-              mode="dropdown"
-            >
-              {this.state.gameOptions.map(game => (
-                <Picker.Item
-                  key={game.value}
-                  label={game.name}
-                  value={game.value}
-                  style={styles.pickerItem}
-                  color='E7E9EA'
-                />
-              ))}
-            </Picker>
-          </View>
+          <SearchableDropdown
+            options={this.state.gameOptions}
+            selectedOption={this.state.selectedGameOption}
+            onSelect={this.handleGameSelect}
+            onSearch={this.handleGameSearch}
+            placeholder="Seleccionar juego"
+          />
 
           {/* Platform Picker */}
           <Text style={styles.text}>Plataforma:</Text>

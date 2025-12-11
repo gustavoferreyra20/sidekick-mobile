@@ -13,7 +13,7 @@ export default class HomeCtrl extends Component {
     }
 
     fetchGameOptions = async () => {
-        return await GameService.getOptions(true);
+        return await GameService.getOptions(false);
     };
 
     setPlatforms = async (game) => {
@@ -34,6 +34,20 @@ export default class HomeCtrl extends Component {
           }));
     };
 
+    searchGames = async (searchTerm) => {
+        try {
+            const games = await GameService.search(10, 0, 'updated_at', 'desc', searchTerm);
+            return games.map(game => ({
+                value: game.id,
+                name: game.name,
+                full: game
+            }));
+        } catch (error) {
+            console.log("Error searching games:", error);
+            throw error;
+        }
+    };
+
     getPosts = async () => {
         return await PostService.getAll();
     };
@@ -41,9 +55,9 @@ export default class HomeCtrl extends Component {
     btnSearchPost = async (gameValue, platformValue, modeValue) => {
         const params = {};
 
-        if (gameValue && gameValue !== "any") params.id_game = gameValue;
-        if (platformValue && platformValue !== "any") params.id_platform = platformValue;
-        if (modeValue && modeValue !== "any") params.id_mode = modeValue;
+        if (gameValue) params.id_game = gameValue;
+        if (platformValue) params.id_platform = platformValue;
+        if (modeValue) params.id_mode = modeValue;
 
         return await PostService.getAll(params);
     };
