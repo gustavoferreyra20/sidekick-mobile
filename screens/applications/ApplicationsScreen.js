@@ -8,6 +8,7 @@ import ReceivedApp from '../../components/applications/ReceivedApp';
 import Popup from '../../components/popups/Popup';
 import {RateScreen} from '../rate/RateScreen';
 import {Ionicons} from "@expo/vector-icons";
+import SidekickChat from '../../components/chat/SidekickChat';
 
 export class ApplicationsScreen extends Component {
     constructor(props) {
@@ -21,6 +22,8 @@ export class ApplicationsScreen extends Component {
         };
         this.controller = new ApplicationCtrl();
         this.id_profile = this.props.route.params.sessionId;
+        this.chatRef = React.createRef();
+        this.currentChatPostId = null;
     }
 
     componentDidMount() {
@@ -31,6 +34,7 @@ export class ApplicationsScreen extends Component {
     }
 
     componentWillUnmount() {
+        this.chatRef.current?.close?.();
         if (this.focusListener && typeof this.focusListener === 'function') {
             this.focusListener();
         }
@@ -92,9 +96,16 @@ export class ApplicationsScreen extends Component {
         this.setState({ rate: { id_user: id_user, id_post: id_post, id_application: id_application, show: true } });
     };
 
-    btnContact = async (id_user) => {
-        await this.controller.contact(id_user);
-        this.setState({});
+    btnContact = (id_post) => {
+        const postId = Number(id_post);
+        if (!postId) return;
+
+        if (this.currentChatPostId === postId) {
+            return;
+        }
+
+        this.currentChatPostId = postId;
+        this.chatRef.current?.open(postId);
     };
 
     updateReview = async () => {
@@ -181,6 +192,10 @@ export class ApplicationsScreen extends Component {
                     contactInf={this.controller.contactInf}
                     msg={this.controller.msg}
                     actionConfirm={this.controller.modalFunction}
+                />
+                <SidekickChat
+                  ref={this.chatRef}
+                  onClose={() => { this.currentChatPostId = null; }}
                 />
             </View>
         );

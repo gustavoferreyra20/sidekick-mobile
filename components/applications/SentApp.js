@@ -32,7 +32,7 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
             <View style={{ marginTop: 8 }}>
               <TouchableOpacity
                 style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#008CBA', width: '100%' }]}
-                onPress={() => contact(item.id_user)}
+                onPress={() => contact(item.id_post)}
                 activeOpacity={0.8}
               >
                 <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 6 }} />

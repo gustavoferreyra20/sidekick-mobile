@@ -57,7 +57,7 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                           {/* Contactar */}
                           <TouchableOpacity
                             style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#17a2b8', flex: 1.2, marginRight: 8 }]}
-                            onPress={() => contact(user.id_user)}
+                            onPress={() => contact(post.id_post)}
                             activeOpacity={0.8}
                           >
                               <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 4 }} />
