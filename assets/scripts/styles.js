@@ -478,9 +478,10 @@ export default StyleSheet.create({
     backgroundColor: '#1C1C1E',
     borderRadius: 12,
     width: '90%',
-    maxHeight: '70%',
+    height: '65%',
     borderWidth: 1,
     borderColor: '#2C2C2E',
+    overflow: 'hidden',
   },
   dropdownHeader: {
     flexDirection: 'row',
@@ -507,10 +508,10 @@ export default StyleSheet.create({
     backgroundColor: '#2C2C2E',
   },
   dropdownContent: {
-    maxHeight: 300,
+    flex: 1,
   },
   dropdownList: {
-    flexGrow: 0,
+    flex: 1,
   },
   dropdownItem: {
     paddingVertical: 12,
