@@ -183,6 +183,22 @@ class UserService {
         });
     });
   }
+
+  static async getAIReview(id_user) {
+    return new Promise((resolve, reject) => {
+      AxiosInstance.get('users/' + id_user + '/ai-review')
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch(function (error) {
+          // 404 is expected when user has no AI review record
+          if (error.response && error.response.status !== 404) {
+            console.log(error);
+          }
+          resolve(null);
+        });
+    });
+  }
 }
 
 export default UserService;

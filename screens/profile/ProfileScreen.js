@@ -35,6 +35,7 @@ export class ProfileScreen extends React.Component {
       id_profile: this.props.route.params.sessionId,
       isCurrentUser: this.props.route.params.isCurrentUser,
       profile: null,
+      aiReview: null,
     };
     this.controller = new ProfileCtrl();
   }
@@ -71,12 +72,18 @@ export class ProfileScreen extends React.Component {
     this.setState({ profile: profileData });
 
     const reviewsData = await this.controller.getReviews(id_user);
+    const aiReviewData = await this.controller.getAIReview(id_user);
 
-    this.setState({ rewards: reviewsData.rewards, reviews: reviewsData.reviews, loading: false });
+    this.setState({ 
+      rewards: reviewsData.rewards, 
+      reviews: reviewsData.reviews, 
+      aiReview: aiReviewData,
+      loading: false 
+    });
   };
 
   render() {
-    const { loading, profile, isCurrentUser, reviews, rewards } = this.state;
+    const { loading, profile, isCurrentUser, reviews, rewards, aiReview } = this.state;
 
     if (loading) {
       return (
@@ -109,6 +116,16 @@ export class ProfileScreen extends React.Component {
           </View>
         </View>
         <View style={styles.line}></View>
+        
+        {/* AI Review Section */}
+        {aiReview && (
+          <View style={styles.aiReviewContainer}>
+            <Text style={styles.aiReviewTitle}>🤖 Reseña generada por IA</Text>
+            <View style={styles.line}></View>
+            <Text style={styles.aiReviewText}>{aiReview}</Text>
+          </View>
+        )}
+        
         <Loader
           data={reviews}
           renderItem={({ item }) => <ReviewItem item={item} handleUserNamePress={this.handleUserNamePress} />}

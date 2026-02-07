@@ -535,4 +535,24 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: 8,
   },
+  aiReviewContainer: {
+    backgroundColor: '#1C1C1E',
+    padding: 15,
+    margin: 10,
+    borderRadius: 10,
+    borderLeftWidth: 4,
+    borderLeftColor: '#28a745',
+    width: '95%',
+  },
+  aiReviewTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#28a745',
+    marginBottom: 10,
+  },
+  aiReviewText: {
+    fontSize: 14,
+    color: '#E7E9EA',
+    lineHeight: 20,
+  },
 });

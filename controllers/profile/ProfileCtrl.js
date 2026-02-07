@@ -60,6 +60,20 @@ class ProfileCtrl {
           return { reviews: null, rewards: null }; // Return null if an error occurs
         }
       };
+
+    getAIReview = async (id_user) => {
+        try {
+            const aiReviewData = await UserService.getAIReview(id_user);
+            // Check if AI review exists and should be shown
+            if (aiReviewData && aiReviewData.show) {
+                return aiReviewData.ai_review;
+            }
+            return null;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
 }
 
 export default ProfileCtrl;
