@@ -54,16 +54,6 @@ const Item = ({user, post, changeStatus, rate, contact, handleUserNamePress}) =>
                     {user.applications.status === 'accepted' && (
                       <View style={[styles.headerRows, { justifyContent: 'space-between', marginTop: 8 }]}>
 
-                          {/* Contactar */}
-                          <TouchableOpacity
-                            style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#17a2b8', flex: 1.2, marginRight: 8 }]}
-                            onPress={() => contact(post.id_post)}
-                            activeOpacity={0.8}
-                          >
-                              <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 4 }} />
-                              <Text style={[styles.buttonText, { fontSize: 14 }]}>Contactar</Text>
-                          </TouchableOpacity>
-
                           {/* Calificar */}
                           <TouchableOpacity
                             style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#28a745', flex: 1, marginHorizontal: 4 }]}
@@ -117,6 +107,15 @@ const ReceivedApp = ({post, onDeletePost, changeStatus, rate, contact, handleUse
                     keyExtractor={item => item.id_user}
                 />
 
+                {/* Contactar */}
+                <TouchableOpacity
+                  style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#17a2b8', width: '100%' }]}
+                  onPress={() => contact(post.id_post)}
+                  activeOpacity={0.8}
+                >
+                    <Ionicons name="chatbubbles" size={16} color="#fff" style={{ marginRight: 4 }} />
+                    <Text style={[styles.buttonText, { fontSize: 14 }]}>Contactar</Text>
+                </TouchableOpacity>
 
                 <TouchableOpacity
                   style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', width: '100%' }]}
