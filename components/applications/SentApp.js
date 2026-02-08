@@ -18,6 +18,10 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
           </View>
         </View>
 
+        {item.applications.status === 'pending' && (
+          <Text style={styles.text}>Solicitud pendiente de aprobación</Text>
+        )}
+
         {item.applications.status === 'complete' ? (
           <Text style={styles.text}>Partida finalizada</Text>
         ) : null}
@@ -42,16 +46,18 @@ const SentApp = ({ item, onCancelApplication, contact }) => {
           </View>
         )}
 
-        <View style={{ marginTop: 8 }}>
-          <TouchableOpacity
-            style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', width: '100%' }]}
-            onPress={() => onCancelApplication(item.id_post, item.applications.id_application)}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="close" size={16} color="#fff" style={{ marginRight: 6 }} />
-            <Text style={styles.buttonText}>Cancelar</Text>
-          </TouchableOpacity>
-        </View>
+        {(item.applications.status === 'pending' || item.applications.status === 'accepted') && (
+          <View style={{ marginTop: 8 }}>
+            <TouchableOpacity
+              style={[styles.modernButton, styles.buttonWithIcon, { backgroundColor: '#dc3545', width: '100%' }]}
+              onPress={() => onCancelApplication(item.id_post, item.applications.id_application)}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="close" size={16} color="#fff" style={{ marginRight: 6 }} />
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
       </View>
       <View style={styles.line} />
