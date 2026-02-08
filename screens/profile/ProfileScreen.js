@@ -1,10 +1,9 @@
 import React from 'react';
-import {ActivityIndicator, Image, Text, View} from 'react-native';
+import {ActivityIndicator, Image, Text, View, FlatList} from 'react-native';
 import styles from '../../assets/scripts/styles';
 
 import ProfileCtrl from '../../controllers/profile/ProfileCtrl';
-import ReviewItem from '../../components/reviews/ReviewItem'
-import Loader from '../../assets/scripts/loader';
+import ReviewItem from '../../components/reviews/ReviewItem';
 
 export class ProfileScreen extends React.Component {
   async componentDidMount() {
@@ -36,6 +35,9 @@ export class ProfileScreen extends React.Component {
       isCurrentUser: this.props.route.params.isCurrentUser,
       profile: null,
       aiReview: null,
+      visibleReviews: [],
+      hasMoreItems: true,
+      isLoadingMore: false,
     };
     this.controller = new ProfileCtrl();
   }
@@ -74,16 +76,73 @@ export class ProfileScreen extends React.Component {
     const reviewsData = await this.controller.getReviews(id_user);
     const aiReviewData = await this.controller.getAIReview(id_user);
 
+    const itemsPerPage = 5;
+    const visibleReviews = reviewsData.reviews.slice(0, itemsPerPage);
+
     this.setState({ 
       rewards: reviewsData.rewards, 
       reviews: reviewsData.reviews, 
       aiReview: aiReviewData,
+      visibleReviews: visibleReviews,
+      page: 1,
+      hasMoreItems: reviewsData.reviews.length > itemsPerPage,
       loading: false 
     });
   };
 
+  handleLoadMore = () => {
+    const { visibleReviews, reviews, hasMoreItems, isLoadingMore } = this.state;
+    
+    if (!isLoadingMore && hasMoreItems) {
+      this.setState({ isLoadingMore: true });
+      
+      const itemsPerPage = 5;
+      const currentCount = visibleReviews.length;
+      const nextItems = reviews.slice(currentCount, currentCount + itemsPerPage);
+      
+      if (nextItems.length > 0) {
+        this.setState({
+          visibleReviews: [...visibleReviews, ...nextItems],
+          hasMoreItems: visibleReviews.length + nextItems.length < reviews.length,
+          isLoadingMore: false,
+        });
+      } else {
+        this.setState({ hasMoreItems: false, isLoadingMore: false });
+      }
+    }
+  };
+
+  renderReviewItem = ({ item }) => {
+    return <ReviewItem item={item} handleUserNamePress={this.handleUserNamePress} />;
+  };
+
+  renderHeader = () => {
+    const { aiReview } = this.state;
+    
+    if (!aiReview) {
+      return null;
+    }
+
+    return (
+      <View style={styles.aiReviewContainer}>
+        <Text style={styles.aiReviewTitle}>🤖 Reseña generada por IA</Text>
+        <View style={styles.line}></View>
+        <Text style={styles.aiReviewText}>{aiReview}</Text>
+      </View>
+    );
+  };
+
+  renderEmptyList = () => {
+    return (
+      <View>
+        {this.renderHeader()}
+        <Text style={styles.noItems}>No se encontraron resultados</Text>
+      </View>
+    );
+  };
+
   render() {
-    const { loading, profile, isCurrentUser, reviews, rewards, aiReview } = this.state;
+    const { loading, profile, isCurrentUser, visibleReviews, rewards, aiReview } = this.state;
 
     if (loading) {
       return (
@@ -117,18 +176,16 @@ export class ProfileScreen extends React.Component {
         </View>
         <View style={styles.line}></View>
         
-        {/* AI Review Section */}
-        {aiReview && (
-          <View style={styles.aiReviewContainer}>
-            <Text style={styles.aiReviewTitle}>🤖 Reseña generada por IA</Text>
-            <View style={styles.line}></View>
-            <Text style={styles.aiReviewText}>{aiReview}</Text>
-          </View>
-        )}
-        
-        <Loader
-          data={reviews}
-          renderItem={({ item }) => <ReviewItem item={item} handleUserNamePress={this.handleUserNamePress} />}
+        <FlatList
+          contentContainerStyle={{ paddingBottom: 100 }}
+          data={visibleReviews}
+          renderItem={this.renderReviewItem}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={0.1}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={this.renderHeader}
+          ListEmptyComponent={this.renderEmptyList}
           style={styles.FlatList}
         />
       </View>

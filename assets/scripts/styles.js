@@ -555,4 +555,8 @@ export default StyleSheet.create({
     color: '#E7E9EA',
     lineHeight: 20,
   },
+  scrollableContent: {
+    flex: 1,
+    width: '100%',
+  },
 });
